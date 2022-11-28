@@ -1,0 +1,1 @@
+export { isModalView } from "./modalStore";

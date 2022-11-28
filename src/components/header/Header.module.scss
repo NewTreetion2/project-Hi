@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  width: 100vw;
+  height: 64px;
+  p {
+    color: white;
+    font-size: 30px;
+  }
+}
