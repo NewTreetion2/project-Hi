@@ -1,11 +1,23 @@
 import "css/Header.css";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { loginTemp } from "store/Store";
+import { loginStatus } from "store/Store";
 
 export default function Header() {
   // 현재 로그인상태인지 아닌지를 결정하는 State
-  const [isLogin, setIsLogin] = useRecoilState(loginTemp);
+  const [isLogin, setIsLogin] = useRecoilState(loginStatus);
+  // const logout = () => {
+  //   if (isLogin) {
+  //     if (!window.confirm("로그아웃 하시겠습니까?")) {
+  //       alert("취소되었습니다");
+  //     } else {
+  //       alert("로그아웃되었습니다");
+  //       setIsLogin(!isLogin);
+  //     }
+  //   } else {
+  //     setIsLogin(!isLogin);
+  //   }
+  // };
 
   return (
     <div className="header">

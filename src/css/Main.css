@@ -1,0 +1,7 @@
+.main {
+  position: absolute;
+  top: 25vh;
+  width: 100vw;
+  height: 500px;
+  background-color: gray;
+}
