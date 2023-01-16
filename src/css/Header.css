@@ -4,10 +4,15 @@
   width: 100vw;
   height: 25vh;
   justify-content: center;
+  z-index: 30;
+  background-color: white;
 }
 
 .header-img {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-logo {

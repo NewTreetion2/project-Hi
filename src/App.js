@@ -9,12 +9,16 @@ import Header from "component/Header";
 function App() {
   return (
     <div>
-      <Header />
-      <Routes>
-        <Route exact path="/" element={<Main />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
+      <div className="header-section">
+        <Header />
+      </div>
+      <div>
+        <Routes>
+          <Route exact path="/" element={<Main />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </div>
     </div>
   );
 }
