@@ -15,3 +15,8 @@
   font-size: 24px;
   font-weight: bold;
 }
+
+.signUpContent {
+  display: flex;
+  flex-direction: column;
+}

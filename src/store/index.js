@@ -1,1 +1,1 @@
-export { loginStatus } from "./Store";
+export { loginStatus, dummyUser } from "./Store";

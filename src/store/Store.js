@@ -5,3 +5,25 @@ export const loginStatus = atom({
   key: "loginStatus",
   default: false,
 });
+
+// 유저 더미데이터
+export const dummyUser = atom({
+  key: "dummyUser",
+  default: [
+    {
+      id: 1,
+      userId: "phy8023",
+      userPw: "gusdnd2",
+    },
+    {
+      id: 2,
+      userId: "gusdnd8023",
+      userPw: "gusdnd12",
+    },
+    {
+      id: 3,
+      userId: "phw8023",
+      userPw: "3498023",
+    },
+  ],
+});
