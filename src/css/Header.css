@@ -6,6 +6,7 @@
   justify-content: center;
   z-index: 30;
   background-color: white;
+  border-bottom: 1px solid skyblue;
 }
 
 .header-img {
@@ -31,8 +32,6 @@
 }
 
 .login-btn {
-  border: none;
-  background-color: white;
   position: absolute;
   top: 20px;
   right: 20px;

@@ -1,0 +1,17 @@
+.signUp {
+  margin-top: 5vh;
+  padding-top: 8vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10vh;
+  width: 30vw;
+  height: 56vh;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+.signUpText {
+  font-size: 24px;
+  font-weight: bold;
+}
