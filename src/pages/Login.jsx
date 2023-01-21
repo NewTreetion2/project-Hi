@@ -1,7 +1,7 @@
 import "css/Login.css";
 import { useState } from "react";
-import SignIn from "component/SignIn";
-import SignUp from "component/SignUp";
+import SignIn from "components/SignIn";
+import SignUp from "components/SignUp";
 
 //로그인 버튼 시 회원가입, 로그인창을 띄워준다
 export default function Login() {
@@ -20,7 +20,7 @@ export default function Login() {
             value="sign in"
             name="sign"
             checked={signState === "sign in"}
-          ></input>
+          />
           로그인
         </label>
         <label>
@@ -30,7 +30,7 @@ export default function Login() {
             value="sign up"
             name="sign"
             checked={signState === "sign up"}
-          ></input>
+          />
           회원가입
         </label>
       </div>

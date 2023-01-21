@@ -22,55 +22,36 @@ export default function Header() {
     }
   };
 
-  if (!isLogin) {
-    //비로그인 시
-
-    return (
-      <div className="header">
-        <div className="header-img">로고 추가 예정</div>
-        <div className="header-logo">
-          {/* 헤더의 로고 이미지 (클릭 시 메인으로 이동) */}
-          <Link to="/">
-            <img src="img/logoimg.png" alt="로고이미지" />
-          </Link>
-        </div>
-        <div className="header-login">
-          <div className="login-btn">
-            <Button
-              className="login-btn-style"
-              onClickHandler={goLogin}
-              title="로그인"
-            />
-          </div>
-        </div>
+  return (
+    <div className="header">
+      <div className="header_img">로고 추가 예정</div>
+      <div className="header_logo">
+        {/* 헤더의 로고 이미지 (클릭 시 메인으로 이동) */}
+        <Link to="/">
+          <img src="img/logoimg.png" alt="로고이미지" />
+        </Link>
       </div>
-    );
-  } else {
-    // 로그인 시
-
-    return (
-      <div className="header">
-        <div className="header-img">로고 추가 예정</div>
-        <div className="header-logo">
-          {/* 헤더의 로고 이미지 (클릭 시 메인으로 이동) */}
-          <Link to="/">
-            <img src="img/logoimg.png" alt="로고이미지" />
-          </Link>
-        </div>
-        <div className="header-login">
-          <div className="login-btn">
+      <div className="header_login">
+        <div className="login_btn">
+          {isLogin ? (
             <Button
-              className="login-btn-style"
+              className="login_btn_style"
               onClickHandler={logout}
               title="로그아웃"
             />
-          </div>
+          ) : (
+            <Button
+              className="login_btn_style"
+              onClickHandler={goLogin}
+              title="로그인"
+            />
+          )}
         </div>
       </div>
-    );
-  }
-
-  //질문 1. 로그인, 로그아웃 버튼부분만 재렌더링하고싶을 때 어떻게 해야할지? header-login제외하고는 전부 같은 내용인데 component화 시킬지?
+    </div>
+  );
+  // 로그인 비로그인 삼항연산자로 처리 ( 솔루션 )
+  // 비로그인 시 로그인과 회원가입 두 개의 버튼을 띄워 각각 화면으로 보여주게 하기 ("라우팅을 이용해 sign in, sign up 이동")
 
   // return (
   //   <div className="header">

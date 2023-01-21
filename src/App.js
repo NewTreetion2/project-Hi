@@ -1,10 +1,11 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import { Routes, Route } from "react-router-dom";
-import NotFound from "pages/NotFound";
-import Main from "pages/Main";
-import Login from "pages/Login";
-import Header from "component/Header";
+
+import Header from "components/Header";
+
+import { Login, Main, NotFound } from "pages";
 
 function App() {
   return (
@@ -12,13 +13,11 @@ function App() {
       <div className="header-section">
         <Header />
       </div>
-      <div>
-        <Routes>
-          <Route exact path="/" element={<Main />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-      </div>
+      <Routes>
+        <Route exact path="/" element={<Main />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
+      </Routes>
     </div>
   );
 }

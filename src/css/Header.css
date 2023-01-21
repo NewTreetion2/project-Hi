@@ -9,21 +9,21 @@
   border-bottom: 1px solid skyblue;
 }
 
-.header-img {
+.header_img {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.header-logo {
+.header_logo {
   align-items: center;
   display: flex;
   justify-content: center;
   flex: 2;
 }
 
-.header-login {
+.header_login {
   display: flex;
   height: 30px;
   justify-content: right;
@@ -31,7 +31,7 @@
   flex: 1;
 }
 
-.login-btn {
+.login_btn {
   position: absolute;
   top: 20px;
   right: 20px;
