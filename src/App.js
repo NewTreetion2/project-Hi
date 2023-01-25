@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Header from "components/Header";
 
-import { Login, Main, NotFound } from "pages";
+import { SignIn, Main, NotFound, SignUp } from "pages";
 
 function App() {
   return (
@@ -14,9 +14,10 @@ function App() {
         <Header />
       </div>
       <Routes>
-        <Route exact path="/" element={<Main />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
+        <Route exact path="/" element={<Main />} />
+        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

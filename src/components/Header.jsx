@@ -8,10 +8,14 @@ export default function Header() {
   // 현재 로그인상태인지 아닌지를 결정하는 State
   const [isLogin, setIsLogin] = useRecoilState(loginStatus);
   const navigate = useNavigate();
-  const goLogin = () => {
-    navigate("/login");
-    setIsLogin(!isLogin);
+  const goSignIn = () => {
+    navigate("/SignIn");
   };
+
+  const goSignUp = () => {
+    navigate("/SignUp");
+  };
+
   const logout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       alert("로그아웃 되었습니다");
@@ -40,11 +44,18 @@ export default function Header() {
               title="로그아웃"
             />
           ) : (
-            <Button
-              className="login_btn_style"
-              onClickHandler={goLogin}
-              title="로그인"
-            />
+            <>
+              <Button
+                className="login_btn_style"
+                onClickHandler={goSignIn}
+                title="로그인"
+              />
+              <Button
+                className="login_btn_style"
+                onClickHandler={goSignUp}
+                title="회원가입"
+              />
+            </>
           )}
         </div>
       </div>
