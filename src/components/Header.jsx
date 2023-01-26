@@ -38,22 +38,39 @@ export default function Header() {
       <div className="header_login">
         <div className="login_btn">
           {isLogin ? (
-            <Button
-              className="login_btn_style"
-              onClickHandler={logout}
-              title="로그아웃"
-            />
+            <>
+              <Button
+                className="login_btn_style"
+                onClickHandler={() => {}}
+                title="My Page"
+              />
+              <Button
+                className="login_btn_style"
+                onClickHandler={() => {}}
+                title="일 던져주기"
+              />
+              <Button
+                className="login_btn_style"
+                onClickHandler={() => {}}
+                title="일 받기"
+              />
+              <Button
+                className="login_btn_style"
+                onClickHandler={logout}
+                title="Logout"
+              />
+            </>
           ) : (
             <>
               <Button
                 className="login_btn_style"
                 onClickHandler={goSignIn}
-                title="로그인"
+                title="Sign in"
               />
               <Button
                 className="login_btn_style"
                 onClickHandler={goSignUp}
-                title="회원가입"
+                title="Sign up"
               />
             </>
           )}
@@ -63,6 +80,9 @@ export default function Header() {
   );
   // 로그인 비로그인 삼항연산자로 처리 ( 솔루션 )
   // 비로그인 시 로그인과 회원가입 두 개의 버튼을 띄워 각각 화면으로 보여주게 하기 ("라우팅을 이용해 sign in, sign up 이동")
+
+  // 질문2. 여러개의 버튼을 map으로 만들 때 onClickHandler가 각각 다르다면 if로 처리해야하는지? 그럼 더 복잡하지 않을까?
+  // 이건 방식의 차이?
 
   // return (
   //   <div className="header">
