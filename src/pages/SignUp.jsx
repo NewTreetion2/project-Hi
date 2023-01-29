@@ -47,7 +47,7 @@ export default function SignIn() {
         <div className="signUpText">회원가입</div>
         <form>
           <p className="idInput">
-            ID{" "}
+            ID
             <input
               type="text"
               value={userId}
@@ -56,7 +56,7 @@ export default function SignIn() {
             />
           </p>
           <p className="pwInput">
-            PW{" "}
+            PW
             <input
               type="password"
               value={userPw}

@@ -55,7 +55,7 @@ export default function SignIn() {
         <div className="loginText">로그인</div>
         {idExists ? (
           <p className="pwInput">
-            PW{" "}
+            PW
             <input
               type="password"
               value={inputUserInfo}
@@ -65,7 +65,7 @@ export default function SignIn() {
           </p>
         ) : (
           <p className="idInput">
-            ID{" "}
+            ID
             <input
               type="text"
               value={inputUserInfo}
@@ -83,3 +83,9 @@ export default function SignIn() {
     </div>
   );
 }
+
+// 이 부분 컴포넌트로 바꿀만한 부분이 있을지?
+// sign up도 마찬가지
+// input이나 로직부분을 컴포넌트화 가능할지 고민해보자
+// SignUp 과 기능차이는 많이 나지만 css등 기본골자는 비슷하다
+// 어떻게든 합칠 방법은 없을지?
