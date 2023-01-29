@@ -25,7 +25,7 @@ export default function Main() {
         <MyCard
           title={"4번 테스트입니다"}
           text={"4번 테스트 내용"}
-          img={"이미지"}
+          img={"이미지1"}
         />
 
         {/* 카드 컴포넌트 제작 후 <Card title, text, img로만 받을 수 있게 제작 */}
