@@ -1,15 +1,13 @@
 import { useState } from "react";
-import "css/SignUp.css";
+import "./SignUp.css";
 import { useRecoilState } from "recoil";
 import { dummyUser } from "store";
-import Button from "../components/Button";
-import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
-export default function SignIn() {
+export default function SignUp() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
   const [user, setUser] = useRecoilState(dummyUser);
-  const navigate = useNavigate();
   const inputUserId = (e) => {
     setUserId(e.target.value);
   };
@@ -31,7 +29,6 @@ export default function SignIn() {
       });
       setUser(newUser);
       alert("회원가입이 완료되었습니다");
-      navigate("/SignIn");
     }
   };
 
@@ -42,7 +39,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className="signUpOutline">
+    <>
       <div className="signUp">
         <div className="signUpText">회원가입</div>
         <form>
@@ -53,6 +50,8 @@ export default function SignIn() {
               value={userId}
               onChange={inputUserId}
               onKeyUp={enterPress}
+              placeholder="아이디"
+              autoFocus
             />
           </p>
           <p className="pwInput">
@@ -62,15 +61,16 @@ export default function SignIn() {
               value={userPw}
               onChange={inputUserPw}
               onKeyUp={enterPress}
+              placeholder="비밀번호"
             />
           </p>
         </form>
-        <Button
-          className="login_btn_style"
-          onClickHandler={makeNewUser}
-          title={"확인"}
-        />
       </div>
-    </div>
+      <div className="submit">
+        <Button variant="primary" onClick={makeNewUser}>
+          Submit
+        </Button>
+      </div>
+    </>
   );
 }

@@ -1,0 +1,29 @@
+.signIn {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 300px;
+  gap: 10vh;
+}
+
+.idInput {
+  width: 18vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pwInput {
+  width: 18vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loginText {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.submit {
+  display: flex;
+  justify-content: right;
+}

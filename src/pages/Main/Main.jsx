@@ -1,5 +1,5 @@
 import MyCard from "components/MyCard";
-import "css/Main.css";
+import "./Main.css";
 
 //메인페이지 loginState에 따라 보여주는 화면이 달라진다
 export default function Main() {
@@ -25,7 +25,7 @@ export default function Main() {
         <MyCard
           title={"4번 테스트입니다"}
           text={"4번 테스트 내용"}
-          img={"이미지1"}
+          img={"이미지"}
         />
 
         {/* 카드 컴포넌트 제작 후 <Card title, text, img로만 받을 수 있게 제작 */}

@@ -1,25 +1,9 @@
-.signUpOutline {
-  position: absolute;
-  top: 30vh;
-  left: 34vw;
-  width: 30vw;
-  height: 60vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
 .signUp {
-  margin-top: 5vh;
-  padding-top: 8vh;
   display: flex;
   align-items: center;
   flex-direction: column;
+  height: 300px;
   gap: 10vh;
-  width: 30vw;
-  height: 56vh;
-  border: 1px solid;
-  border-radius: 10px;
 }
 
 .signUpText {
@@ -37,4 +21,9 @@
   width: 18vw;
   display: flex;
   justify-content: space-between;
+}
+
+.submit {
+  display: flex;
+  justify-content: right;
 }

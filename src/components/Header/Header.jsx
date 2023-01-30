@@ -1,21 +1,16 @@
-import "css/Header.css";
+import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginStatus } from "store/Store";
-import Button from "./Button";
+import Button from "../Button/Button";
+import MyModal from "components/Modal/MyModal";
+import SignIn from "pages/SignIn/SignIn";
+import { SignUp } from "pages";
 
 export default function Header() {
   // 현재 로그인상태인지 아닌지를 결정하는 State
   const [isLogin, setIsLogin] = useRecoilState(loginStatus);
   const navigate = useNavigate();
-  const goSignIn = () => {
-    navigate("/SignIn");
-  };
-
-  const goSignUp = () => {
-    navigate("/SignUp");
-  };
-
   const logout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       alert("로그아웃 되었습니다");
@@ -28,51 +23,47 @@ export default function Header() {
 
   return (
     <div className="header">
-      <div className="header_img">로고 추가 예정</div>
-      <div className="header_logo">
+      <div className="headerImg">로고 추가 예정</div>
+      <div className="headerLogo">
         {/* 헤더의 로고 이미지 (클릭 시 메인으로 이동) */}
         <Link to="/">
           <img src="img/logoimg.png" alt="로고이미지" />
         </Link>
       </div>
-      <div className="header_login">
-        <div className="login_btn">
+      <div className="headerLogin">
+        <div className="loginBtn">
           {isLogin ? (
             <>
               <Button
-                className="login_btn_style"
+                className="loginBtnStyle"
                 onClickHandler={() => {}}
                 title="My Page"
               />
               <Button
-                className="login_btn_style"
+                className="loginBtnStyle"
                 onClickHandler={() => {}}
                 title="일 던져주기"
               />
               <Button
-                className="login_btn_style"
+                className="loginBtnStyle"
                 onClickHandler={() => {}}
                 title="일 받기"
               />
               <Button
-                className="login_btn_style"
+                className="loginBtnStyle"
                 onClickHandler={logout}
                 title="Logout"
               />
             </>
           ) : (
-            <>
-              <Button
-                className="login_btn_style"
-                onClickHandler={goSignIn}
-                title="Sign in"
-              />
-              <Button
-                className="login_btn_style"
-                onClickHandler={goSignUp}
-                title="Sign up"
-              />
-            </>
+            <div className="signBtn">
+              <MyModal title="Sign in">
+                <SignIn />
+              </MyModal>
+              <MyModal title="Sign Up">
+                <SignUp />
+              </MyModal>
+            </div>
           )}
         </div>
       </div>

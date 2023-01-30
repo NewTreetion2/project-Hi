@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Routes, Route } from "react-router-dom";
 
-import Header from "components/Header";
+import Header from "components/Header/Header";
 
 import { SignIn, Main, NotFound, SignUp } from "pages";
 
