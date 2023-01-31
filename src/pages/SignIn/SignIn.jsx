@@ -2,8 +2,7 @@ import "./SignIn.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { loginStatus } from "store";
-import { dummyUser } from "store";
+import { loginStatus, dummyUser } from "store";
 import { Button } from "react-bootstrap";
 
 export default function SignIn() {

@@ -2,14 +2,14 @@
   position: fixed;
   display: flex;
   width: 100vw;
-  height: 25vh;
+  height: 15vh;
   justify-content: center;
   z-index: 30;
   background-color: white;
   border-bottom: 1px solid skyblue;
 }
 
-.headerImg {
+.headerFlex {
   flex: 1;
   display: flex;
   align-items: center;
@@ -17,10 +17,19 @@
 }
 
 .headerLogo {
-  align-items: center;
+  width: 100vw;
+  height: 6vh;
   display: flex;
   justify-content: center;
   flex: 2;
+}
+
+.h-14 {
+  height: 14vh;
+}
+
+.h-10 {
+  height: 10vh;
 }
 
 .headerLogin {

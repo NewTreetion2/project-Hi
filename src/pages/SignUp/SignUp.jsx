@@ -3,10 +3,12 @@ import "./SignUp.css";
 import { useRecoilState } from "recoil";
 import { dummyUser } from "store";
 import { Button } from "react-bootstrap";
+import { modalStatus } from "store";
 
 export default function SignUp() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
+  const [show, setShow] = useRecoilState(modalStatus);
   const [user, setUser] = useRecoilState(dummyUser);
   const inputUserId = (e) => {
     setUserId(e.target.value);
@@ -22,13 +24,18 @@ export default function SignUp() {
       const newUser = [...user];
       const tempId = userId;
       const tempPw = userPw;
-      newUser.push({
-        id: newUser.length + 1,
-        userId: tempId,
-        userPw: tempPw,
-      });
-      setUser(newUser);
-      alert("회원가입이 완료되었습니다");
+      if (newUser.find((user) => user.userId === tempId)) {
+        alert("중복된 아이디가 존재합니다");
+      } else {
+        newUser.push({
+          id: newUser.length + 1,
+          userId: tempId,
+          userPw: tempPw,
+        });
+        setUser(newUser);
+        alert("회원가입이 완료되었습니다");
+        setShow(!show);
+      }
     }
   };
 

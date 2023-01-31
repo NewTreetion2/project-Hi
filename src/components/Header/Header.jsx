@@ -5,7 +5,7 @@ import { loginStatus } from "store/Store";
 import Button from "../Button/Button";
 import MyModal from "components/Modal/MyModal";
 import SignIn from "pages/SignIn/SignIn";
-import { SignUp } from "pages";
+import SignUp from "pages/SignUp/SignUp";
 
 export default function Header() {
   // 현재 로그인상태인지 아닌지를 결정하는 State
@@ -23,11 +23,11 @@ export default function Header() {
 
   return (
     <div className="header">
-      <div className="headerImg">로고 추가 예정</div>
+      <div className="headerFlex"></div>
       <div className="headerLogo">
         {/* 헤더의 로고 이미지 (클릭 시 메인으로 이동) */}
         <Link to="/">
-          <img src="img/logoimg.png" alt="로고이미지" />
+          <img className="h-14" src="img/logoimg.png" alt="로고이미지" />
         </Link>
       </div>
       <div className="headerLogin">
@@ -57,7 +57,7 @@ export default function Header() {
             </>
           ) : (
             <div className="signBtn">
-              <MyModal title="Sign in">
+              <MyModal title="Sign In">
                 <SignIn />
               </MyModal>
               <MyModal title="Sign Up">

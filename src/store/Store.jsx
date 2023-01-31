@@ -6,6 +6,12 @@ export const loginStatus = atom({
   default: false,
 });
 
+// Modal창 컨트롤러
+export const modalStatus = atom({
+  key: "modalStatus",
+  default: false,
+});
+
 // 유저 더미데이터
 export const dummyUser = atom({
   key: "dummyUser",
