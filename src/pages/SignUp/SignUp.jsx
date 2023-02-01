@@ -8,7 +8,7 @@ import { modalStatus } from "store";
 export default function SignUp() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
-  const [show, setShow] = useRecoilState(modalStatus);
+  const [modalClose, setModalClose] = useRecoilState(modalStatus);
   const [user, setUser] = useRecoilState(dummyUser);
   const inputUserId = (e) => {
     setUserId(e.target.value);
@@ -34,7 +34,7 @@ export default function SignUp() {
         });
         setUser(newUser);
         alert("회원가입이 완료되었습니다");
-        setShow(!show);
+        setModalClose(!modalClose);
       }
     }
   };
