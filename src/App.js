@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Header from "components/Header/Header";
 
-import { Main, NotFound } from "pages";
+import { Main, NotFound, GetWork } from "pages";
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
       </div>
       <Routes>
         <Route exact path="/" element={<Main />} />
+        <Route path="/getWork" element={<GetWork />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

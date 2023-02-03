@@ -4,13 +4,17 @@ import { useRecoilState } from "recoil";
 import { loginStatus } from "store/Store";
 import Button from "../Button/Button";
 import MyModal from "components/Modal/MyModal";
-import SignIn from "pages/SignIn/SignIn";
-import SignUp from "pages/SignUp/SignUp";
+import SignIn from "components/SignIn/SignIn";
+import SignUp from "components/SignUp/SignUp";
+import ThrowWork from "components/ThorwWork/ThrowWork";
 
 export default function Header() {
   // 현재 로그인상태인지 아닌지를 결정하는 State
   const [isLogin, setIsLogin] = useRecoilState(loginStatus);
   const navigate = useNavigate();
+  const goGetWork = () => {
+    navigate("/getWork");
+  };
   const logout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       alert("로그아웃 되었습니다");
@@ -39,14 +43,12 @@ export default function Header() {
                 onClickHandler={() => {}}
                 title="My Page"
               />
+              <MyModal title="일 던져주기">
+                <ThrowWork />
+              </MyModal>
               <Button
                 className="loginBtnStyle"
-                onClickHandler={() => {}}
-                title="일 던져주기"
-              />
-              <Button
-                className="loginBtnStyle"
-                onClickHandler={() => {}}
+                onClickHandler={goGetWork}
                 title="일 받기"
               />
               <Button
