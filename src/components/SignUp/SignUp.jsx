@@ -3,12 +3,12 @@ import "./SignUp.css";
 import { useRecoilState } from "recoil";
 import { dummyUser } from "store";
 import { Button } from "react-bootstrap";
-import useModalControl from "hooks/useModalControl";
+import { modalStatus } from "store";
 
 export default function SignUp() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
-  const { handleModalClose } = useModalControl();
+  const [modalClose, setModalClose] = useRecoilState(modalStatus);
   const [user, setUser] = useRecoilState(dummyUser);
   const inputUserId = (e) => {
     setUserId(e.target.value);
@@ -34,7 +34,7 @@ export default function SignUp() {
         });
         setUser(newUser);
         alert("회원가입이 완료되었습니다");
-        handleModalClose();
+        setModalClose(!modalClose);
       }
     }
   };

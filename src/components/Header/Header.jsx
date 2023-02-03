@@ -59,8 +59,12 @@ export default function Header() {
             </>
           ) : (
             <div className="signBtn">
-              <MyModal title="Sign In" content={<SignIn />} key={1} />
-              <MyModal title="Sign Up" content={<SignUp />} key={2} />
+              <MyModal title="Sign In">
+                <SignIn />
+              </MyModal>
+              <MyModal title="Sign Up">
+                <SignUp />
+              </MyModal>
             </div>
           )}
         </div>
