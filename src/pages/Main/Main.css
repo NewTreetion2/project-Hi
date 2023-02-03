@@ -21,10 +21,6 @@
   height: 500px;
 }
 
-.h-73 {
-  height: 73vh;
-}
-
 .cardListWrap {
   display: flex;
   flex-direction: column;
