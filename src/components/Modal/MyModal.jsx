@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import { useRecoilValue } from "recoil";
 import { modalStatus } from "store";
 
-export default function MyModal({ children, title }) {
+export default function MyModal({ children, title, size }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -17,7 +17,7 @@ export default function MyModal({ children, title }) {
 
   return (
     <>
-      <Button variant="secondary" onClick={handleShow}>
+      <Button variant="secondary" onClick={handleShow} size={size}>
         {title}
       </Button>
 

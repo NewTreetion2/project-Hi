@@ -27,11 +27,10 @@ export default function Header() {
 
   return (
     <div className="header">
-      <div className="headerFlex"></div>
       <div className="headerLogo">
         {/* 헤더의 로고 이미지 (클릭 시 메인으로 이동) */}
         <Link to="/">
-          <img className="h-14" src="img/logoimg.png" alt="로고이미지" />
+          <img className="h-14" src="img/logoimg2.png" alt="로고이미지" />
         </Link>
       </div>
       <div className="headerLogin">
@@ -59,10 +58,10 @@ export default function Header() {
             </>
           ) : (
             <div className="signBtn">
-              <MyModal title="Sign In">
+              <MyModal title="Sign In" size="sm">
                 <SignIn />
               </MyModal>
-              <MyModal title="Sign Up">
+              <MyModal title="Sign Up" size="sm">
                 <SignUp />
               </MyModal>
             </div>

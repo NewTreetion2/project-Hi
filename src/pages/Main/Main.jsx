@@ -3,7 +3,7 @@ import MainCarousel from "components/Carousel/Main/MainCarousel";
 import "./Main.css";
 
 const mainCarouArr = [
-  { imgSrc: "", text: "1번째 carousel입니다" },
+  { imgSrc: "img/carouselFirst.jpg", text: "글 추가 예정" },
   { imgSrc: "", text: "2번째 carousel입니다" },
   { imgSrc: "", text: "3번째 carousel입니다" },
 ];

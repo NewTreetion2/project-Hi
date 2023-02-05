@@ -2,7 +2,7 @@
   position: fixed;
   display: flex;
   width: 100vw;
-  height: 15vh;
+  height: 50px;
   justify-content: center;
   z-index: 30;
   background-color: white;
@@ -18,14 +18,14 @@
 
 .headerLogo {
   width: 100vw;
-  height: 6vh;
+  height: 15px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   flex: 2;
 }
 
 .h-14 {
-  height: 14vh;
+  height: 49px;
 }
 
 .h-10 {
@@ -34,7 +34,7 @@
 
 .headerLogin {
   display: flex;
-  height: 30px;
+  height: 10px;
   justify-content: right;
   gap: 10px;
   flex: 1;
@@ -42,7 +42,7 @@
 
 .loginBtn {
   position: absolute;
-  top: 20px;
+  top: 10px;
   right: 20px;
 }
 
