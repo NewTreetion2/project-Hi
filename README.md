@@ -96,10 +96,3 @@ DB구축 및 기능정리 완료
 
 1. Modal 변경 완료
 2. Main에 Carousel 적용
-
-### 0204
-
-MyModal을 관리해주는 Custom Hook을 제작했으나 Bootstrap에서 제공하는 Modal은 State를 불러오는 순간
-그 State에 ref를 고정시켜 Recoil로 지정할 시 마지막에 불러온 데이터를 중복시켜서 띄워준다
-즉, 상태관리를 Recoil로 할 경우 마지막 데이터값만을 불러오게 된다 (마지막으로 true를 반환한 컴포넌트의 Recoil값이 ref에 저장돼서 같은 Recoil을 주시하고 있는 모든 Modal값이 같아짐 -> 결과적으로 회원가입과 로그인 창이 중복돼서 나타난다)
-따라서 일단 Custom Hook을 포기하고 useState로 진행하기로 결정
