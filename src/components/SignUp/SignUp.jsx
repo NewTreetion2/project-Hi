@@ -1,21 +1,17 @@
-import { useState } from "react";
-import "./SignUp.css";
+import styles from "./SignUp.module.scss";
+
 import { useRecoilState } from "recoil";
-import { dummyUser } from "store";
 import { Button } from "react-bootstrap";
-import { modalStatus } from "store";
+
+import { dummyUser } from "store";
+
+import { useInput, useModalControl } from "hooks";
 
 export default function SignUp() {
-  const [userId, setUserId] = useState("");
-  const [userPw, setUserPw] = useState("");
-  const [modalClose, setModalClose] = useRecoilState(modalStatus);
+  const [userId, setUserId] = useInput();
+  const [userPw, setUserPw] = useInput();
+  const { handleModalClose } = useModalControl();
   const [user, setUser] = useRecoilState(dummyUser);
-  const inputUserId = (e) => {
-    setUserId(e.target.value);
-  };
-  const inputUserPw = (e) => {
-    setUserPw(e.target.value);
-  };
 
   const makeNewUser = () => {
     if (userId === "" || userPw === "") {
@@ -34,7 +30,7 @@ export default function SignUp() {
         });
         setUser(newUser);
         alert("회원가입이 완료되었습니다");
-        setModalClose(!modalClose);
+        handleModalClose();
       }
     }
   };
@@ -47,33 +43,33 @@ export default function SignUp() {
 
   return (
     <>
-      <div className="signUp">
-        <div className="signUpText">회원가입</div>
+      <div className={`${styles.signUp}`}>
+        <div className={`${styles.boldText}`}>회원가입</div>
         <form>
-          <p className="idInput">
+          <p className={`${styles.idInput}`}>
             ID
             <input
               type="text"
               value={userId}
-              onChange={inputUserId}
+              onChange={setUserId}
               onKeyUp={enterPress}
               placeholder="아이디"
               autoFocus
             />
           </p>
-          <p className="pwInput">
+          <p className={`${styles.pwInput}`}>
             PW
             <input
               type="password"
               value={userPw}
-              onChange={inputUserPw}
+              onChange={setUserPw}
               onKeyUp={enterPress}
               placeholder="비밀번호"
             />
           </p>
         </form>
       </div>
-      <div className="submit">
+      <div className={`${styles.submit}`}>
         <Button variant="primary" onClick={makeNewUser}>
           Submit
         </Button>

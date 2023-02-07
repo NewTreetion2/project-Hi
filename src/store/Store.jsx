@@ -9,7 +9,7 @@ export const loginStatus = atom({
 // Modal창 컨트롤러
 export const modalStatus = atom({
   key: "modalStatus",
-  default: false,
+  default: "",
 });
 
 // 유저 더미데이터
@@ -30,6 +30,18 @@ export const dummyUser = atom({
       id: 3,
       userId: "phw8023",
       userPw: "3498023",
+    },
+  ],
+});
+
+export const dummyData = atom({
+  key: "dummyData",
+  default: [
+    {
+      userSrc: "",
+      userTitle: "",
+      userText: "",
+      userCheck: "",
     },
   ],
 });

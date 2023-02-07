@@ -1,17 +1,19 @@
-import "./App.css";
+import styles from "./App.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Routes, Route } from "react-router-dom";
 
-import Header from "components/Header/Header";
-
+import { Header, MyModal } from "components";
 import { Main, NotFound, GetWork } from "pages";
 
+// TODO
 function App() {
   return (
     <div>
-      <div className="header-section">
+      <div className={`${styles.header}`}>
         <Header />
+
+        <MyModal />
       </div>
       <Routes>
         <Route exact path="/" element={<Main />} />

@@ -1,12 +1,16 @@
-import "./Header.css";
+// scss
+import styles from "./Header.module.scss";
+
+// lib
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { loginStatus } from "store/Store";
-import Button from "../Button/Button";
-import MyModal from "components/Modal/MyModal";
-import SignIn from "components/SignIn/SignIn";
-import SignUp from "components/SignUp/SignUp";
-import ThrowWork from "components/ThorwWork/ThrowWork";
+import { Button } from "react-bootstrap";
+
+// Recoil 데이터
+import { loginStatus } from "store";
+
+// TODO: kwon
+import useModalControl from "hooks/useModalControl";
 
 export default function Header() {
   // 현재 로그인상태인지 아닌지를 결정하는 State
@@ -25,45 +29,67 @@ export default function Header() {
     }
   };
 
+  const {
+    defineModalTypeAsSignin,
+    defineModalTypeAsSignUp,
+    defineModalTypeAsThrowWork,
+  } = useModalControl();
+
   return (
-    <div className="header">
-      <div className="headerLogo">
+    <div className={`${styles.header}`}>
+      <div className={`${styles.logo}`}>
         {/* 헤더의 로고 이미지 (클릭 시 메인으로 이동) */}
         <Link to="/">
-          <img className="h-14" src="img/logoimg2.png" alt="로고이미지" />
+          <img
+            className={`${styles.logoSize}`}
+            src="img/logoimg2.png"
+            alt="로고이미지"
+          />
         </Link>
       </div>
-      <div className="headerLogin">
-        <div className="loginBtn">
+      <div className={`${styles.login}`}>
+        <div className={`${styles.loginBtn}`}>
           {isLogin ? (
-            <>
+            <div className={`${styles.btnSpace}`}>
+              <Button variant="secondary" onClick={() => {}} size={"sm"}>
+                My page
+              </Button>
               <Button
-                className="loginBtnStyle"
-                onClickHandler={() => {}}
-                title="My Page"
-              />
-              <MyModal title="일 던져주기">
-                <ThrowWork />
-              </MyModal>
-              <Button
-                className="loginBtnStyle"
-                onClickHandler={goGetWork}
-                title="일 받기"
-              />
-              <Button
-                className="loginBtnStyle"
-                onClickHandler={logout}
-                title="Logout"
-              />
-            </>
+                variant="secondary"
+                onClick={defineModalTypeAsThrowWork}
+                size={"sm"}
+              >
+                일 던져주기
+              </Button>
+              <Button variant="secondary" onClick={goGetWork} size={"sm"}>
+                일 받기
+              </Button>
+              <Button variant="secondary" onClick={logout} size={"sm"}>
+                Logout
+              </Button>
+            </div>
           ) : (
-            <div className="signBtn">
-              <MyModal title="Sign In" size="sm">
+            <div className={`${styles.btnSpace}`}>
+              <Button
+                variant="secondary"
+                onClick={defineModalTypeAsSignin}
+                size={"sm"}
+              >
+                Sign In
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={defineModalTypeAsSignUp}
+                size={"sm"}
+              >
+                Sign Up
+              </Button>
+              {/* <MyModal title="Sign In" size="sm">
                 <SignIn />
               </MyModal>
               <MyModal title="Sign Up" size="sm">
                 <SignUp />
-              </MyModal>
+              </MyModal> */}
             </div>
           )}
         </div>

@@ -1,23 +1,20 @@
-import "./SignIn.css";
-import { useState } from "react";
+import styles from "./SignIn.module.scss";
+
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { loginStatus, dummyUser } from "store";
 import { Button } from "react-bootstrap";
+
+import { loginStatus, dummyUser } from "store";
+
+import { useInput, useModalControl } from "hooks";
 
 export default function SignIn() {
   const navigate = useNavigate();
-  const [inputId, setInputId] = useState("");
-  const [inputPw, setInputPw] = useState("");
+  const [inputId, setInputId] = useInput();
+  const [inputPw, setInputPw] = useInput("");
+  const { handleModalClose } = useModalControl();
   const userInfo = [...useRecoilValue(dummyUser)];
   const [Login, setLogin] = useRecoilState(loginStatus);
-  const inputText = (e) => {
-    setInputId(e.target.value);
-  };
-
-  const inputPassword = (e) => {
-    setInputPw(e.target.value);
-  };
 
   const checkValidation = () => {
     if (inputId === "" || inputPw === "") {
@@ -31,6 +28,7 @@ export default function SignIn() {
           alert("로그인 성공");
           setLogin(!Login);
           navigate("/");
+          handleModalClose();
         } else {
           alert("비밀번호가 틀립니다");
         }
@@ -46,33 +44,33 @@ export default function SignIn() {
 
   return (
     <>
-      <div className="signIn">
-        <div className="loginText">로그인</div>
+      <div className={`${styles.signIn}`}>
+        <div className={`${styles.boldText}`}>로그인</div>
         <div>
-          <p className="idInput">
+          <p className={`${styles.idInput}`}>
             ID
             <input
               type="text"
               value={inputId}
-              onChange={inputText}
+              onChange={setInputId}
               onKeyUp={enterPress}
               placeholder="아이디"
               autoFocus
             />
           </p>
-          <p className="pwInput">
+          <p className={`${styles.pwInput}`}>
             PW
             <input
               type="password"
               value={inputPw}
-              onChange={inputPassword}
+              onChange={setInputPw}
               onKeyUp={enterPress}
               placeholder="비밀번호"
             />
           </p>
         </div>
       </div>
-      <div className="submit">
+      <div className={`${styles.submit}`}>
         <Button variant="primary" onClick={checkValidation}>
           Sign In
         </Button>

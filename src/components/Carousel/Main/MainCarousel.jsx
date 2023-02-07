@@ -1,5 +1,5 @@
 import { Carousel } from "react-bootstrap";
-import "./MainCarousel.css";
+import styles from "./MainCarousel.module.scss";
 
 export default function MainCarousel({ interval, carouArr }) {
   return (
@@ -7,7 +7,7 @@ export default function MainCarousel({ interval, carouArr }) {
       {carouArr.map((item) => (
         <Carousel.Item>
           <img
-            className="d-block w-100 h-73 opac-3"
+            className={`d-block ${styles.fitSize} ${styles.opacity}`}
             src={item.imgSrc}
             alt="추가예정"
           />

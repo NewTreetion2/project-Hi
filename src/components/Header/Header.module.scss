@@ -16,7 +16,7 @@
   justify-content: center;
 }
 
-.headerLogo {
+.logo {
   width: 100vw;
   height: 15px;
   display: flex;
@@ -24,15 +24,15 @@
   flex: 2;
 }
 
-.h-14 {
+.logoSize {
   height: 49px;
 }
 
-.h-10 {
+.height10 {
   height: 10vh;
 }
 
-.headerLogin {
+.login {
   display: flex;
   height: 10px;
   justify-content: right;
@@ -46,7 +46,7 @@
   right: 20px;
 }
 
-.signBtn {
+.btnSpace {
   display: flex;
   gap: 10px;
 }
