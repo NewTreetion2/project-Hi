@@ -1,15 +1,11 @@
-// scss
 import styles from "./Header.module.scss";
 
-// lib
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { Button } from "react-bootstrap";
 
-// Recoil 데이터
 import { loginStatus } from "store";
 
-// TODO: kwon
 import useModalControl from "hooks/useModalControl";
 
 export default function Header() {

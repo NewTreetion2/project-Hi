@@ -29,10 +29,10 @@ export default function ThrowWork() {
     e.preventDefault();
     const inputArr = [...dummy];
     inputArr.push({
-      userSrc: img,
-      userTitle: title,
-      userText: text,
-      userCheck: check,
+      src: img,
+      title: title,
+      text: text,
+      check: check,
     });
     setDummy(inputArr);
   };
@@ -84,22 +84,26 @@ export default function ThrowWork() {
       <Row className={`mb-3`}>
         선택사항
         <Form.Group className={`mb-3`} id="formGridCheckbox">
-          <Form.Check
-            type="checkbox"
-            label="홈 레코딩"
-            id="recordingSpace"
-            value={"home"}
-            onChange={setCheck}
-            checked={check === "home"}
-          />
-          <Form.Check
-            type="checkbox"
-            label="스튜디오"
-            id="recordingSpace"
-            value={"studio"}
-            onChange={setCheck}
-            checked={check === "studio"}
-          />
+          <label>
+            <Form.Check
+              type="checkbox"
+              id="recordingSpace"
+              value={"home"}
+              onChange={setCheck}
+              checked={check === "home"}
+            />
+            홈 레코딩
+          </label>
+          <label>
+            <Form.Check
+              type="checkbox"
+              id="recordingSpace"
+              value={"studio"}
+              onChange={setCheck}
+              checked={check === "studio"}
+            />
+            스튜디오
+          </label>
         </Form.Group>
       </Row>
 

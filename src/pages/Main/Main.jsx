@@ -45,8 +45,13 @@ export default function Main() {
       <div className={`${styles.cardListWrap}`}>
         <p>현재 진행중인 오디션</p>
         <div className={`${styles.cardList}`}>
-          {cardCarouArr.map((item) => (
-            <MyCard title={item.title} text={item.text} imgSrc={item.imgSrc} />
+          {cardCarouArr.map((item, index) => (
+            <MyCard
+              key={index}
+              title={item.title}
+              text={item.text}
+              imgSrc={item.imgSrc}
+            />
           ))}
         </div>
       </div>

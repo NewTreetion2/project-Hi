@@ -4,8 +4,8 @@ import styles from "./MainCarousel.module.scss";
 export default function MainCarousel({ interval, carouArr }) {
   return (
     <Carousel interval={interval}>
-      {carouArr.map((item) => (
-        <Carousel.Item>
+      {carouArr.map((item, index) => (
+        <Carousel.Item key={index}>
           <img
             className={`d-block ${styles.fitSize} ${styles.opacity}`}
             src={item.imgSrc}

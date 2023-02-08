@@ -38,10 +38,10 @@ export const dummyData = atom({
   key: "dummyData",
   default: [
     {
-      userSrc: "",
-      userTitle: "",
-      userText: "",
-      userCheck: "",
+      src: "",
+      title: "",
+      text: "",
+      check: "",
     },
   ],
 });

@@ -1,10 +1,14 @@
-import { useRecoilValue } from "recoil";
+import { MyCard } from "components";
+import { useRecoilState } from "recoil";
 import { dummyData } from "store";
 
 export default function GetWork() {
-  const dummy = useRecoilValue(dummyData);
-  const dummyUserData = [...dummy];
-  console.log(dummyUserData);
-
-  return <p> src : {dummyUserData[1].userTitle}</p>;
+  const [tempData, setTempData] = useRecoilState(dummyData);
+  return (
+    <MyCard
+      title={tempData[1].title}
+      text={tempData[1].text}
+      imgSrc={tempData[1].src}
+    />
+  );
 }
