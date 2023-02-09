@@ -36,12 +36,5 @@ export const dummyUser = atom({
 
 export const dummyData = atom({
   key: "dummyData",
-  default: [
-    {
-      src: "",
-      title: "",
-      text: "",
-      check: "",
-    },
-  ],
+  default: [],
 });

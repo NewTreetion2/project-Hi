@@ -1,14 +1,21 @@
 import { MyCard } from "components";
-import { useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { dummyData } from "store";
 
 export default function GetWork() {
-  const [tempData, setTempData] = useRecoilState(dummyData);
-  return (
-    <MyCard
-      title={tempData[1].title}
-      text={tempData[1].text}
-      imgSrc={tempData[1].src}
-    />
-  );
+  const [temp, setTemp] = useRecoilState(dummyData);
+  const reset = useResetRecoilState(dummyData);
+  const tempArr = [];
+  useEffect(() => {
+    tempArr.push(
+      <MyCard title={temp[0].title} text={temp[0].text} imgSrc={temp[0].src} />
+    );
+    reset();
+  }, [setTemp]);
+  console.log(temp);
+
+  tempArr.map((item) => {
+    return <div>{item}</div>;
+  });
 }
