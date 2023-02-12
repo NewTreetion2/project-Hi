@@ -92,7 +92,7 @@ export default function ThrowWork() {
               onChange={setCheck}
               checked={check === "home"}
             />
-            홈 레코딩
+            홈레코딩
           </label>
           <label>
             <Form.Check
