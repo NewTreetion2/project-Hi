@@ -1,37 +1,32 @@
 import styles from "./SignIn.module.scss";
 
-import { useNavigate } from "react-router-dom";
-import { useRecoilValue, useRecoilState } from "recoil";
+import LoginApis from "apis/LoginApis";
+
+import { useRecoilState } from "recoil";
 import { Button } from "react-bootstrap";
 
-import { loginStatus, dummyUser } from "store";
+import { loginStatus } from "store";
 
 import { useInput, useModalControl } from "hooks";
 
 export default function SignIn() {
-  const navigate = useNavigate();
   const [inputId, setInputId] = useInput();
   const [inputPw, setInputPw] = useInput("");
   const { handleModalClose } = useModalControl();
-  const userInfo = [...useRecoilValue(dummyUser)];
-  const [Login, setLogin] = useRecoilState(loginStatus);
+  const [login, setLogin] = useRecoilState(loginStatus);
+  const { LoginUser } = LoginApis();
 
-  const checkValidation = () => {
+  const checkValidation = async () => {
     if (inputId === "" || inputPw === "") {
       alert("공백이 존재할 수 없습니다");
     } else {
-      const findId = userInfo.findIndex((id) => id.userId === inputId);
-      if (findId < 0) {
-        alert("아이디가 존재하지 않습니다");
+      const res = await LoginUser(inputId, inputPw);
+      if (res === 200) {
+        alert("로그인 성공");
+        setLogin(!login);
+        handleModalClose();
       } else {
-        if (userInfo[findId].userPw === inputPw) {
-          alert("로그인 성공");
-          setLogin(!Login);
-          navigate("/");
-          handleModalClose();
-        } else {
-          alert("비밀번호가 틀립니다");
-        }
+        alert(`아이디 혹은 비밀번호를 확인해주세요`);
       }
     }
   };
@@ -51,7 +46,7 @@ export default function SignIn() {
             ID
             <input
               type="text"
-              value={inputId}
+              value={inputId || ""}
               onChange={setInputId}
               onKeyUp={enterPress}
               placeholder="아이디"
@@ -62,7 +57,7 @@ export default function SignIn() {
             PW
             <input
               type="password"
-              value={inputPw}
+              value={inputPw || ""}
               onChange={setInputPw}
               onKeyUp={enterPress}
               placeholder="비밀번호"
