@@ -8,13 +8,23 @@ import { Button } from "react-bootstrap";
 import { loginStatus } from "store";
 
 import { useInput, useModalControl } from "hooks";
+import { useEffect, useState } from "react";
 
 export default function SignIn() {
   const [inputId, setInputId] = useInput();
-  const [inputPw, setInputPw] = useInput("");
+  const [inputPw, setInputPw] = useInput();
   const { handleModalClose } = useModalControl();
   const [login, setLogin] = useRecoilState(loginStatus);
   const { LoginUser } = LoginApis();
+  const [active, setActive] = useState(true);
+
+  useEffect(() => {
+    if (inputId !== "" && inputPw !== "") {
+      setActive(false);
+    } else {
+      setActive(true);
+    }
+  }, [inputId, inputPw, setActive]);
 
   const checkValidation = async () => {
     if (inputId === "" || inputPw === "") {
@@ -32,7 +42,7 @@ export default function SignIn() {
   };
 
   const enterPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && active === false) {
       checkValidation();
     }
   };
@@ -46,7 +56,7 @@ export default function SignIn() {
             ID
             <input
               type="text"
-              value={inputId || ""}
+              value={inputId}
               onChange={setInputId}
               onKeyUp={enterPress}
               placeholder="아이디"
@@ -57,7 +67,7 @@ export default function SignIn() {
             PW
             <input
               type="password"
-              value={inputPw || ""}
+              value={inputPw}
               onChange={setInputPw}
               onKeyUp={enterPress}
               placeholder="비밀번호"
@@ -66,7 +76,7 @@ export default function SignIn() {
         </div>
       </div>
       <div className={`${styles.submit}`}>
-        <Button variant="primary" onClick={checkValidation}>
+        <Button disabled={active} variant="primary" onClick={checkValidation}>
           Sign In
         </Button>
       </div>

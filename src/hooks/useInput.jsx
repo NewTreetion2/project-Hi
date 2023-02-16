@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function useInput(e) {
+export default function useInput() {
   const [info, setInfo] = useState();
+
+  useEffect(() => {
+    setInfo(``);
+  }, []);
 
   const onChange = (e) => {
     setInfo(e.target.value);

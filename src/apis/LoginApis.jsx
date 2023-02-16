@@ -21,7 +21,6 @@ export default function LoginApis() {
         passwordConfirm: pwconfirm,
         name: name,
       });
-      console.log(res);
       return res.status;
     } catch (err) {
       return err;

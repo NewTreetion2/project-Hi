@@ -19,7 +19,6 @@ export default function SignUp() {
       alert("공백이 존재할 수 없습니다");
     } else {
       const res = await RegistUser(inputId, inputPw, inputPwConfirm, inputName);
-      console.log(res);
       if (res === 200) {
         alert(`회원가입 성공`);
         handleModalClose();
@@ -44,7 +43,7 @@ export default function SignUp() {
             ID
             <input
               type="text"
-              value={inputId}
+              value={inputId || ""}
               onChange={setInputId}
               onKeyUp={enterPress}
               placeholder="아이디"
@@ -55,7 +54,7 @@ export default function SignUp() {
             PW
             <input
               type="password"
-              value={inputPw}
+              value={inputPw || ""}
               onChange={setInputPw}
               onKeyUp={enterPress}
               placeholder="비밀번호"
@@ -65,7 +64,7 @@ export default function SignUp() {
             Confirm
             <input
               type="password"
-              value={inputPwConfirm}
+              value={inputPwConfirm || ""}
               onChange={setInputPwConfirm}
               onKeyUp={enterPress}
               placeholder="비밀번호 확인"
@@ -75,7 +74,7 @@ export default function SignUp() {
             Name
             <input
               type="text"
-              value={inputName}
+              value={inputName || ""}
               onChange={setInputName}
               onKeyUp={enterPress}
               placeholder="닉네임"
