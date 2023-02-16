@@ -27,17 +27,13 @@ export default function SignIn() {
   }, [inputId, inputPw, setActive]);
 
   const checkValidation = async () => {
-    if (inputId === "" || inputPw === "") {
-      alert("공백이 존재할 수 없습니다");
+    const res = await LoginUser(inputId, inputPw);
+    if (res === 200) {
+      alert("로그인 성공");
+      setLogin(!login);
+      handleModalClose();
     } else {
-      const res = await LoginUser(inputId, inputPw);
-      if (res === 200) {
-        alert("로그인 성공");
-        setLogin(!login);
-        handleModalClose();
-      } else {
-        alert(`아이디 혹은 비밀번호를 확인해주세요`);
-      }
+      alert(`아이디 혹은 비밀번호를 확인해주세요`);
     }
   };
 
