@@ -1,43 +1,44 @@
 import styles from "./SignIn.module.scss";
 
-import { useNavigate } from "react-router-dom";
-import { useRecoilValue, useRecoilState } from "recoil";
+import LoginApis from "apis/LoginApis";
+
+import { useRecoilState } from "recoil";
 import { Button } from "react-bootstrap";
 
-import { loginStatus, dummyUser } from "store";
+import { loginStatus } from "store";
 
 import { useInput, useModalControl } from "hooks";
+import { useEffect, useState } from "react";
 
 export default function SignIn() {
-  const navigate = useNavigate();
   const [inputId, setInputId] = useInput();
-  const [inputPw, setInputPw] = useInput("");
+  const [inputPw, setInputPw] = useInput();
   const { handleModalClose } = useModalControl();
-  const userInfo = [...useRecoilValue(dummyUser)];
-  const [Login, setLogin] = useRecoilState(loginStatus);
+  const [login, setLogin] = useRecoilState(loginStatus);
+  const { LoginUser } = LoginApis();
+  const [active, setActive] = useState(true);
 
-  const checkValidation = () => {
-    if (inputId === "" || inputPw === "") {
-      alert("공백이 존재할 수 없습니다");
+  useEffect(() => {
+    if (inputId !== "" && inputPw !== "") {
+      setActive(false);
     } else {
-      const findId = userInfo.findIndex((id) => id.userId === inputId);
-      if (findId < 0) {
-        alert("아이디가 존재하지 않습니다");
-      } else {
-        if (userInfo[findId].userPw === inputPw) {
-          alert("로그인 성공");
-          setLogin(!Login);
-          navigate("/");
-          handleModalClose();
-        } else {
-          alert("비밀번호가 틀립니다");
-        }
-      }
+      setActive(true);
+    }
+  }, [inputId, inputPw, setActive]);
+
+  const checkValidation = async () => {
+    const res = await LoginUser(inputId, inputPw);
+    if (res === 200) {
+      alert("로그인 성공");
+      setLogin(!login);
+      handleModalClose();
+    } else {
+      alert(`아이디 혹은 비밀번호를 확인해주세요`);
     }
   };
 
   const enterPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && active === false) {
       checkValidation();
     }
   };
@@ -71,7 +72,7 @@ export default function SignIn() {
         </div>
       </div>
       <div className={`${styles.submit}`}>
-        <Button variant="primary" onClick={checkValidation}>
+        <Button disabled={active} variant="primary" onClick={checkValidation}>
           Sign In
         </Button>
       </div>

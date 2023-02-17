@@ -1,36 +1,29 @@
 import styles from "./SignUp.module.scss";
 
-import { useRecoilState } from "recoil";
-import { Button } from "react-bootstrap";
+import LoginApis from "apis/LoginApis";
 
-import { dummyUser } from "store";
+import { Button } from "react-bootstrap";
 
 import { useInput, useModalControl } from "hooks";
 
 export default function SignUp() {
-  const [userId, setUserId] = useInput();
-  const [userPw, setUserPw] = useInput();
+  const [inputId, setInputId] = useInput();
+  const [inputPw, setInputPw] = useInput();
+  const [inputPwConfirm, setInputPwConfirm] = useInput();
+  const [inputName, setInputName] = useInput();
   const { handleModalClose } = useModalControl();
-  const [user, setUser] = useRecoilState(dummyUser);
+  const { RegistUser } = LoginApis();
 
-  const makeNewUser = () => {
-    if (userId === "" || userPw === "") {
+  const makeNewUser = async () => {
+    if (inputId === "" || inputPw === "") {
       alert("공백이 존재할 수 없습니다");
     } else {
-      const newUser = [...user];
-      const tempId = userId;
-      const tempPw = userPw;
-      if (newUser.find((user) => user.userId === tempId)) {
-        alert("중복된 아이디가 존재합니다");
-      } else {
-        newUser.push({
-          id: newUser.length + 1,
-          userId: tempId,
-          userPw: tempPw,
-        });
-        setUser(newUser);
-        alert("회원가입이 완료되었습니다");
+      const res = await RegistUser(inputId, inputPw, inputPwConfirm, inputName);
+      if (res === 200) {
+        alert(`회원가입 성공`);
         handleModalClose();
+      } else {
+        alert(`회원정보를 올바르게 입력해주세요`);
       }
     }
   };
@@ -46,25 +39,45 @@ export default function SignUp() {
       <div className={`${styles.signUp}`}>
         <div className={`${styles.boldText}`}>회원가입</div>
         <form>
-          <p className={`${styles.idInput}`}>
+          <p className={`${styles.input}`}>
             ID
             <input
               type="text"
-              value={userId}
-              onChange={setUserId}
+              value={inputId || ""}
+              onChange={setInputId}
               onKeyUp={enterPress}
               placeholder="아이디"
               autoFocus
             />
           </p>
-          <p className={`${styles.pwInput}`}>
+          <p className={`${styles.input}`}>
             PW
             <input
               type="password"
-              value={userPw}
-              onChange={setUserPw}
+              value={inputPw || ""}
+              onChange={setInputPw}
               onKeyUp={enterPress}
               placeholder="비밀번호"
+            />
+          </p>
+          <p className={`${styles.input}`}>
+            Confirm
+            <input
+              type="password"
+              value={inputPwConfirm || ""}
+              onChange={setInputPwConfirm}
+              onKeyUp={enterPress}
+              placeholder="비밀번호 확인"
+            />
+          </p>
+          <p className={`${styles.input}`}>
+            Name
+            <input
+              type="text"
+              value={inputName || ""}
+              onChange={setInputName}
+              onKeyUp={enterPress}
+              placeholder="닉네임"
             />
           </p>
         </form>

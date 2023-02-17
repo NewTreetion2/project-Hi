@@ -3,7 +3,7 @@
   align-items: center;
   flex-direction: column;
   height: 300px;
-  gap: 10vh;
+  gap: 45px;
 }
 
 .boldText {
@@ -11,13 +11,7 @@
   font-weight: bold;
 }
 
-.idInput {
-  width: 18vw;
-  display: flex;
-  justify-content: space-between;
-}
-
-.pwInput {
+.input {
   width: 18vw;
   display: flex;
   justify-content: space-between;
