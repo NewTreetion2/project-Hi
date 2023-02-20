@@ -5,14 +5,29 @@ import LoginApis from "apis/LoginApis";
 import { Button } from "react-bootstrap";
 
 import { useInput, useModalControl } from "hooks";
+import { useState, useEffect } from "react";
 
 export default function SignUp() {
+  const [active, setActive] = useState(true);
   const [inputId, setInputId] = useInput();
   const [inputPw, setInputPw] = useInput();
   const [inputPwConfirm, setInputPwConfirm] = useInput();
   const [inputName, setInputName] = useInput();
   const { handleModalClose } = useModalControl();
   const { RegistUser } = LoginApis();
+
+  useEffect(() => {
+    if (
+      inputId !== "" &&
+      inputPw !== "" &&
+      inputPwConfirm !== "" &&
+      inputName !== ""
+    ) {
+      setActive(false);
+    } else {
+      setActive(true);
+    }
+  }, [inputId, inputPw, inputPwConfirm, inputName, setActive]);
 
   const makeNewUser = async () => {
     if (inputId === "" || inputPw === "") {
@@ -23,13 +38,14 @@ export default function SignUp() {
         alert(`회원가입 성공`);
         handleModalClose();
       } else {
+        console.log(res);
         alert(`회원정보를 올바르게 입력해주세요`);
       }
     }
   };
 
   const enterPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && active === false) {
       makeNewUser();
     }
   };
@@ -83,7 +99,7 @@ export default function SignUp() {
         </form>
       </div>
       <div className={`${styles.submit}`}>
-        <Button variant="primary" onClick={makeNewUser}>
+        <Button disabled={active} variant="primary" onClick={makeNewUser}>
           Submit
         </Button>
       </div>

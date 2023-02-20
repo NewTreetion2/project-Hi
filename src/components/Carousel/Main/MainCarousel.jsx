@@ -1,3 +1,4 @@
+import TextAnimation from "components/TextAnimation/TextAnimation";
 import { Carousel } from "react-bootstrap";
 import styles from "./MainCarousel.module.scss";
 
@@ -13,6 +14,7 @@ export default function MainCarousel({ interval, carouArr }) {
           />
           <Carousel.Caption>
             <h3>{item.text}</h3>
+            <TextAnimation text={"안녕하세요"} />
           </Carousel.Caption>
         </Carousel.Item>
       ))}
