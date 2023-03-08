@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
 
 import { Header, MyModal } from "components";
-import { Main, NotFound, WorkList } from "pages";
+import { Main, NotFound, WorkList, MyPage } from "pages";
 
 // TODO
 function App() {
@@ -18,6 +18,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route path="/getWork" element={<WorkList />} />
+        <Route path="/myPage" element={<MyPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

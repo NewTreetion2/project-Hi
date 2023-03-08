@@ -4,7 +4,7 @@ export default function useInput() {
   const [info, setInfo] = useState();
 
   useEffect(() => {
-    setInfo(``);
+    setInfo("");
   }, []);
 
   const onChange = (e) => {

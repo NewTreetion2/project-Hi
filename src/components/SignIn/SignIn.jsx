@@ -52,7 +52,7 @@ export default function SignIn() {
             ID
             <input
               type="text"
-              value={inputId}
+              value={inputId || ""}
               onChange={setInputId}
               onKeyUp={enterPress}
               placeholder="아이디"
@@ -63,7 +63,7 @@ export default function SignIn() {
             PW
             <input
               type="password"
-              value={inputPw}
+              value={inputPw || ""}
               onChange={setInputPw}
               onKeyUp={enterPress}
               placeholder="비밀번호"

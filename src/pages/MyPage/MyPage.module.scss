@@ -1,0 +1,51 @@
+.main {
+  width: 75vw;
+  height: 100vh;
+  margin: 150px 200px;
+  display: flex;
+}
+
+.infoMenuBox {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.contentBox {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+}
+
+.userInfo {
+  width: auto;
+  height: 260px;
+}
+
+.menuBar {
+  width: auto;
+  height: 400px;
+}
+
+.summary {
+  width: auto;
+  height: 200px;
+}
+
+.search {
+  width: auto;
+  height: 100px;
+}
+
+.workList {
+  width: auto;
+  height: 500px;
+}
+
+.summaryFunctionBox {
+  width: auto;
+  height: 130px;
+  background-color: gray;
+  opacity: 0.1;
+  border-radius: 7px;
+}

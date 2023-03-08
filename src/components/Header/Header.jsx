@@ -2,7 +2,7 @@ import styles from "./Header.module.scss";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { Button } from "react-bootstrap";
+import MyButton from "components/Button/MyButton";
 
 import { loginStatus } from "store";
 
@@ -14,6 +14,9 @@ export default function Header() {
   const navigate = useNavigate();
   const goGetWork = () => {
     navigate("/getWork");
+  };
+  const goMyPage = () => {
+    navigate("/myPage");
   };
   const logout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
@@ -47,45 +50,24 @@ export default function Header() {
         <div className={`${styles.loginBtn}`}>
           {isLogin ? (
             <div className={`${styles.btnSpace}`}>
-              <Button variant="secondary" onClick={() => {}} size={"sm"}>
-                My page
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={defineModalTypeAsThrowWork}
-                size={"sm"}
-              >
-                일 던져주기
-              </Button>
-              <Button variant="secondary" onClick={goGetWork} size={"sm"}>
-                일 받기
-              </Button>
-              <Button variant="secondary" onClick={logout} size={"sm"}>
-                Logout
-              </Button>
+              <MyButton onClickHandler={goMyPage} text={"My Page"} />
+              <MyButton
+                onClickHandler={defineModalTypeAsThrowWork}
+                text={"일 던져주기"}
+              />
+              <MyButton onClickHandler={goGetWork} text={"일 받기"} />
+              <MyButton onClickHandler={logout} text={"Logout"} />
             </div>
           ) : (
             <div className={`${styles.btnSpace}`}>
-              <Button
-                variant="secondary"
-                onClick={defineModalTypeAsSignin}
-                size={"sm"}
-              >
-                Sign In
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={defineModalTypeAsSignUp}
-                size={"sm"}
-              >
-                Sign Up
-              </Button>
-              {/* <MyModal title="Sign In" size="sm">
-                <SignIn />
-              </MyModal>
-              <MyModal title="Sign Up" size="sm">
-                <SignUp />
-              </MyModal> */}
+              <MyButton
+                onClickHandler={defineModalTypeAsSignin}
+                text={"Sign In"}
+              />
+              <MyButton
+                onClickHandler={defineModalTypeAsSignUp}
+                text={"Sign Up"}
+              />
             </div>
           )}
         </div>

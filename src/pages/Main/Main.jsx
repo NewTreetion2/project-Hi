@@ -1,9 +1,13 @@
 import styles from "./Main.module.scss";
 
 import { MainCarousel, MyCard } from "components";
+import TextAnimation from "components/TextAnimation/TextAnimation";
 
 const mainCarouArr = [
-  { imgSrc: "img/carouselFirst.jpg", text: "글 추가 예정" },
+  {
+    imgSrc: "img/carouselFirst.jpg",
+    text: <TextAnimation text="환영합니다" />,
+  },
   { imgSrc: "", text: "2번째 carousel입니다" },
   { imgSrc: "", text: "3번째 carousel입니다" },
 ];
@@ -39,7 +43,7 @@ export default function Main() {
       받아야 할 props는 interval, 각 아이템의 src, 내용
       객체로 [{src:"" , 내용은 <></>}] 배열처리해서 넘겨준다? */}
       <div className={`${styles.carousel}`}>
-        <MainCarousel interval={2500} carouArr={mainCarouArr} />
+        <MainCarousel interval={50000} carouArr={mainCarouArr} />
       </div>
 
       <div className={`${styles.cardListWrap}`}>

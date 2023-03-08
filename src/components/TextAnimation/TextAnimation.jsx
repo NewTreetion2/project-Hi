@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+let tempText = [];
 
 export default function TextAnimation({ text }) {
+  const [temp, setTemp] = useState(false);
   const [count, setCount] = useState(0);
   const [renderText, setRenderText] = useState([]);
-  let tempText = [];
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTemp(!temp);
+    }, 5000);
 
-  setInterval(() => {
+    return () => {
+      clearInterval(timer);
+    };
+  });
+
+  useEffect(() => {
     if (count >= text.length) {
       tempText = [];
       setRenderText([]);
@@ -16,8 +26,7 @@ export default function TextAnimation({ text }) {
       setRenderText(tempText);
       setCount(count + 1);
     }
+  }, [temp, setTemp]);
 
-    console.log(renderText);
-  }, 10000000);
   return <h1>{renderText}</h1>;
 }

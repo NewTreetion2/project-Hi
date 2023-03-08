@@ -1,4 +1,5 @@
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import MyButton from "components/Button/MyButton";
 
 export default function MyCard({ title, text, imgSrc }) {
   return (
@@ -7,7 +8,7 @@ export default function MyCard({ title, text, imgSrc }) {
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{text}</Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <MyButton text={"Go somewhere"} />
       </Card.Body>
     </Card>
   );
