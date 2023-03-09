@@ -1,11 +1,18 @@
+import WorkApis from "apis/WorkApis";
+
 import { MyCard } from "components";
-import { useRecoilValue } from "recoil";
-import { dummyData } from "store";
 
 export default function WorkList() {
-  const temp = useRecoilValue(dummyData);
+  const { GetWorkList, GetWorkDetail } = WorkApis();
+  const getWorkData = async () => {
+    const res = await GetWorkDetail(1);
+    console.log(res);
+  };
 
-  return temp.map((item, index) => (
-    <MyCard key={index} title={item.title} text={item.text} imgSrc={item.src} />
-  ));
+  const getWorkList = async () => {
+    const res = await GetWorkList();
+    console.log(res);
+  };
+
+  getWorkList();
 }

@@ -1,15 +1,14 @@
 import styles from "./ThrowWork.module.scss";
 
+import WorkApis from "apis/WorkApis";
+
 import { useRef, useState } from "react";
-import { useRecoilState } from "recoil";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
-import { useInput } from "hooks";
-
-import { dummyData } from "store";
+import { useInput, useModalControl } from "hooks";
 
 export default function ThrowWork() {
   const imgRef = useRef();
@@ -17,7 +16,8 @@ export default function ThrowWork() {
   const [title, setTitle] = useInput();
   const [text, setText] = useInput();
   const [check, setCheck] = useInput();
-  const [dummy, setDummy] = useRecoilState(dummyData);
+  const { PostWork } = WorkApis();
+  const { handleModalClose } = useModalControl();
   const imgChange = (e) => {
     const selectedFile = e.target.files;
     imgRef.current.src = `img/${selectedFile[0].name}`;
@@ -27,14 +27,8 @@ export default function ThrowWork() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const inputArr = [...dummy];
-    inputArr.push({
-      src: img,
-      title: title,
-      text: text,
-      check: check,
-    });
-    setDummy(inputArr);
+    PostWork("title", "text22", "20230310", "20230317", "3000", "02", "Y");
+    handleModalClose();
   };
 
   return (
