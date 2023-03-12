@@ -5,3 +5,5 @@ export { default as Header } from "components/Header/Header";
 export { default as MainCarousel } from "components/Carousel/Main/MainCarousel";
 export { default as MyCard } from "components/MyCard/MyCard";
 export { default as MyModal } from "components/MyModal/MyModal";
+export { default as TextAnimation } from "components/TextAnimation/TextAnimation";
+export { default as Footer } from "components/Footer/Footer";

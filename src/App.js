@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Routes, Route } from "react-router-dom";
 
-import { Header, MyModal } from "components";
+import { Header, MyModal, Footer } from "components";
 import { Main, NotFound, WorkList, MyPage } from "pages";
 
 // TODO
@@ -15,12 +15,17 @@ function App() {
 
         <MyModal />
       </div>
-      <Routes>
-        <Route exact path="/" element={<Main />} />
-        <Route path="/getWork" element={<WorkList />} />
-        <Route path="/myPage" element={<MyPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <div className={`${styles.content}`}>
+        <Routes>
+          <Route exact path="/" element={<Main />} />
+          <Route path="/getWork" element={<WorkList />} />
+          <Route path="/myPage" element={<MyPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+      <div className={`${styles.footer}`}>
+        <Footer />
+      </div>
     </div>
   );
 }
