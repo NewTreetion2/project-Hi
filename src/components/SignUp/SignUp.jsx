@@ -38,7 +38,6 @@ export default function SignUp() {
         alert(`회원가입 성공`);
         handleModalClose();
       } else {
-        console.log(res);
         alert(`회원정보를 올바르게 입력해주세요`);
       }
     }
