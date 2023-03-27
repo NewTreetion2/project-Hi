@@ -1,0 +1,18 @@
+.summaryFunctionBox {
+  width: auto;
+  height: 130px;
+  background-color: E8F5FF;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+}
+
+.summaryContent {
+  height: 110px;
+  flex: 1;
+  margin: 10px 0 0 10px;
+  box-shadow: 2px 2px 2px 2px gray;
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px 0 15px;
+}

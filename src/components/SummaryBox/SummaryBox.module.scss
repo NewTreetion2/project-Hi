@@ -1,0 +1,24 @@
+.summaryContentTop {
+  align-items: center;
+  display: flex;
+  flex: 2;
+}
+
+.summaryContentDown {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  flex: 3;
+}
+
+.summaryContentLeft {
+  flex: 2;
+}
+
+.summaryContentRight {
+  flex: 3;
+  display: flex;
+  justify-content: right;
+  font-size: 14px;
+  font-weight: 400;
+}

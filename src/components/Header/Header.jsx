@@ -16,7 +16,7 @@ export default function Header() {
     navigate("/getWork");
   };
   const goMyPage = () => {
-    navigate("/myPage");
+    navigate("/my-page");
   };
   const logout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {

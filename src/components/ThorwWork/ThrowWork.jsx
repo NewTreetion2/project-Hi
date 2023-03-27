@@ -25,9 +25,17 @@ export default function ThrowWork() {
     setImg(imgRef.current.src);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    PostWork("title", "text22", "20230310", "20230317", "3000", "02", "Y");
+    const res = await PostWork(
+      "title",
+      "text22",
+      "20230310",
+      "20230317",
+      "3000",
+      "02",
+      "Y"
+    );
     handleModalClose();
   };
 
@@ -82,9 +90,9 @@ export default function ThrowWork() {
             <Form.Check
               type="checkbox"
               id="recordingSpace"
-              value={"home"}
+              value={"02"}
               onChange={setCheck}
-              checked={check === "home"}
+              checked={check === "02"}
             />
             홈레코딩
           </label>
@@ -92,9 +100,9 @@ export default function ThrowWork() {
             <Form.Check
               type="checkbox"
               id="recordingSpace"
-              value={"studio"}
+              value={"01"}
               onChange={setCheck}
-              checked={check === "studio"}
+              checked={check === "01"}
             />
             스튜디오
           </label>

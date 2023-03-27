@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Main />} />
           <Route path="/getWork" element={<WorkList />} />
-          <Route path="/myPage" element={<MyPage />} />
+          <Route path="/my-page" element={<MyPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
