@@ -1,3 +1,4 @@
+import MyButton from "components/Button/MyButton";
 import Menu from "components/Menu/Menu";
 import Summary from "components/Summary/Summary";
 import styles from "./MyPage.module.scss";
@@ -6,7 +7,19 @@ export default function MyPage() {
   return (
     <div className={`${styles.main}`}>
       <div className={`${styles.infoMenuBox}`}>
-        <div className={`${styles.userInfo}`}>유저인포</div>
+        <div className={`${styles.userInfo}`}>
+          <div className={`${styles.profile}`}>
+            <img
+              className={`${styles.profileImg}`}
+              src="img/default_profile.png"
+              alt="프로필 디폴트 이미지"
+            />
+          </div>
+          <div className={`${styles.userName}`}>트리션</div>
+          <div className={`${styles.profileImgChangeBtn}`}>
+            <MyButton text="프로필 사진 변경" />
+          </div>
+        </div>
         {/* 들어갈 내용 -> 유저 아이디와 대표 이미지 */}
         <div className={`${styles.menuBar}`}>
           <Menu />
