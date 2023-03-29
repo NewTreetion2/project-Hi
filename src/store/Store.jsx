@@ -15,5 +15,5 @@ export const modalStatus = atom({
 // MyPage의 Worklist Search기능을 사용하기 위한 State
 export const projectSearchStatus = atom({
   key: "projectSearchStatus",
-  default: "proceeding",
+  default: "",
 });
