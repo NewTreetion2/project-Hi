@@ -1,0 +1,30 @@
+.workListBox {
+  width: 700px;
+  height: 90px;
+  background-color: gray;
+  display: flex;
+  padding: 15px 30px;
+}
+
+.img {
+  flex: 1;
+}
+
+.info {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.text {
+  flex: 2;
+}
+
+.date {
+}

@@ -1,9 +1,23 @@
 .searchBox {
+  width: 800px;
   display: flex;
   gap: 25px;
+  align-items: center;
 }
 
 .input {
   border-radius: 5px;
   border: 1px solid;
+}
+
+.startDate {
+  width: 130px;
+}
+
+.endDate {
+  width: 130px;
+}
+
+.commitBtn {
+  width: 300px;
 }

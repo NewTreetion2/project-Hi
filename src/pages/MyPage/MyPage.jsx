@@ -4,6 +4,7 @@ import Menu from "components/Menu/Menu";
 import Profile from "components/Profile/Profile";
 import Summary from "components/Summary/Summary";
 import Search from "components/Search/Search";
+import WorkListCompo from "components/WorkListCompo/WorkListCompo";
 
 export default function MyPage() {
   return (
@@ -24,7 +25,16 @@ export default function MyPage() {
         <div className={`${styles.search}`}>
           <Search />
         </div>
-        <div className={`${styles.workList}`}>워크 리스트</div>
+        <div className={`${styles.workList}`}>
+          워크 리스트
+          <WorkListCompo />
+          <WorkListCompo />
+          <WorkListCompo />
+          <WorkListCompo />
+          <WorkListCompo />
+          <WorkListCompo />
+          <WorkListCompo />
+        </div>
         {/* 현재 내가 참여하고 있는 프로젝트를 등록순으로 정리, 이후 검색에 따라 나열순서가 변경된다*/}
       </div>
     </div>

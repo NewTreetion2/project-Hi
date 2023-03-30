@@ -39,14 +39,24 @@
 }
 
 .search {
-  width: auto;
   height: 100px;
   margin-top: 40px;
 }
 
 .workList {
   width: auto;
-  height: 500px;
+  height: 1000px;
+  border: 1px solid;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .menuBarTitle {
@@ -67,9 +77,4 @@
 .menuBarContentFont {
   font-size: 13px;
   font-weight: 500;
-}
-
-.select {
-  width: 150px;
-  font-size: 12px;
 }
