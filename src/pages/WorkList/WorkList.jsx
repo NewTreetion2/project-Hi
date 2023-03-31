@@ -1,7 +1,5 @@
 import WorkApis from "apis/WorkApis";
 
-import { MyCard } from "components";
-
 export default function WorkList() {
   const { GetWorkList, GetWorkDetail } = WorkApis();
   const getWorkData = async () => {

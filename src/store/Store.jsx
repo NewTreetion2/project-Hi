@@ -12,8 +12,8 @@ export const modalStatus = atom({
   default: "",
 });
 
-// 일 던져주기, 받기를 위한 dummyData
-export const dummyData = atom({
-  key: "dummyData",
-  default: [],
+// MyPage의 Worklist Search기능을 사용하기 위한 State
+export const projectSearchStatus = atom({
+  key: "projectSearchStatus",
+  default: "",
 });

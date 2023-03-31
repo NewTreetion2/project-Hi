@@ -1,0 +1,39 @@
+.workListBox {
+  width: 700px;
+  height: 110px;
+  background-color: gray;
+  display: flex;
+  padding: 15px 20px;
+  flex: none;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.img {
+  width: 100px;
+  height: 80px;
+  background-color: white;
+}
+
+.info {
+  margin-left: 20px;
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid;
+  margin-bottom: 5px;
+}
+
+.text {
+  flex: 2;
+  border: 1px solid;
+}
+
+.date {
+}

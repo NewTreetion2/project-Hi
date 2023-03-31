@@ -18,8 +18,11 @@
 }
 
 .userInfo {
-  width: auto;
+  width: 250px;
   height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .menuBar {
@@ -36,13 +39,24 @@
 }
 
 .search {
-  width: auto;
   height: 100px;
+  margin-top: 40px;
 }
 
 .workList {
   width: auto;
-  height: 500px;
+  height: 600px;
+  border: 1px solid;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .menuBarTitle {
@@ -63,4 +77,15 @@
 .menuBarContentFont {
   font-size: 13px;
   font-weight: 500;
+}
+
+.sort {
+  width: 700px;
+  display: flex;
+  justify-content: left;
+}
+
+.sortBtn {
+  display: flex;
+  gap: 10px;
 }
