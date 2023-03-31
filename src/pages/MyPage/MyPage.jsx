@@ -5,8 +5,11 @@ import Profile from "components/Profile/Profile";
 import Summary from "components/Summary/Summary";
 import Search from "components/Search/Search";
 import WorkListCompo from "components/WorkListCompo/WorkListCompo";
+import { useState } from "react";
 
 export default function MyPage() {
+  const [sortType, setSortType] = useState("");
+
   return (
     <div className={`${styles.main}`}>
       <div className={`${styles.infoMenuBox}`}>
@@ -26,7 +29,28 @@ export default function MyPage() {
           <Search />
         </div>
         <div className={`${styles.workList}`}>
-          워크 리스트
+          <div className={`${styles.sort}`}>
+            <form className={`${styles.sortBtn}`}>
+              <label>
+                <input
+                  type="radio"
+                  value="regist"
+                  checked={sortType === "regist"}
+                  onChange={() => setSortType("regist")}
+                />
+                등록순
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="amount"
+                  checked={sortType === "amount"}
+                  onChange={() => setSortType("amount")}
+                />
+                금액순
+              </label>
+            </form>
+          </div>
           <WorkListCompo />
           <WorkListCompo />
           <WorkListCompo />
