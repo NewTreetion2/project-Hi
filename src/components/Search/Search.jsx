@@ -21,16 +21,25 @@ export default function Search() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  // function onChangeHandler(e) {
+  //   const tempOb = { ...searchState };
+  //   if (e.target.id === "project") {
+  //     tempOb.project = e.target.value;
+  //     setSearchState(tempOb);
+  //   } else if (e.target.id === "text") {
+  //     tempOb.text = e.target.value;
+  //     setSearchState(tempOb);
+  //   }
+  // }
+
   function onChangeHandler(e) {
-    const tempOb = { ...searchState };
-    if (e.target.id === "project") {
-      tempOb.project = e.target.value;
-      setSearchState(tempOb);
-    } else if (e.target.id === "text") {
-      tempOb.text = e.target.value;
-      setSearchState(tempOb);
-    }
+    const { id, value } = e.target;
+    setSearchState({
+      ...searchState,
+      [id]: value,
+    });
   }
+
   function onClickHandler() {
     //서버에 searchState.project , searchState.text, startDate, endDate를 보내 프로젝트를 조회 후 시간 순으로 정렬
   }
