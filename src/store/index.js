@@ -1,1 +1,1 @@
-export { loginStatus, modalStatus, projectSearchStatus } from "store/Store";
+export { loginStatus, modalStatus } from "store/Store";
