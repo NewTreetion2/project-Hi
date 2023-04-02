@@ -1,23 +1,31 @@
+@mixin input-layer() {
+  width: 260px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  padding-left: 10px;
+}
+
 .searchBox {
-  width: 800px;
+  width: 100%;
   display: flex;
-  gap: 25px;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.startDate,
+.endDate {
+  @include input-layer();
+  width: 150px;
 }
 
 .input {
-  border-radius: 5px;
-  border: 1px solid;
-}
-
-.startDate {
-  width: 130px;
-}
-
-.endDate {
-  width: 130px;
+  @include input-layer();
 }
 
 .commitBtn {
-  width: 300px;
+  button {
+    height: 40px;
+  }
 }

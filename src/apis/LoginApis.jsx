@@ -7,7 +7,7 @@ export default function LoginApis() {
         id: id,
         password: password,
       });
-      return res.status;
+      return res.data;
     } catch (err) {
       return err;
     }

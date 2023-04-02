@@ -28,5 +28,5 @@ export default function TextAnimation({ text }) {
     }
   }, [temp, setTemp]);
 
-  return <h1>{renderText}</h1>;
+  return <p>{renderText}</p>;
 }

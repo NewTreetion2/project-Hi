@@ -6,4 +6,13 @@
   &:hover {
     background-color: #f5c126;
   }
+
+  &:active {
+    background-color: #ffd400 !important;
+  }
+
+  &:disabled {
+    background-color: #ffd400;
+    color: black;
+  }
 }

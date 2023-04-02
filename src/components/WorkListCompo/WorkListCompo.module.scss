@@ -1,39 +1,55 @@
 .workListBox {
-  width: 700px;
-  height: 110px;
-  background-color: gray;
-  display: flex;
-  padding: 15px 20px;
   flex: none;
+  display: flex;
   border: 1px solid;
   border-radius: 5px;
-}
+  padding: 15px 20px;
+  width: 100%;
+  border: 1px solid #ced4da;
+  background-color: rgba(232, 245, 255, 0.5);
 
-.img {
-  width: 100px;
-  height: 80px;
-  background-color: white;
-}
+  .imgWrapper {
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.info {
-  margin-left: 20px;
-  flex: 4;
-  display: flex;
-  flex-direction: column;
-}
+    img {
+      width: 180px;
+      height: 180px;
+    }
+  }
 
-.title {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid;
-  margin-bottom: 5px;
-}
+  .info {
+    flex: 1;
+    height: 180px;
+    display: flex;
+    padding-left: 30px;
+    padding-top: 10px;
+    flex-direction: column;
 
-.text {
-  flex: 2;
-  border: 1px solid;
-}
+    .title {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      height: 30px;
+      border-radius: 5px;
 
-.date {
+      h3 {
+        font-size: 23px;
+      }
+    }
+
+    .text {
+      overflow-y: scroll;
+      flex: 1;
+      border-radius: 5px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
 }
