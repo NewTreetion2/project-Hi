@@ -1,35 +1,31 @@
 .signIn {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  height: 300px;
-  gap: 10vh;
+  margin-left: 30px;
+  height: 330px;
+  gap: 15px;
 }
 
-.idInput {
-  width: 18vw;
-  display: flex;
-  justify-content: space-between;
-}
-
-.pwInput {
-  width: 18vw;
-  display: flex;
-  justify-content: space-between;
+.input {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  width: 400px;
+  height: 60px;
+  margin-bottom: 15px;
 }
 
 .boldText {
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .submit {
-  display: flex;
-  justify-content: right;
-}
-
-.floating {
-  width: 25vw;
-  height: 40px;
-  margin-bottom: 2.5rem;
+  button {
+    width: 400px;
+    height: 60px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+  }
 }

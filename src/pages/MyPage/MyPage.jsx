@@ -29,28 +29,6 @@ export default function MyPage() {
           <Search />
         </div>
         <div className={`${styles.workList}`}>
-          <div className={`${styles.sort}`}>
-            <form className={`${styles.sortBtn}`}>
-              <label>
-                <input
-                  type="radio"
-                  value="regist"
-                  checked={sortType === "regist"}
-                  onChange={() => setSortType("regist")}
-                />
-                등록순
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  value="amount"
-                  checked={sortType === "amount"}
-                  onChange={() => setSortType("amount")}
-                />
-                금액순
-              </label>
-            </form>
-          </div>
           <WorkListCompo />
           <WorkListCompo />
           <WorkListCompo />

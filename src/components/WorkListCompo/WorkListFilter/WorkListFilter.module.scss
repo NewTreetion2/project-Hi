@@ -1,0 +1,16 @@
+.selectorcontainer {
+  display: flex;
+  gap: 10px;
+
+  .selectorWrapper {
+    position: relative;
+
+    .selectExplaneText {
+      color: gray;
+      font-size: 13px;
+      position: absolute;
+      top: -20px;
+      left: 5px;
+    }
+  }
+}

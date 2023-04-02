@@ -3,12 +3,12 @@ import styles from "./SignIn.module.scss";
 import LoginApis from "apis/LoginApis";
 
 import { useRecoilState } from "recoil";
-import { Button } from "react-bootstrap";
 
 import { loginStatus } from "store";
 
 import { useInput, useModalControl } from "hooks";
 import { useEffect, useState } from "react";
+import MyButton from "components/Button/MyButton";
 
 export default function SignIn() {
   const [inputId, setInputId] = useInput();
@@ -28,7 +28,7 @@ export default function SignIn() {
 
   const checkValidation = async () => {
     const res = await LoginUser(inputId, inputPw);
-    if (res === 200) {
+    if (res.status === "SUCCESS") {
       alert("로그인 성공");
       setLogin(!login);
       handleModalClose();
@@ -48,33 +48,31 @@ export default function SignIn() {
       <div className={`${styles.signIn}`}>
         <div className={`${styles.boldText}`}>로그인</div>
         <div>
-          <p className={`${styles.idInput}`}>
-            ID
-            <input
-              type="text"
-              value={inputId || ""}
-              onChange={setInputId}
-              onKeyUp={enterPress}
-              placeholder="아이디"
-              autoFocus
-            />
-          </p>
-          <p className={`${styles.pwInput}`}>
-            PW
-            <input
-              type="password"
-              value={inputPw || ""}
-              onChange={setInputPw}
-              onKeyUp={enterPress}
-              placeholder="비밀번호"
-            />
-          </p>
+          <input
+            className={styles.input}
+            type="text"
+            value={inputId || ""}
+            onChange={setInputId}
+            onKeyUp={enterPress}
+            placeholder="아이디"
+            autoFocus
+          />
+          <input
+            className={styles.input}
+            type="password"
+            value={inputPw || ""}
+            onChange={setInputPw}
+            onKeyUp={enterPress}
+            placeholder="비밀번호"
+          />
         </div>
-      </div>
-      <div className={`${styles.submit}`}>
-        <Button disabled={active} variant="primary" onClick={checkValidation}>
-          Sign In
-        </Button>
+        <div className={`${styles.submit}`}>
+          <MyButton
+            disabled={active}
+            onClickHandler={checkValidation}
+            text="Sign In"
+          />
+        </div>
       </div>
     </>
   );

@@ -4,12 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
 
 import { Header, MyModal, Footer } from "components";
-import { Main, NotFound, WorkList, MyPage } from "pages";
+import { Main, NotFound, WorkList, MyPage, WorkDetail } from "pages";
 
 // TODO
 function App() {
   return (
-    <div>
+    <div className={styles.project}>
       <div className={`${styles.header}`}>
         <Header />
 
@@ -20,6 +20,7 @@ function App() {
           <Route exact path="/" element={<Main />} />
           <Route path="/getWork" element={<WorkList />} />
           <Route path="/my-page" element={<MyPage />} />
+          <Route path="/work-detail/:workNum" element={<WorkDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

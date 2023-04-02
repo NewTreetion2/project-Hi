@@ -21,6 +21,8 @@ export default function Search() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  console.log(searchState);
+
   // function onChangeHandler(e) {
   //   const tempOb = { ...searchState };
   //   if (e.target.id === "project") {
@@ -34,6 +36,7 @@ export default function Search() {
 
   function onChangeHandler(e) {
     const { id, value } = e.target;
+
     setSearchState({
       ...searchState,
       [id]: value,
@@ -50,23 +53,29 @@ export default function Search() {
         onChangeHandler={onChangeHandler}
         arr={selectArr}
       />
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        selectsStart
-        startDate={startDate}
-        endDate={endDate}
-        className={`${styles.startDate}`}
-      />
-      <DatePicker
-        selected={endDate}
-        onChange={(date) => setEndDate(date)}
-        selectsEnd
-        startDate={startDate}
-        endDate={endDate}
-        minDate={startDate}
-        className={`${styles.endDate}`}
-      />
+      <div>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          selectsStart
+          startDate={startDate}
+          endDate={endDate}
+          className={`${styles.startDate}`}
+        />
+      </div>
+
+      <div>
+        <DatePicker
+          selected={endDate}
+          onChange={(date) => setEndDate(date)}
+          selectsEnd
+          startDate={startDate}
+          endDate={endDate}
+          minDate={startDate}
+          className={`${styles.endDate}`}
+        />
+      </div>
+
       <input
         className={`${styles.input}`}
         id="text"

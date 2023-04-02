@@ -1,7 +1,18 @@
 .btnColor {
+  color: black;
+  font-weight: 500;
   background-color: #ffd400;
   border: none;
   &:hover {
     background-color: #f5c126;
+  }
+
+  &:active {
+    background-color: #ffd400 !important;
+  }
+
+  &:disabled {
+    background-color: #ffd400;
+    color: black;
   }
 }
