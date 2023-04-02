@@ -1,0 +1,16 @@
+.workListContainer {
+  padding: 100px 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  // jobCardList
+  .cardList {
+    margin-top: 50px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 238px);
+    grid-gap: 30px;
+    justify-content: space-between;
+  }
+}
