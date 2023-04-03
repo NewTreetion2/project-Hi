@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 
 import { useInput, useModalControl } from "hooks";
 import { useState, useEffect } from "react";
+import MyButton from "components/Button/MyButton";
 
 export default function SignUp() {
   const [active, setActive] = useState(true);
@@ -54,53 +55,47 @@ export default function SignUp() {
       <div className={`${styles.signUp}`}>
         <div className={`${styles.boldText}`}>회원가입</div>
         <form>
-          <p className={`${styles.input}`}>
-            ID
-            <input
-              type="text"
-              value={inputId || ""}
-              onChange={setInputId}
-              onKeyUp={enterPress}
-              placeholder="아이디"
-              autoFocus
-            />
-          </p>
-          <p className={`${styles.input}`}>
-            PW
-            <input
-              type="password"
-              value={inputPw || ""}
-              onChange={setInputPw}
-              onKeyUp={enterPress}
-              placeholder="비밀번호"
-            />
-          </p>
-          <p className={`${styles.input}`}>
-            Confirm
-            <input
-              type="password"
-              value={inputPwConfirm || ""}
-              onChange={setInputPwConfirm}
-              onKeyUp={enterPress}
-              placeholder="비밀번호 확인"
-            />
-          </p>
-          <p className={`${styles.input}`}>
-            Name
-            <input
-              type="text"
-              value={inputName || ""}
-              onChange={setInputName}
-              onKeyUp={enterPress}
-              placeholder="닉네임"
-            />
-          </p>
+          <input
+            className={styles.input}
+            type="text"
+            value={inputId || ""}
+            onChange={setInputId}
+            onKeyUp={enterPress}
+            placeholder="아이디"
+            autoFocus
+          />
+          <input
+            className={styles.input}
+            type="password"
+            value={inputPw || ""}
+            onChange={setInputPw}
+            onKeyUp={enterPress}
+            placeholder="비밀번호"
+          />
+          <input
+            className={styles.input}
+            type="password"
+            value={inputPwConfirm || ""}
+            onChange={setInputPwConfirm}
+            onKeyUp={enterPress}
+            placeholder="비밀번호 확인"
+          />
+          <input
+            className={styles.input}
+            type="text"
+            value={inputName || ""}
+            onChange={setInputName}
+            onKeyUp={enterPress}
+            placeholder="닉네임"
+          />
         </form>
-      </div>
-      <div className={`${styles.submit}`}>
-        <Button disabled={active} variant="primary" onClick={makeNewUser}>
-          Submit
-        </Button>
+        <div className={`${styles.submit}`}>
+          <MyButton
+            disabled={active}
+            onClickHandler={makeNewUser}
+            text="Submit"
+          />
+        </div>
       </div>
     </>
   );
