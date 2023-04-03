@@ -26,6 +26,10 @@ export default function useModalControl() {
     handleModalOpenOnType("throwWork");
   };
 
+  const defineModalTypeAsFileUpload = () => {
+    handleModalOpenOnType("fileUpload");
+  };
+
   const handleModalClose = useCallback(() => {
     setModalType("");
   }, [setModalType]);
@@ -35,6 +39,7 @@ export default function useModalControl() {
     defineModalTypeAsSignin,
     defineModalTypeAsSignUp,
     defineModalTypeAsThrowWork,
+    defineModalTypeAsFileUpload,
     handleModalClose,
   };
 }
