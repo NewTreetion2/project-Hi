@@ -1,0 +1,21 @@
+.content {
+  display: flex;
+  flex-shrink: 0;
+  height: 50px;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 5px;
+
+  .userName {
+    width: 150px;
+    padding-left: 10px;
+  }
+
+  .file {
+    flex: 1;
+  }
+
+  .choiceBtn {
+    padding-right: 10px;
+  }
+}

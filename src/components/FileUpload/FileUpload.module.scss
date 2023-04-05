@@ -1,0 +1,14 @@
+.file {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+
+  .upload {
+    flex: 1;
+    padding-top: 15px;
+  }
+  .summit {
+    display: flex;
+    justify-content: right;
+  }
+}
