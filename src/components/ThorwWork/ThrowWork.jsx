@@ -40,78 +40,94 @@ export default function ThrowWork() {
   };
 
   return (
-    <Form>
-      <Row className={`mb-3`}>
-        <Form.Group controlId="formFile" className={`mb-3`}>
-          <Form.Label>
-            <div className={`${styles.imgPreviewContainer}`}>
-              <img
-                className={`${styles.imgPreview}`}
-                src="img/imgUpload.PNG"
-                alt="이미지 없음"
-                ref={imgRef}
-              />
-            </div>
-            <p>이미지를 선택해주세요</p>
-          </Form.Label>
-          <Form.Control
+    <div className={styles.throwWork}>
+      <div className={styles.contentBox}>
+        <label className={styles.imgPreviewContainer}>
+          <input
             type="file"
-            size="sm"
             accept="image/*"
             style={{ display: "none" }}
             onChange={imgChange}
           />
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="오디션 이름을 입력해주세요"
-            onChange={setTitle}
+          <img
+            className={styles.imgPreview}
+            src="img/imgUpload.PNG"
+            alt="이미지 없음"
+            ref={imgRef}
           />
-        </Form.Group>
-      </Row>
-
-      <Form.Group as={Col} controlId="formGridPassword">
-        <Form.Label>Text</Form.Label>
-        <Form.Control
-          as="textarea"
-          placeholder="내용을 입력해주세요"
-          rows={3}
-          onChange={setText}
-        />
-      </Form.Group>
-
-      <Row className={`mb-3`}>
-        선택사항
-        <Form.Group className={`mb-3`} id="formGridCheckbox">
-          <label>
-            <Form.Check
-              type="checkbox"
-              id="recordingSpace"
-              value={"02"}
-              onChange={setCheck}
-              checked={check === "02"}
-            />
-            홈레코딩
-          </label>
-          <label>
-            <Form.Check
-              type="checkbox"
-              id="recordingSpace"
-              value={"01"}
-              onChange={setCheck}
-              checked={check === "01"}
-            />
-            스튜디오
-          </label>
-        </Form.Group>
-      </Row>
-
-      <Button variant="primary" type="submit" onClick={onSubmit}>
-        Submit
-      </Button>
-    </Form>
+          <p>이미지 선택</p>
+        </label>
+        <div className={styles.title}></div>
+        <div className={styles.text}></div>
+      </div>
+      <div className={styles.radioBox}></div>
+    </div>
+    // <Form className={styles.throwWork}>
+    //   <Form.Group className={styles.imgPreviewContainer} controlId="formFile">
+    //     <Form.Label>
+    //       <img
+    //         className={styles.imgPreview}
+    //         src="img/imgUpload.PNG"
+    //         alt="이미지 없음"
+    //         ref={imgRef}
+    //       />
+    //       <p>이미지를 선택해주세요</p>
+    //     </Form.Label>
+    //     <Form.Control
+    //       type="file"
+    //       size="sm"
+    //       accept="image/*"
+    //       style={{ display: "none" }}
+    //       onChange={imgChange}
+    //     />
+    //   </Form.Group>
+    //   <div className={styles.contents}>
+    //     <Form.Group className={styles.title} controlId="formGridEmail">
+    //       <Form.Label>Title</Form.Label>
+    //       <Form.Control
+    //         type="text"
+    //         placeholder="오디션 이름을 입력해주세요"
+    //         onChange={setTitle}
+    //       />
+    //     </Form.Group>
+    //     <Form.Group controlId="formGridPassword">
+    //       <Form.Label>Text</Form.Label>
+    //       <Form.Control
+    //         as="textarea"
+    //         placeholder="내용을 입력해주세요"
+    //         rows={3}
+    //         onChange={setText}
+    //       />
+    //     </Form.Group>
+    //   </div>
+    //   <div>
+    //     선택사항
+    //     <Form.Group id="formGridCheckbox">
+    //       <label>
+    //         <Form.Check
+    //           type="checkbox"
+    //           id="recordingSpace"
+    //           value={"02"}
+    //           onChange={setCheck}
+    //           checked={check === "02"}
+    //         />
+    //         홈레코딩
+    //       </label>
+    //       <label>
+    //         <Form.Check
+    //           type="checkbox"
+    //           id="recordingSpace"
+    //           value={"01"}
+    //           onChange={setCheck}
+    //           checked={check === "01"}
+    //         />
+    //         스튜디오
+    //       </label>
+    //     </Form.Group>
+    //     <Button variant="primary" type="submit" onClick={onSubmit}>
+    //       Submit
+    //     </Button>
+    //   </div>
+    // </Form>
   );
 }

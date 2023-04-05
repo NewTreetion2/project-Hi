@@ -44,37 +44,35 @@ export default function SignIn() {
   };
 
   return (
-    <>
-      <div className={`${styles.signIn}`}>
-        <div className={`${styles.boldText}`}>로그인</div>
-        <div>
-          <input
-            className={styles.input}
-            type="text"
-            value={inputId || ""}
-            onChange={setInputId}
-            onKeyUp={enterPress}
-            placeholder="아이디"
-            autoFocus
-          />
-          <input
-            className={styles.input}
-            type="password"
-            value={inputPw || ""}
-            onChange={setInputPw}
-            onKeyUp={enterPress}
-            placeholder="비밀번호"
-          />
-        </div>
-        <div className={`${styles.submit}`}>
-          <MyButton
-            disabled={active}
-            onClickHandler={checkValidation}
-            text="Sign In"
-          />
-        </div>
+    <div className={styles.signIn}>
+      <div className={styles.boldText}>로그인</div>
+      <div>
+        <input
+          className={styles.input}
+          type="text"
+          value={inputId || ""}
+          onChange={setInputId}
+          onKeyUp={enterPress}
+          placeholder="아이디"
+          autoFocus
+        />
+        <input
+          className={styles.input}
+          type="password"
+          value={inputPw || ""}
+          onChange={setInputPw}
+          onKeyUp={enterPress}
+          placeholder="비밀번호"
+        />
       </div>
-    </>
+      <div className={styles.submit}>
+        <MyButton
+          disabled={active}
+          onClickHandler={checkValidation}
+          text="Sign In"
+        />
+      </div>
+    </div>
   );
 }
 
