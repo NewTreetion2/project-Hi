@@ -9,13 +9,18 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
 import { useInput, useModalControl } from "hooks";
+import MyButton from "components/Button/MyButton";
 
 export default function ThrowWork() {
   const imgRef = useRef();
+  const scriptRef = useRef();
+  const imgInputRef = useRef();
   const [img, setImg] = useState();
-  const [title, setTitle] = useInput();
-  const [text, setText] = useInput();
-  const [check, setCheck] = useInput();
+  // const [title, setTitle] = useInput();
+  // const [text, setText] = useInput();
+  // const [check, setCheck] = useInput();
+  const [script, setScript] = useState();
+
   const { PostWork } = WorkApis();
   const { handleModalClose } = useModalControl();
   const imgChange = (e) => {
@@ -39,15 +44,37 @@ export default function ThrowWork() {
     handleModalClose();
   };
 
+  const handleOpenScriptDialog = () => {
+    scriptRef.current.click();
+  };
+
+  const handleScriptSelected = () => {
+    const files = scriptRef.current.files;
+    const newFiles = Object.values(files);
+    setScript(newFiles);
+  };
+
+  const handleOpenImgDialog = () => {
+    imgInputRef.current.click();
+  };
+
+  const handleImgSelected = () => {
+    const files = scriptRef.current.files;
+    const newFiles = Object.values(files);
+    setScript(newFiles);
+  };
+
   return (
     <div className={styles.throwWork}>
       <div className={styles.contentBox}>
-        <label className={styles.imgPreviewContainer}>
+        <div className={styles.imgPreviewContainer}>
           <input
             type="file"
             accept="image/*"
             style={{ display: "none" }}
             onChange={imgChange}
+            ref={imgInputRef}
+            multiple
           />
           <img
             className={styles.imgPreview}
@@ -55,8 +82,34 @@ export default function ThrowWork() {
             alt="이미지 없음"
             ref={imgRef}
           />
-          <p>이미지 선택</p>
-        </label>
+          <MyButton onClickHandler={handleOpenImgDialog} text="이미지 선택" />
+        </div>
+        <div>
+          <input
+            type="file"
+            accept=".hwp , .doc , .pdf"
+            multiple
+            style={{ display: "none" }}
+            ref={scriptRef}
+            onChange={handleScriptSelected}
+          />
+          <MyButton
+            onClickHandler={handleOpenScriptDialog}
+            text="대본을 선택해주세요"
+          />
+          <div>
+            {script ? (
+              <div className={styles.script}>
+                {script.map((item) => {
+                  return <p style={{ marginBottom: "5px" }}>{item.name}</p>;
+                })}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+
         <div className={styles.title}></div>
         <div className={styles.text}></div>
       </div>
