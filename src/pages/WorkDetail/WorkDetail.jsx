@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function WorkDetail() {
   const params = useParams();
   const { defineModalTypeAsFileUpload } = useModalControl();
-  const [isRegistrant, setIsRegistrant] = useState(false);
+  const [isRegistrant, setIsRegistrant] = useState(true);
 
   // 서버에서 params에 들어있는 workNum의 해당하는 WorkDetail을 가지고 온다
   const workData = {
@@ -53,6 +53,7 @@ export default function WorkDetail() {
             현재 프로젝트 고유 넘버는 {params.workNum} 입니다
           </p>
         </div>
+
         {isRegistrant ? (
           <div className={styles.comment}>
             <Comment />
