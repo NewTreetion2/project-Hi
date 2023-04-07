@@ -61,7 +61,7 @@ export default function SignUp() {
             value={inputId || ""}
             onChange={setInputId}
             onKeyUp={enterPress}
-            placeholder="아이디"
+            placeholder="아이디를 입력해주세요."
             autoFocus
           />
           <input
@@ -70,7 +70,7 @@ export default function SignUp() {
             value={inputPw || ""}
             onChange={setInputPw}
             onKeyUp={enterPress}
-            placeholder="비밀번호"
+            placeholder="비밀번호를 입력해주세요."
           />
           <input
             className={styles.input}
@@ -78,7 +78,7 @@ export default function SignUp() {
             value={inputPwConfirm || ""}
             onChange={setInputPwConfirm}
             onKeyUp={enterPress}
-            placeholder="비밀번호 확인"
+            placeholder="비밀번호를 다시 한 번 입력해주세요."
           />
           <input
             className={styles.input}
@@ -86,7 +86,7 @@ export default function SignUp() {
             value={inputName || ""}
             onChange={setInputName}
             onKeyUp={enterPress}
-            placeholder="닉네임"
+            placeholder="닉네임을 입력해주세요."
           />
         </form>
         <div className={`${styles.submit}`}>

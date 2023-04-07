@@ -53,7 +53,7 @@ export default function SignIn() {
           value={inputId || ""}
           onChange={setInputId}
           onKeyUp={enterPress}
-          placeholder="아이디"
+          placeholder="아이디를 입력해주세요."
           autoFocus
         />
         <input
@@ -62,7 +62,7 @@ export default function SignIn() {
           value={inputPw || ""}
           onChange={setInputPw}
           onKeyUp={enterPress}
-          placeholder="비밀번호"
+          placeholder="비밀번호를 입력해주세요."
         />
       </div>
       <div className={styles.submit}>

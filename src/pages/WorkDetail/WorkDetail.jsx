@@ -4,10 +4,12 @@ import styles from "./WorkDetail.module.scss";
 import { useParams } from "react-router-dom";
 import MyButton from "components/Button/MyButton";
 import { useModalControl } from "hooks";
+import { useState } from "react";
 
 export default function WorkDetail() {
   const params = useParams();
   const { defineModalTypeAsFileUpload } = useModalControl();
+  const [isRegistrant, setIsRegistrant] = useState(false);
 
   // 서버에서 params에 들어있는 workNum의 해당하는 WorkDetail을 가지고 온다
   const workData = {
@@ -21,13 +23,26 @@ export default function WorkDetail() {
       <div className={styles.img}>
         <img src="../img/default_profile.png" alt="프로젝트 이미지" />
         <div className={styles.attendBtn}>
-          <MyButton
-            onClickHandler={defineModalTypeAsFileUpload}
-            text="프로젝트 참여하기"
-          />
+          {isRegistrant ? (
+            ""
+          ) : (
+            <MyButton
+              onClickHandler={defineModalTypeAsFileUpload}
+              text="프로젝트 참여하기"
+            />
+          )}
         </div>
       </div>
       <div className={styles.info}>
+        {isRegistrant ? (
+          <div className={styles.btns}>
+            <MyButton text="완료" />
+            <MyButton text="삭제" />
+            <MyButton text="수정" />
+          </div>
+        ) : (
+          ""
+        )}
         <div className={styles.title}>{workData.title}</div>
         <div className={styles.content}>{workData.content}</div>
         <div className={styles.notes}>
@@ -38,15 +53,19 @@ export default function WorkDetail() {
             현재 프로젝트 고유 넘버는 {params.workNum} 입니다
           </p>
         </div>
-        <div className={styles.comment}>
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-        </div>
+        {isRegistrant ? (
+          <div className={styles.comment}>
+            <Comment />
+            <Comment />
+            <Comment />
+            <Comment />
+            <Comment />
+            <Comment />
+            <Comment />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
