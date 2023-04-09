@@ -94,6 +94,7 @@
         border: 1px solid #ced4da;
         border-radius: 5px;
         padding-left: 10px;
+        position: relative;
         &::-webkit-scrollbar {
           display: none;
         }
@@ -109,6 +110,54 @@
       height: 150px;
       border: 1px solid #ced4da;
       border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+
+      .boxForm {
+        display: flex;
+        flex: 1;
+        height: 30px;
+        border-bottom: 1px solid #ced4da;
+
+        .optionTitle {
+          width: 100px;
+          display: flex;
+          margin-bottom: 0;
+          padding: 0 15px;
+          align-items: center;
+          justify-content: center;
+          border-right: 1px solid #ced4da;
+          font-weight: bold;
+        }
+
+        .contentForm {
+          display: flex;
+          justify-content: space-around;
+          width: 450px;
+
+          label {
+            display: flex;
+
+            input {
+              margin-right: 10px;
+            }
+
+            p {
+              margin-bottom: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+        }
+
+        .inputText {
+          width: 445px;
+          height: 40px;
+          border: none;
+          padding-left: 15px;
+        }
+      }
     }
 
     .submitBox {
