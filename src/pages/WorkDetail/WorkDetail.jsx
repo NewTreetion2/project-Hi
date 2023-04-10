@@ -34,16 +34,18 @@ export default function WorkDetail() {
         </div>
       </div>
       <div className={styles.info}>
-        {isRegistrant ? (
-          <div className={styles.btns}>
-            <MyButton text="완료" />
-            <MyButton text="삭제" />
-            <MyButton text="수정" />
-          </div>
-        ) : (
-          ""
-        )}
-        <div className={styles.title}>{workData.title}</div>
+        <div className={styles.title}>
+          {workData.title}
+          {isRegistrant ? (
+            <div className={styles.btns}>
+              <MyButton text="완료" />
+              <MyButton text="삭제" />
+              <MyButton text="수정" />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
         <div className={styles.content}>{workData.content}</div>
         <div className={styles.notes}>
           <p className={styles.item}>{workData.notes.price}원</p>
