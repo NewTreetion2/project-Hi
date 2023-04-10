@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function WorkDetail() {
   const params = useParams();
   const { defineModalTypeAsFileUpload } = useModalControl();
-  const [isRegistrant, setIsRegistrant] = useState(false);
+  const [isRegistrant, setIsRegistrant] = useState(true);
 
   // 서버에서 params에 들어있는 workNum의 해당하는 WorkDetail을 가지고 온다
   const workData = {
@@ -34,16 +34,18 @@ export default function WorkDetail() {
         </div>
       </div>
       <div className={styles.info}>
-        {isRegistrant ? (
-          <div className={styles.btns}>
-            <MyButton text="완료" />
-            <MyButton text="삭제" />
-            <MyButton text="수정" />
-          </div>
-        ) : (
-          ""
-        )}
-        <div className={styles.title}>{workData.title}</div>
+        <div className={styles.title}>
+          {workData.title}
+          {isRegistrant ? (
+            <div className={styles.btns}>
+              <MyButton text="완료" />
+              <MyButton text="삭제" />
+              <MyButton text="수정" />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
         <div className={styles.content}>{workData.content}</div>
         <div className={styles.notes}>
           <p className={styles.item}>{workData.notes.price}원</p>
