@@ -2,11 +2,7 @@ import styles from "./ThrowWork.module.scss";
 
 import WorkApis from "apis/WorkApis";
 
-import { useRef, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
+import { useRef, useState, useEffect } from "react";
 
 import { useInput, useModalControl } from "hooks";
 import MyButton from "components/Button/MyButton";
@@ -16,10 +12,14 @@ export default function ThrowWork() {
   const scriptRef = useRef();
   const imgInputRef = useRef();
   const [img, setImg] = useState();
-  // const [title, setTitle] = useInput();
-  // const [text, setText] = useInput();
-  // const [check, setCheck] = useInput();
+  const [title, setTitle] = useInput();
+  const [text, setText] = useInput();
+  const [price, setPrice] = useInput();
+  const [date, setDate] = useInput();
   const [script, setScript] = useState();
+  const [recordingType, setRecordingType] = useState("");
+  const [recordingPlace, setRecordingPlace] = useState();
+  const [active, setActive] = useState(false);
 
   const { PostWork } = WorkApis();
   const { handleModalClose } = useModalControl();
@@ -28,6 +28,14 @@ export default function ThrowWork() {
     imgRef.current.src = `img/${selectedFile[0].name}`;
     imgRef.current.style = { objectFit: "contain" };
     setImg(imgRef.current.src);
+  };
+
+  const typeOnChangeHandler = (e) => {
+    setRecordingType(e.target.value);
+  };
+
+  const placeOnChangeHandler = (e) => {
+    setRecordingPlace(e.target.value);
   };
 
   const handleOpenScriptDialog = () => {
@@ -44,11 +52,33 @@ export default function ThrowWork() {
     imgInputRef.current.click();
   };
 
-  const handleImgSelected = () => {
-    const files = scriptRef.current.files;
-    const newFiles = Object.values(files);
-    setScript(newFiles);
+  const onSubmitHandler = () => {
+    console.log(
+      title,
+      text,
+      price,
+      date,
+      recordingPlace,
+      recordingType,
+      img,
+      script
+    );
   };
+
+  useEffect(() => {
+    if (
+      title !== "" &&
+      text !== "" &&
+      price !== "" &&
+      date !== "" &&
+      recordingPlace !== "" &&
+      recordingType !== ""
+    ) {
+      setActive(false);
+    } else {
+      setActive(true);
+    }
+  }, [title, text, price, date, recordingPlace, recordingType, setActive]);
 
   return (
     <div className={styles.throwWork}>
@@ -102,14 +132,113 @@ export default function ThrowWork() {
             className={styles.inputTitle}
             type="text"
             placeholder="제목을 입력해주세요"
+            onChange={setTitle}
           />
         </div>
         <div className={styles.text}>
-          <textarea rows={4} cols={70} placeholder="내용을 입력해주세요" />
+          <textarea
+            rows={4}
+            cols={70}
+            placeholder="내용을 입력해주세요"
+            onChange={setText}
+          />
         </div>
-        <div className={styles.radioBox}></div>
+        <div className={styles.radioBox}>
+          <div className={styles.boxForm}>
+            <p className={styles.optionTitle}>녹음타입</p>
+            <div className={styles.contentForm}>
+              <label>
+                <input
+                  type="radio"
+                  value={"animation"}
+                  checked={recordingType === "animation"}
+                  onChange={typeOnChangeHandler}
+                />
+                <p>애니메이션</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value={"game"}
+                  checked={recordingType === "game"}
+                  onChange={typeOnChangeHandler}
+                />
+                <p>게임</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value={"ad"}
+                  checked={recordingType === "ad"}
+                  onChange={typeOnChangeHandler}
+                />
+                <p>광고</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value={"narration"}
+                  checked={recordingType === "narration"}
+                  onChange={typeOnChangeHandler}
+                />
+                <p>내레이션</p>
+              </label>
+            </div>
+          </div>
+          <div className={styles.boxForm}>
+            <p className={styles.optionTitle}>녹음금액</p>
+            <div className={styles.contentBox}>
+              <input
+                type="number"
+                className={styles.inputText}
+                placeholder="금액을 입력해주세요 (숫자만 입력해주세요)"
+                onChange={setPrice}
+                min={0}
+              />
+            </div>
+          </div>
+          <div className={styles.boxForm}>
+            <p className={styles.optionTitle}>녹음장소</p>
+            <div className={styles.contentForm}>
+              <label>
+                <input
+                  type="radio"
+                  value="studio"
+                  checked={recordingPlace === "studio"}
+                  onChange={placeOnChangeHandler}
+                />
+                <p>스튜디오</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="home"
+                  checked={recordingPlace === "home"}
+                  onChange={placeOnChangeHandler}
+                />
+                <p>홈</p>
+              </label>
+            </div>
+          </div>
+          <div className={styles.boxForm}>
+            <p className={styles.optionTitle}>마감기한</p>
+            <div className={styles.contentBox}>
+              <input
+                type="number"
+                className={styles.inputText}
+                placeholder="마감기한을 입력해주세요 ( ex. 10일 -> 10 )"
+                onChange={setDate}
+                min={0}
+              />
+            </div>
+          </div>
+        </div>
         <div className={styles.submitBox}>
-          <MyButton text="제출" />
+          <MyButton
+            text="제출"
+            onClickHandler={onSubmitHandler}
+            disabled={active}
+          />
         </div>
       </div>
     </div>
