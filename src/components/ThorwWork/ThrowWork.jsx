@@ -2,11 +2,7 @@ import styles from "./ThrowWork.module.scss";
 
 import WorkApis from "apis/WorkApis";
 
-import { useRef, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
+import { useRef, useState, useEffect } from "react";
 
 import { useInput, useModalControl } from "hooks";
 import MyButton from "components/Button/MyButton";
@@ -23,6 +19,7 @@ export default function ThrowWork() {
   const [script, setScript] = useState();
   const [recordingType, setRecordingType] = useState("");
   const [recordingPlace, setRecordingPlace] = useState();
+  const [active, setActive] = useState(false);
 
   const { PostWork } = WorkApis();
   const { handleModalClose } = useModalControl();
@@ -67,6 +64,21 @@ export default function ThrowWork() {
       script
     );
   };
+
+  useEffect(() => {
+    if (
+      title !== "" &&
+      text !== "" &&
+      price !== "" &&
+      date !== "" &&
+      recordingPlace !== "" &&
+      recordingType !== ""
+    ) {
+      setActive(false);
+    } else {
+      setActive(true);
+    }
+  }, [title, text, price, date, recordingPlace, recordingType, setActive]);
 
   return (
     <div className={styles.throwWork}>
@@ -222,7 +234,11 @@ export default function ThrowWork() {
           </div>
         </div>
         <div className={styles.submitBox}>
-          <MyButton text="제출" onClickHandler={onSubmitHandler} />
+          <MyButton
+            text="제출"
+            onClickHandler={onSubmitHandler}
+            disabled={active}
+          />
         </div>
       </div>
     </div>
