@@ -11,3 +11,8 @@ export const modalStatus = atom({
   key: "modalStatus",
   default: "",
 });
+
+export const signInUserId = atom({
+  key: "signInUserId",
+  default: "",
+});

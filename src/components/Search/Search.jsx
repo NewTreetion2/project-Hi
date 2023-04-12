@@ -21,8 +21,6 @@ export default function Search() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  console.log(searchState);
-
   // function onChangeHandler(e) {
   //   const tempOb = { ...searchState };
   //   if (e.target.id === "project") {

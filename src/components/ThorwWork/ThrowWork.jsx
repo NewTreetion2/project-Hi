@@ -11,18 +11,22 @@ export default function ThrowWork() {
   const imgRef = useRef();
   const scriptRef = useRef();
   const imgInputRef = useRef();
-  const [img, setImg] = useState();
+
   const [title, setTitle] = useInput();
   const [text, setText] = useInput();
   const [price, setPrice] = useInput();
   const [date, setDate] = useInput();
+
+  const [img, setImg] = useState();
   const [script, setScript] = useState();
   const [recordingType, setRecordingType] = useState("");
   const [recordingPlace, setRecordingPlace] = useState();
   const [active, setActive] = useState(false);
 
   const { PostWork } = WorkApis();
+
   const { handleModalClose } = useModalControl();
+
   const imgChange = (e) => {
     const selectedFile = e.target.files;
     imgRef.current.src = `img/${selectedFile[0].name}`;
@@ -63,6 +67,8 @@ export default function ThrowWork() {
       img,
       script
     );
+
+    handleModalClose();
   };
 
   useEffect(() => {

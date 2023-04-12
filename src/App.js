@@ -5,9 +5,15 @@ import { Routes, Route } from "react-router-dom";
 
 import { Header, MyModal, Footer } from "components";
 import { Main, NotFound, WorkList, MyPage, WorkDetail } from "pages";
+import { useResetRecoilState } from "recoil";
+import { signInUserId } from "store";
 
 // TODO
 function App() {
+  const resetUserID = useResetRecoilState(signInUserId);
+  window.onbeforeunload = () => {
+    resetUserID();
+  };
   return (
     <div className={styles.project}>
       <div className={`${styles.header}`}>

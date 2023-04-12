@@ -2,13 +2,14 @@ import styles from "./SignIn.module.scss";
 
 import LoginApis from "apis/LoginApis";
 
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import { loginStatus } from "store";
 
 import { useInput, useModalControl } from "hooks";
 import { useEffect, useState } from "react";
 import MyButton from "components/Button/MyButton";
+import { signInUserId } from "store";
 
 export default function SignIn() {
   const [inputId, setInputId] = useInput();
@@ -17,6 +18,7 @@ export default function SignIn() {
   const [login, setLogin] = useRecoilState(loginStatus);
   const { LoginUser } = LoginApis();
   const [active, setActive] = useState(true);
+  const setSignInUser = useSetRecoilState(signInUserId);
 
   useEffect(() => {
     if (inputId !== "" && inputPw !== "") {
@@ -32,6 +34,7 @@ export default function SignIn() {
       alert("로그인 성공");
       setLogin(!login);
       handleModalClose();
+      setSignInUser(inputId);
     } else {
       alert(`아이디 혹은 비밀번호를 확인해주세요`);
     }
