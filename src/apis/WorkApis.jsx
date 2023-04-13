@@ -3,6 +3,7 @@ import axios from "axios";
 export default function WorkApis() {
   async function PostWork(
     title,
+    mbNo,
     content,
     registrationDate,
     closingDate,
@@ -12,12 +13,13 @@ export default function WorkApis() {
   ) {
     try {
       const res = await axios.post(`api/vo/post`, {
-        title: title,
-        content: content,
-        registrationDate: registrationDate,
-        closingDate: closingDate,
-        price: price,
-        recordingPlace: recordingPlace,
+        title: `${title}`,
+        mbNo: `${mbNo}`,
+        content: `${content}`,
+        registrationDate: `${registrationDate}`,
+        closingDate: `${closingDate}`,
+        price: `${price}`,
+        recordingPlace: `${recordingPlace}`,
         useYn: useYn,
       });
       return res.status;

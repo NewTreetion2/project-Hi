@@ -9,16 +9,16 @@ import { loginStatus } from "store";
 import { useInput, useModalControl } from "hooks";
 import { useEffect, useState } from "react";
 import MyButton from "components/Button/MyButton";
-import { signInUserId } from "store";
+import { signInUser } from "store";
 
 export default function SignIn() {
   const [inputId, setInputId] = useInput();
   const [inputPw, setInputPw] = useInput();
   const { handleModalClose } = useModalControl();
   const [login, setLogin] = useRecoilState(loginStatus);
-  const { LoginUser } = LoginApis();
+  const { SignInUser, SignInUserData } = LoginApis();
   const [active, setActive] = useState(true);
-  const setSignInUser = useSetRecoilState(signInUserId);
+  const setSignInUser = useSetRecoilState(signInUser);
 
   useEffect(() => {
     if (inputId !== "" && inputPw !== "") {
@@ -29,15 +29,22 @@ export default function SignIn() {
   }, [inputId, inputPw, setActive]);
 
   const checkValidation = async () => {
-    const res = await LoginUser(inputId, inputPw);
+    const res = await SignInUser(inputId, inputPw);
+    const userData = await userDataSave(inputId);
     if (res.status === "SUCCESS") {
       alert("로그인 성공");
       setLogin(!login);
       handleModalClose();
-      setSignInUser(inputId);
+      setSignInUser(userData);
     } else {
       alert(`아이디 혹은 비밀번호를 확인해주세요`);
     }
+  };
+
+  const userDataSave = async (id) => {
+    const res = await SignInUserData(id);
+
+    return res.data;
   };
 
   const enterPress = (e) => {

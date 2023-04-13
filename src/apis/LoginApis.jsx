@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default function LoginApis() {
-  async function LoginUser(id, password) {
+  async function SignInUser(id, password) {
     try {
       const res = await axios.post(`/api/vo/login`, {
         id: id,
@@ -27,5 +27,15 @@ export default function LoginApis() {
     }
   }
 
-  return { LoginUser, RegistUser };
+  async function SignInUserData(id) {
+    try {
+      const res = await axios.get(`/api/vo/member/${id}`);
+
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  return { SignInUser, RegistUser, SignInUserData };
 }

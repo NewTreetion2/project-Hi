@@ -2,26 +2,47 @@ import styles from "./ThrowWork.module.scss";
 
 import WorkApis from "apis/WorkApis";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import { useRef, useState, useEffect } from "react";
 
 import { useInput, useModalControl } from "hooks";
 import MyButton from "components/Button/MyButton";
+import { useRecoilValue } from "recoil";
+import { signInUser } from "store";
 
 export default function ThrowWork() {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const changeDateForm = (day) => {
+    const year = day.getFullYear();
+    const month = day.getMonth() + 1;
+    const date = day.getDate();
+
+    const formChangeDate = `${year}${month < 10 ? "0" : ""}${month}${
+      date < 10 ? "0" : ""
+    }${date}`;
+
+    return formChangeDate;
+  };
+
   const imgRef = useRef();
   const scriptRef = useRef();
   const imgInputRef = useRef();
 
   const [title, setTitle] = useInput();
-  const [text, setText] = useInput();
+  const [content, setContent] = useInput();
   const [price, setPrice] = useInput();
-  const [date, setDate] = useInput();
+  const [deadline, setDeadline] = useInput();
 
   const [img, setImg] = useState();
   const [script, setScript] = useState();
   const [recordingType, setRecordingType] = useState("");
-  const [recordingPlace, setRecordingPlace] = useState();
+  const [recordingPlace, setRecordingPlace] = useState("");
   const [active, setActive] = useState(false);
+
+  const signInUserData = useRecoilValue(signInUser);
 
   const { PostWork } = WorkApis();
 
@@ -56,17 +77,20 @@ export default function ThrowWork() {
     imgInputRef.current.click();
   };
 
-  const onSubmitHandler = () => {
-    console.log(
+  const onSubmitHandler = async () => {
+    const today = changeDateForm(startDate);
+    const deadline = changeDateForm(endDate);
+    const res = await PostWork(
       title,
-      text,
+      signInUserData.mbNo,
+      content,
+      today,
+      deadline,
       price,
-      date,
       recordingPlace,
-      recordingType,
-      img,
-      script
+      "Y"
     );
+    console.log(today, deadline, res);
 
     handleModalClose();
   };
@@ -74,9 +98,10 @@ export default function ThrowWork() {
   useEffect(() => {
     if (
       title !== "" &&
-      text !== "" &&
+      content !== "" &&
       price !== "" &&
-      date !== "" &&
+      startDate !== "" &&
+      endDate !== "" &&
       recordingPlace !== "" &&
       recordingType !== ""
     ) {
@@ -84,7 +109,16 @@ export default function ThrowWork() {
     } else {
       setActive(true);
     }
-  }, [title, text, price, date, recordingPlace, recordingType, setActive]);
+  }, [
+    title,
+    content,
+    price,
+    startDate,
+    endDate,
+    recordingPlace,
+    recordingType,
+    setActive,
+  ]);
 
   return (
     <div className={styles.throwWork}>
@@ -146,7 +180,7 @@ export default function ThrowWork() {
             rows={4}
             cols={70}
             placeholder="내용을 입력해주세요"
-            onChange={setText}
+            onChange={setContent}
           />
         </div>
         <div className={styles.radioBox}>
@@ -229,13 +263,30 @@ export default function ThrowWork() {
           <div className={styles.boxForm}>
             <p className={styles.optionTitle}>마감기한</p>
             <div className={styles.contentBox}>
-              <input
-                type="number"
-                className={styles.inputText}
-                placeholder="마감기한을 입력해주세요 ( ex. 10일 -> 10 )"
-                onChange={setDate}
-                min={0}
-              />
+              <div className={styles.dateBox}>
+                <div>
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    selectsStart
+                    startDate={startDate}
+                    endDate={endDate}
+                    className={styles.dateForm}
+                  />
+                </div>
+                ~
+                <div>
+                  <DatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    selectsEnd
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={startDate}
+                    className={styles.dateForm}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

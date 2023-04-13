@@ -1,7 +1,7 @@
 import styles from "./Profile.module.scss";
 import MyButton from "components/Button/MyButton";
 
-export default function Profile() {
+export default function Profile({ user }) {
   return (
     <>
       <div className={`${styles.profile}`}>
@@ -11,7 +11,7 @@ export default function Profile() {
           alt="프로필 디폴트 이미지"
         />
       </div>
-      <div className={`${styles.userName}`}>트리션</div>
+      <div className={`${styles.userName}`}>{user.name}</div>
       <div className={`${styles.profileImgChangeBtn}`}>
         <MyButton text="프로필 사진 변경" />
       </div>

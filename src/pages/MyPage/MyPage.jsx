@@ -5,16 +5,21 @@ import Profile from "components/Profile/Profile";
 import Summary from "components/Summary/Summary";
 import Search from "components/Search/Search";
 import WorkListCompo from "components/WorkListCompo/WorkListCompo";
+
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
+
+import { signInUser } from "store";
 
 export default function MyPage() {
   const [sortType, setSortType] = useState("");
+  const SignInUserInfo = useRecoilValue(signInUser);
 
   return (
     <div className={`${styles.main}`}>
       <div className={`${styles.infoMenuBox}`}>
         <div className={`${styles.userInfo}`}>
-          <Profile />
+          <Profile user={SignInUserInfo} />
         </div>
         <div className={`${styles.menuBar}`}>
           <Menu />

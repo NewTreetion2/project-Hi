@@ -6,11 +6,11 @@ import { Routes, Route } from "react-router-dom";
 import { Header, MyModal, Footer } from "components";
 import { Main, NotFound, WorkList, MyPage, WorkDetail } from "pages";
 import { useResetRecoilState } from "recoil";
-import { signInUserId } from "store";
+import { signInUser } from "store";
 
 // TODO
 function App() {
-  const resetUserID = useResetRecoilState(signInUserId);
+  const resetUserID = useResetRecoilState(signInUser);
   window.onbeforeunload = () => {
     resetUserID();
   };

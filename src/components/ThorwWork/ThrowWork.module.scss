@@ -65,6 +65,22 @@
         display: none;
       }
     }
+
+    .dateBox {
+      margin-left: 25px;
+      width: 400px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1;
+
+      .dateForm {
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        padding-left: 5px;
+      }
+    }
   }
 
   .infoBox {
@@ -101,6 +117,7 @@
 
         &:focus {
           height: 300px;
+          z-index: 2;
         }
       }
     }
