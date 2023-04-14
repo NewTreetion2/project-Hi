@@ -243,8 +243,8 @@ export default function ThrowWork() {
               <label>
                 <input
                   type="radio"
-                  value="studio"
-                  checked={recordingPlace === "studio"}
+                  value="01"
+                  checked={recordingPlace === "01"}
                   onChange={placeOnChangeHandler}
                 />
                 <p>스튜디오</p>
@@ -252,8 +252,8 @@ export default function ThrowWork() {
               <label>
                 <input
                   type="radio"
-                  value="home"
-                  checked={recordingPlace === "home"}
+                  value="02"
+                  checked={recordingPlace === "02"}
                   onChange={placeOnChangeHandler}
                 />
                 <p>홈</p>

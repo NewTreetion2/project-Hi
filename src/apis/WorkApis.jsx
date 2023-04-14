@@ -12,14 +12,14 @@ export default function WorkApis() {
     useYn
   ) {
     try {
-      const res = await axios.post(`api/vo/post`, {
-        title: `${title}`,
-        mbNo: `${mbNo}`,
-        content: `${content}`,
-        registrationDate: `${registrationDate}`,
-        closingDate: `${closingDate}`,
-        price: `${price}`,
-        recordingPlace: `${recordingPlace}`,
+      const res = await axios.post(`/api/vo/post`, {
+        title: title,
+        mbNo: mbNo,
+        content: content,
+        registrationDate: registrationDate,
+        closingDate: closingDate,
+        price: price,
+        recordingPlace: recordingPlace,
         useYn: useYn,
       });
       return res.status;
@@ -30,7 +30,7 @@ export default function WorkApis() {
 
   async function GetWorkList() {
     try {
-      const res = await axios.get(`api/vo/post`);
+      const res = await axios.get(`/api/vo/post`);
       return res.data;
     } catch (err) {
       return err;
@@ -39,7 +39,7 @@ export default function WorkApis() {
 
   async function GetWorkDetail(workNumber) {
     try {
-      const res = await axios.get(`api/vo/post/${workNumber}`);
+      const res = await axios.get(`/api/vo/post/${workNumber}`);
       return res.data;
     } catch (err) {
       return err;
