@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export default function WorkDetail() {
   const params = useParams();
-  const { defineModalTypeAsFileUpload } = useModalControl();
+  const { defineModalTypeAsImgUpload } = useModalControl();
   const [isRegistrant, setIsRegistrant] = useState(true);
 
   // 서버에서 params에 들어있는 workNum의 해당하는 WorkDetail을 가지고 온다
@@ -27,7 +27,7 @@ export default function WorkDetail() {
             ""
           ) : (
             <MyButton
-              onClickHandler={defineModalTypeAsFileUpload}
+              onClickHandler={defineModalTypeAsImgUpload}
               text="프로젝트 참여하기"
             />
           )}

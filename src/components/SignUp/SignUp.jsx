@@ -1,8 +1,6 @@
 import styles from "./SignUp.module.scss";
 
-import LoginApis from "apis/LoginApis";
-
-import { Button } from "react-bootstrap";
+import UserApis from "apis/UserApis";
 
 import { useInput, useModalControl } from "hooks";
 import { useState, useEffect } from "react";
@@ -15,7 +13,7 @@ export default function SignUp() {
   const [inputPwConfirm, setInputPwConfirm] = useInput();
   const [inputName, setInputName] = useInput();
   const { handleModalClose } = useModalControl();
-  const { RegistUser } = LoginApis();
+  const { RegistUser } = UserApis();
 
   useEffect(() => {
     if (

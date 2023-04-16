@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function LoginApis() {
+export default function UserApis() {
   async function SignInUser(id, password) {
     try {
       const res = await axios.post(`/api/vo/login`, {
@@ -37,5 +37,35 @@ export default function LoginApis() {
     }
   }
 
-  return { SignInUser, RegistUser, SignInUserData };
+  async function ChangeProfileImg(formData) {
+    try {
+      const res = await axios.post(`/api/vo/member`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async function UserProfileImg(userData) {
+    try {
+      const res = await axios.get(`/api/vo/member/profile/${userData.mbNo}`);
+
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  return {
+    SignInUser,
+    RegistUser,
+    SignInUserData,
+    ChangeProfileImg,
+    UserProfileImg,
+  };
 }

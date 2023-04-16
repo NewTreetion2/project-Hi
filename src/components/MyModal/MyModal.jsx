@@ -3,8 +3,7 @@ import Modal from "react-bootstrap/Modal";
 
 import useModalControl from "hooks/useModalControl";
 
-import { SignIn, SignUp, ThrowWork } from "components";
-import FileUpload from "components/FileUpload/FileUpload";
+import { SignIn, SignUp, ThrowWork, FileUpload } from "components";
 
 export default function MyModal() {
   const { modalType, handleModalClose } = useModalControl();
@@ -25,7 +24,8 @@ export default function MyModal() {
           {modalType === "signIn" && <SignIn />}
           {modalType === "signUp" && <SignUp />}
           {modalType === "throwWork" && <ThrowWork />}
-          {modalType === "fileUpload" && <FileUpload />}
+          {modalType === "imgUpload" && <FileUpload type="img" />}
+          {modalType === "fileUpload" && <FileUpload type="" />}
         </Modal.Body>
       </Modal>
     </>

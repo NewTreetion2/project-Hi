@@ -1,7 +1,14 @@
+import UserApis from "apis/UserApis";
 import styles from "./Profile.module.scss";
+
 import MyButton from "components/Button/MyButton";
 
+import { useModalControl } from "hooks";
+import { useEffect } from "react";
+
 export default function Profile({ user }) {
+  const { defineModalTypeAsImgUpload } = useModalControl();
+
   return (
     <>
       <div className={`${styles.profile}`}>
@@ -13,7 +20,10 @@ export default function Profile({ user }) {
       </div>
       <div className={`${styles.userName}`}>{user.name}</div>
       <div className={`${styles.profileImgChangeBtn}`}>
-        <MyButton text="프로필 사진 변경" />
+        <MyButton
+          text="프로필 사진 변경"
+          onClickHandler={defineModalTypeAsImgUpload}
+        />
       </div>
     </>
   );

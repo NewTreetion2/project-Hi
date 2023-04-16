@@ -34,7 +34,6 @@ export default function ThrowWork() {
   const [title, setTitle] = useInput();
   const [content, setContent] = useInput();
   const [price, setPrice] = useInput();
-  const [deadline, setDeadline] = useInput();
 
   const [img, setImg] = useState();
   const [script, setScript] = useState();
@@ -80,7 +79,7 @@ export default function ThrowWork() {
   const onSubmitHandler = async () => {
     const today = changeDateForm(startDate);
     const deadline = changeDateForm(endDate);
-    const res = await PostWork(
+    await PostWork(
       title,
       signInUserData.mbNo,
       content,
@@ -90,7 +89,6 @@ export default function ThrowWork() {
       recordingPlace,
       "Y"
     );
-    console.log(today, deadline, res);
 
     handleModalClose();
   };
