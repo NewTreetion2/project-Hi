@@ -34,7 +34,6 @@ export default function ThrowWork() {
   const [title, setTitle] = useInput();
   const [content, setContent] = useInput();
   const [price, setPrice] = useInput();
-  const [deadline, setDeadline] = useInput();
 
   const [img, setImg] = useState();
   const [script, setScript] = useState();
@@ -80,7 +79,7 @@ export default function ThrowWork() {
   const onSubmitHandler = async () => {
     const today = changeDateForm(startDate);
     const deadline = changeDateForm(endDate);
-    const res = await PostWork(
+    await PostWork(
       title,
       signInUserData.mbNo,
       content,
@@ -90,7 +89,6 @@ export default function ThrowWork() {
       recordingPlace,
       "Y"
     );
-    console.log(today, deadline, res);
 
     handleModalClose();
   };
@@ -243,8 +241,8 @@ export default function ThrowWork() {
               <label>
                 <input
                   type="radio"
-                  value="studio"
-                  checked={recordingPlace === "studio"}
+                  value="01"
+                  checked={recordingPlace === "01"}
                   onChange={placeOnChangeHandler}
                 />
                 <p>스튜디오</p>
@@ -252,8 +250,8 @@ export default function ThrowWork() {
               <label>
                 <input
                   type="radio"
-                  value="home"
-                  checked={recordingPlace === "home"}
+                  value="02"
+                  checked={recordingPlace === "02"}
                   onChange={placeOnChangeHandler}
                 />
                 <p>홈</p>

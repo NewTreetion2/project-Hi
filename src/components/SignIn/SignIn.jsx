@@ -1,6 +1,6 @@
 import styles from "./SignIn.module.scss";
 
-import LoginApis from "apis/LoginApis";
+import UserApis from "apis/UserApis";
 
 import { useRecoilState, useSetRecoilState } from "recoil";
 
@@ -16,7 +16,7 @@ export default function SignIn() {
   const [inputPw, setInputPw] = useInput();
   const { handleModalClose } = useModalControl();
   const [login, setLogin] = useRecoilState(loginStatus);
-  const { SignInUser, SignInUserData } = LoginApis();
+  const { SignInUser, SignInUserData } = UserApis();
   const [active, setActive] = useState(true);
   const setSignInUser = useSetRecoilState(signInUser);
 
@@ -30,21 +30,15 @@ export default function SignIn() {
 
   const checkValidation = async () => {
     const res = await SignInUser(inputId, inputPw);
-    const userData = await userDataSave(inputId);
+    const userData = await SignInUserData(inputId);
     if (res.status === "SUCCESS") {
       alert("로그인 성공");
       setLogin(!login);
       handleModalClose();
-      setSignInUser(userData);
+      setSignInUser(userData.data);
     } else {
       alert(`아이디 혹은 비밀번호를 확인해주세요`);
     }
-  };
-
-  const userDataSave = async (id) => {
-    const res = await SignInUserData(id);
-
-    return res.data;
   };
 
   const enterPress = (e) => {
