@@ -32,10 +32,10 @@ export default function SignIn() {
     const res = await SignInUser(inputId, inputPw);
     const userData = await SignInUserData(inputId);
     if (res.status === "SUCCESS") {
-      alert("로그인 성공");
       setLogin(!login);
       handleModalClose();
       setSignInUser(userData.data);
+      alert("로그인 성공");
     } else {
       alert(`아이디 혹은 비밀번호를 확인해주세요`);
     }

@@ -19,12 +19,7 @@ export default function FileUpload({ type }) {
     formData.append("password", signInUserData.password);
     formData.append("file", files[0].name);
 
-    console.log(signInUserData);
-    console.log(formData.get("file"));
-    console.log(files);
-
-    const res = await ChangeProfileImg(formData);
-    console.log(res);
+    await ChangeProfileImg(formData);
   };
 
   return (

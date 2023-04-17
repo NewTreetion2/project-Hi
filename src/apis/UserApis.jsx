@@ -39,7 +39,7 @@ export default function UserApis() {
 
   async function ChangeProfileImg(formData) {
     try {
-      const res = await axios.post(`/api/vo/member`, formData, {
+      const res = await axios.put(`/api/vo/member`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -51,9 +51,9 @@ export default function UserApis() {
     }
   }
 
-  async function UserProfileImg(userData) {
+  async function GetProfileImg(mbNo) {
     try {
-      const res = await axios.get(`/api/vo/member/profile/${userData.mbNo}`);
+      const res = await axios.get(`/api/vo/member/profile/${mbNo}`);
 
       return res.data;
     } catch (err) {
@@ -66,6 +66,6 @@ export default function UserApis() {
     RegistUser,
     SignInUserData,
     ChangeProfileImg,
-    UserProfileImg,
+    GetProfileImg,
   };
 }

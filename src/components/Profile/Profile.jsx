@@ -6,8 +6,24 @@ import MyButton from "components/Button/MyButton";
 import { useModalControl } from "hooks";
 import { useEffect } from "react";
 
+const { GetProfileImg } = UserApis();
+
 export default function Profile({ user }) {
   const { defineModalTypeAsImgUpload } = useModalControl();
+  console.log(user);
+
+  const getUserProfileImg = async () => {
+    try {
+      const res = await GetProfileImg(user.mbNo);
+      console.log(res);
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    getUserProfileImg();
+  });
 
   return (
     <>
