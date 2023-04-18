@@ -4,18 +4,27 @@ import styles from "./Profile.module.scss";
 import MyButton from "components/Button/MyButton";
 
 import { useModalControl } from "hooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const { GetProfileImg } = UserApis();
 
 export default function Profile({ user }) {
   const { defineModalTypeAsImgUpload } = useModalControl();
-  console.log(user);
+  const [userImg, setUserImg] = useState();
+
+  const ByteToUrl = (byteArray) => {
+    const blob = new Blob(byteArray, { type: "image/*" });
+    console.log(blob);
+    const url = URL.createObjectURL(blob);
+    const newUrl = url.replace("blob:", "");
+    setUserImg(newUrl);
+    return () => URL.revokeObjectURL(url);
+  };
 
   const getUserProfileImg = async () => {
     try {
       const res = await GetProfileImg(user.mbNo);
-      console.log(res);
+      ByteToUrl(res);
     } catch (err) {
       throw err;
     }
@@ -23,16 +32,25 @@ export default function Profile({ user }) {
 
   useEffect(() => {
     getUserProfileImg();
-  });
+  }, [setUserImg]);
 
   return (
     <>
       <div className={`${styles.profile}`}>
-        <img
-          className={`${styles.profileImg}`}
-          src="img/default_profile.png"
-          alt="프로필 디폴트 이미지"
-        />
+        {console.log(userImg)}
+        {userImg ? (
+          <img
+            className={`${styles.profileImg}`}
+            src={userImg}
+            alt="프로필 이미지"
+          />
+        ) : (
+          <img
+            className={`${styles.profileImg}`}
+            src="img/default_profile.png"
+            alt="프로필 디폴트 이미지"
+          />
+        )}
       </div>
       <div className={`${styles.userName}`}>{user.name}</div>
       <div className={`${styles.profileImgChangeBtn}`}>

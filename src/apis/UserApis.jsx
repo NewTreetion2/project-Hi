@@ -53,9 +53,12 @@ export default function UserApis() {
 
   async function GetProfileImg(mbNo) {
     try {
-      const res = await axios.get(`/api/vo/member/profile/${mbNo}`);
-
-      return res.data;
+      const res = await axios.get(`/api/vo/member/profile/28`, {
+        responseType: `arraybuffer`,
+      });
+      console.log(res);
+      const byteArray = new Uint8Array(res.data);
+      return byteArray;
     } catch (err) {
       throw err;
     }
