@@ -4,22 +4,25 @@ import { useRef } from "react";
 import { useRecoilValue } from "recoil";
 import { signInUser } from "store";
 import UserApis from "apis/UserApis";
+import { useModalControl } from "hooks";
 
 export default function FileUpload({ type }) {
   const imgRef = useRef();
   const recordRef = useRef();
   const signInUserData = useRecoilValue(signInUser);
   const { ChangeProfileImg } = UserApis();
+  const { handleModalClose } = useModalControl();
 
   const ImgUpload = async () => {
     const formData = new FormData();
-    const files = imgRef.current.files;
+    const files = imgRef.current.files[0];
 
     formData.append("id", signInUserData.id);
     formData.append("password", signInUserData.password);
-    formData.append("file", files[0].name);
+    formData.append("file", files);
 
     await ChangeProfileImg(formData);
+    handleModalClose();
   };
 
   return (

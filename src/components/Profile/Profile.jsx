@@ -9,35 +9,33 @@ import { useEffect, useState } from "react";
 const { GetProfileImg } = UserApis();
 
 export default function Profile({ user }) {
-  const { defineModalTypeAsImgUpload } = useModalControl();
+  const { defineModalTypeAsImgUpload, handleModalClose } = useModalControl();
   const [userImg, setUserImg] = useState();
-
-  const ByteToUrl = (byteArray) => {
-    const blob = new Blob(byteArray, { type: "image/*" });
-    console.log(blob);
-    const url = URL.createObjectURL(blob);
-    const newUrl = url.replace("blob:", "");
-    setUserImg(newUrl);
-    return () => URL.revokeObjectURL(url);
-  };
 
   const getUserProfileImg = async () => {
     try {
       const res = await GetProfileImg(user.mbNo);
-      ByteToUrl(res);
+      if (res.data !== "") {
+        const dataType = "data:image/png;base64,";
+        const url = dataType + res.data;
+        setUserImg(url);
+      } else {
+        setUserImg(null);
+      }
     } catch (err) {
       throw err;
     }
   };
 
   useEffect(() => {
-    getUserProfileImg();
-  }, [setUserImg]);
+    if (user.mbNo !== undefined) {
+      getUserProfileImg();
+    }
+  }, [setUserImg, getUserProfileImg]);
 
   return (
     <>
       <div className={`${styles.profile}`}>
-        {console.log(userImg)}
         {userImg ? (
           <img
             className={`${styles.profileImg}`}
