@@ -1,27 +1,36 @@
 import Comment from "components/Comment/Comment";
 import styles from "./WorkDetail.module.scss";
 
-import { useParams } from "react-router-dom";
 import MyButton from "components/Button/MyButton";
 import { useModalControl } from "hooks";
-import { useState } from "react";
+
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { useRecoilValue } from "recoil";
+import { workStatus } from "store";
+import { signInUser } from "store";
 
 export default function WorkDetail() {
   const params = useParams();
   const { defineModalTypeAsImgUpload } = useModalControl();
-  const [isRegistrant, setIsRegistrant] = useState(true);
+  const [isRegistrant, setIsRegistrant] = useState(false);
+  const signInUserInfo = useRecoilValue(signInUser);
+  const workList = useRecoilValue(workStatus);
+  const WorkNumber = params.workNum - 1;
+
+  useEffect(() => {
+    if (workList[WorkNumber].memberNo === signInUserInfo.mbNo) {
+      setIsRegistrant(true);
+    }
+  }, [setIsRegistrant]);
 
   // 서버에서 params에 들어있는 workNum의 해당하는 WorkDetail을 가지고 온다
-  const workData = {
-    title: "느낌있는 아역 찾습니다",
-    content: "어린이 목소리를 찾습니다",
-    notes: { price: 10000, days: 7, recordingPlace: "Home" },
-  };
-
   return (
     <div className={styles.workDetailMain}>
       <div className={styles.img}>
         <img src="../img/default_profile.png" alt="프로젝트 이미지" />
+        {console.log(workList)}
         <div className={styles.attendBtn}>
           {isRegistrant ? (
             ""
@@ -35,7 +44,7 @@ export default function WorkDetail() {
       </div>
       <div className={styles.info}>
         <div className={styles.title}>
-          {workData.title}
+          {workList[WorkNumber].title}
           {isRegistrant ? (
             <div className={styles.btns}>
               <MyButton text="완료" />
@@ -46,11 +55,13 @@ export default function WorkDetail() {
             ""
           )}
         </div>
-        <div className={styles.content}>{workData.content}</div>
+        <div className={styles.content}>{workList[WorkNumber].content}</div>
         <div className={styles.notes}>
-          <p className={styles.item}>{workData.notes.price}원</p>
-          <p className={styles.item}>{workData.notes.days}일</p>
-          <p className={styles.item}>{workData.notes.recordingPlace}</p>
+          <p className={styles.item}>{workList[WorkNumber].price}원</p>
+          <p className={styles.item}>{workList[WorkNumber].closingDate}</p>
+          <p className={styles.item}>
+            {workList[WorkNumber].recordingPlace === "01" ? "스튜디오" : "홈"}
+          </p>
           <p className={styles.item}>
             현재 프로젝트 고유 넘버는 {params.workNum} 입니다
           </p>

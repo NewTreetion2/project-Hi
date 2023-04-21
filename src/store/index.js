@@ -1,1 +1,1 @@
-export { loginStatus, modalStatus, signInUser } from "store/Store";
+export { loginStatus, modalStatus, signInUser, workStatus } from "store/Store";

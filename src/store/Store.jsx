@@ -12,7 +12,14 @@ export const modalStatus = atom({
   default: "",
 });
 
+// 현재 로그인 한 유저 정보
 export const signInUser = atom({
   key: "signInUser",
   default: {},
+});
+
+// 프로젝트 목록 가져오기
+export const workStatus = atom({
+  key: "workStatus",
+  default: [],
 });
