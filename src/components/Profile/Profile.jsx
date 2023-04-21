@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 const { GetProfileImg } = UserApis();
 
 export default function Profile({ user }) {
-  const { defineModalTypeAsImgUpload, handleModalClose } = useModalControl();
+  const { defineModalTypeAsImgUpload } = useModalControl();
   const [userImg, setUserImg] = useState();
 
   const getUserProfileImg = async () => {

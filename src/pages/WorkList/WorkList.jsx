@@ -1,12 +1,14 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import styles from "./WorkList.module.scss";
 
 import WorkApis from "apis/WorkApis";
 
 import { MyCard, WorkListFilter } from "components";
 
+const { GetWorkList, GetWorkDetail } = WorkApis();
+
 export default function WorkList() {
-  const { GetWorkList, GetWorkDetail } = WorkApis();
+  const [workList, setWorkList] = useState();
   //! TODO: 비동기 이므로 try, catch 삽입할것
   const getWorkData = async () => {
     try {
@@ -16,86 +18,41 @@ export default function WorkList() {
       throw err;
     }
   };
-
   const getWorkList = async () => {
     try {
       const res = await GetWorkList();
-      console.log(res);
+      return res.data;
     } catch (err) {
       throw err;
     }
   };
 
-  getWorkList();
+  useEffect(() => {
+    const temp = async () => {
+      setWorkList(await getWorkList());
+    };
+
+    temp();
+  }, []);
 
   return (
     <div className={styles.workListContainer}>
       <WorkListFilter />
-      <JobCardList />
+      {console.log(workList)}
+      <JobCardList workArr={workList} />
     </div>
   );
 }
 
-const JobCardList = () => {
-  const tmpCardListData = useMemo(() => {
-    return [
-      {
-        title: "1번 테스트입니다",
-        text: "1번 테스트 내용",
-        imgSrc: "이미지",
-      },
-      {
-        title: "2번 테스트입니다",
-        text: "2번 테스트 내용",
-        imgSrc: "이미지",
-      },
-      {
-        title: "3번 테스트입니다",
-        text: "3번 테스트 내용",
-        imgSrc: "이미지",
-      },
-      {
-        title: "4번 테스트입니다",
-        text: "4번 테스트 내용",
-        imgSrc: "이미지",
-      },
-    ];
-  }, []);
-
+const JobCardList = ({ workArr }) => {
+  console.log(workArr);
   return (
     <div className={`${styles.cardList}`}>
-      {tmpCardListData.map((item, index) => (
+      {workArr.map((item, index) => (
         <MyCard
           key={index}
           title={item.title}
-          text={item.text}
-          imgSrc={"img/default_profile.png"} // TODO: 하드코딩, 변경 필요
-        />
-      ))}
-
-      {tmpCardListData.map((item, index) => (
-        <MyCard
-          key={index}
-          title={item.title}
-          text={item.text}
-          imgSrc={"img/default_profile.png"} // TODO: 하드코딩, 변경 필요
-        />
-      ))}
-
-      {tmpCardListData.map((item, index) => (
-        <MyCard
-          key={index}
-          title={item.title}
-          text={item.text}
-          imgSrc={"img/default_profile.png"} // TODO: 하드코딩, 변경 필요
-        />
-      ))}
-
-      {tmpCardListData.map((item, index) => (
-        <MyCard
-          key={index}
-          title={item.title}
-          text={item.text}
+          text={item.content}
           imgSrc={"img/default_profile.png"} // TODO: 하드코딩, 변경 필요
         />
       ))}
