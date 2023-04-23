@@ -36,19 +36,11 @@ export default function Profile({ user }) {
   return (
     <>
       <div className={`${styles.profile}`}>
-        {userImg ? (
-          <img
-            className={`${styles.profileImg}`}
-            src={userImg}
-            alt="프로필 이미지"
-          />
-        ) : (
-          <img
-            className={`${styles.profileImg}`}
-            src="img/default_profile.png"
-            alt="프로필 디폴트 이미지"
-          />
-        )}
+        <img
+          className={`${styles.profileImg}`}
+          src={userImg ? `${userImg}` : "img/default_profile.png"}
+          alt="프로필 이미지"
+        />
       </div>
       <div className={`${styles.userName}`}>{user.name}</div>
       <div className={`${styles.profileImgChangeBtn}`}>

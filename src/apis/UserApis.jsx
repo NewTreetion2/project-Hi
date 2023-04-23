@@ -4,8 +4,8 @@ export default function UserApis() {
   async function SignInUser(id, password) {
     try {
       const res = await axios.post(`/api/vo/login`, {
-        id: id,
-        password: password,
+        id,
+        password,
       });
       return res.data;
     } catch (err) {
@@ -13,13 +13,13 @@ export default function UserApis() {
     }
   }
 
-  async function RegistUser(id, password, pwconfirm, name) {
+  async function RegistUser(id, password, passwordConfirm, name) {
     try {
       const res = await axios.post("/api/vo/register", {
-        id: id,
-        password: password,
-        passwordConfirm: pwconfirm,
-        name: name,
+        id,
+        password,
+        passwordConfirm,
+        name,
       });
       return res.status;
     } catch (err) {

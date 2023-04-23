@@ -13,14 +13,14 @@ export default function WorkApis() {
   ) {
     try {
       const res = await axios.post(`/api/vo/post`, {
-        title: title,
-        mbNo: mbNo,
-        content: content,
-        registrationDate: registrationDate,
-        closingDate: closingDate,
-        price: price,
-        recordingPlace: recordingPlace,
-        useYn: useYn,
+        title,
+        mbNo,
+        content,
+        registrationDate,
+        closingDate,
+        price,
+        recordingPlace,
+        useYn,
       });
       return res.status;
     } catch (err) {
