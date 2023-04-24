@@ -9,6 +9,14 @@
   justify-content: right;
   align-items: center;
   flex: 3;
+
+  button {
+    border: none;
+    background-color: white;
+    text-decoration: underline;
+    font-size: 20px;
+    font-weight: bold;
+  }
 }
 
 .summaryContentLeft {

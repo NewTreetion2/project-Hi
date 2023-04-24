@@ -1,1 +1,8 @@
-export { loginStatus, modalStatus, signInUser, workStatus } from "store/Store";
+export {
+  loginStatus,
+  modalStatus,
+  signInUser,
+  workStatus,
+  mypageSortType,
+  mypageSearchStatus,
+} from "store/Store";

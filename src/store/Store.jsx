@@ -23,3 +23,13 @@ export const workStatus = atom({
   key: "workStatus",
   default: [],
 });
+
+export const mypageSortType = atom({
+  key: "mypageSortType",
+  default: "all",
+});
+
+export const mypageSearchStatus = atom({
+  key: "mypageSearchStatus",
+  default: [],
+});
