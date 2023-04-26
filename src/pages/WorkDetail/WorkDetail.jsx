@@ -11,9 +11,15 @@ import { useRecoilValue } from "recoil";
 import { workStatus } from "store";
 import { signInUser } from "store";
 
+const tmpComment = [
+  { id: "트리션", src: "img/1__.mp3   " },
+  { id: "가렌", src: "정의의 전장으로.mp3" },
+  { id: "다리우스", src: "녹서스의 단두대.mp3" },
+];
+
 export default function WorkDetail() {
   const params = useParams();
-  const { defineModalTypeAsImgUpload } = useModalControl();
+  const { defineModalTypeAsFileUpload } = useModalControl();
   const [isRegistrant, setIsRegistrant] = useState(false);
   const signInUserInfo = useRecoilValue(signInUser);
   const workList = useRecoilValue(workStatus);
@@ -36,7 +42,7 @@ export default function WorkDetail() {
             ""
           ) : (
             <MyButton
-              onClickHandler={defineModalTypeAsImgUpload}
+              onClickHandler={defineModalTypeAsFileUpload}
               text="프로젝트 참여하기"
             />
           )}
@@ -69,13 +75,9 @@ export default function WorkDetail() {
 
         {isRegistrant ? (
           <div className={styles.comment}>
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
+            {tmpComment.map((item, index) => {
+              return <Comment key={index} userInfo={item} />;
+            })}
           </div>
         ) : (
           ""

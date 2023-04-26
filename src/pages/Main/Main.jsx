@@ -1,11 +1,13 @@
-import WorkApis from "apis/WorkApis";
 import styles from "./Main.module.scss";
 
 import { MainCarousel, MyCard } from "components";
 import TextAnimation from "components/TextAnimation/TextAnimation";
-import { useState, useEffect } from "react";
+
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { workStatus } from "store";
+
+import WorkApis from "apis/WorkApis";
 
 const mainCarouArr = [
   {
@@ -30,15 +32,12 @@ export default function Main() {
   };
 
   useEffect(() => {
-    const temp = async () => {
+    const getAllWorkList = async () => {
       setWorkList(await getWorkList());
     };
 
-    temp();
+    getAllWorkList();
   }, []);
-
-  console.log(workList);
-
   return (
     <div className={`${styles.main}`}>
       {/* Carousel은 {children} 으로 처리할 수 없을 것 같은데 방법을 찾아보자 어떻게 component와 할 수 있을까

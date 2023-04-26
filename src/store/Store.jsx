@@ -33,3 +33,8 @@ export const mypageSearchStatus = atom({
   key: "mypageSearchStatus",
   default: [],
 });
+
+export const temp = atom({
+  key: "temp",
+  default: "",
+});

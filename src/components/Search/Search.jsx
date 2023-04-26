@@ -13,7 +13,7 @@ import { mypageSortType, mypageSearchStatus } from "store";
 const selectArr = [
   { value: "throw", text: "던져준 일" },
   { value: "attend", text: "받은 일" },
-  { value: "all", text: "등록된 프로젝트" },
+  { value: "all", text: "모든 일" },
 ];
 
 export default function Search() {
@@ -31,7 +31,7 @@ export default function Search() {
   const setSortType = useSetRecoilState(mypageSortType);
   const setSearchInfo = useSetRecoilState(mypageSearchStatus);
   const [searchState, setSearchState] = useState({
-    type: "",
+    type: "throw",
     text: "",
   });
   const [startDate, setStartDate] = useState(new Date());
