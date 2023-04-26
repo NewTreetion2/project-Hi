@@ -5,4 +5,5 @@ export {
   workStatus,
   mypageSortType,
   mypageSearchStatus,
+  temp,
 } from "store/Store";

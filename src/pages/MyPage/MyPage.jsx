@@ -30,6 +30,8 @@ export default function MyPage() {
     const tmpCount = [throwWorkList.length, 0, workList.length];
     setCountWork([...tmpCount]);
 
+    // 현재는 임시방편으로 제작했지만, 추후에 서버에서 작업한 뒤 []만 넘어올 예정
+
     if (sortType === "throw") {
       setSortWorkList([...throwWorkList]);
     } else if (sortType === "attend") {
@@ -37,6 +39,8 @@ export default function MyPage() {
       setSortWorkList([...workList]);
     } else if (sortType === "search") {
       console.log(searchInfo);
+      //이후 서버통신을 통해 searchInfo를 던져주고 돌아온 []을 sortWorkList에 [...] 해주면 된다
+
       setSortType("");
     }
   }, [sortType, setSortWorkList]);

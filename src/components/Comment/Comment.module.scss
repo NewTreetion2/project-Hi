@@ -13,6 +13,13 @@
 
   .file {
     flex: 1;
+    display: flex;
+    align-items: center;
+
+    audio {
+      width: 500px;
+      height: 40px;
+    }
   }
 
   .choiceBtn {

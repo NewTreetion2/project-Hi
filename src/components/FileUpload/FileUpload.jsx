@@ -1,10 +1,14 @@
-import MyButton from "components/Button/MyButton";
 import styles from "./FileUpload.module.scss";
+
+import MyButton from "components/Button/MyButton";
+
 import { useRef } from "react";
 import { useRecoilValue } from "recoil";
 import { signInUser } from "store";
-import UserApis from "apis/UserApis";
+
 import { useModalControl } from "hooks";
+
+import UserApis from "apis/UserApis";
 
 export default function FileUpload({ type }) {
   const imgRef = useRef();
@@ -13,7 +17,7 @@ export default function FileUpload({ type }) {
   const { ChangeProfileImg } = UserApis();
   const { handleModalClose } = useModalControl();
 
-  const ImgUpload = async () => {
+  const imgUpload = async () => {
     const formData = new FormData();
     const files = imgRef.current.files[0];
 
@@ -25,6 +29,9 @@ export default function FileUpload({ type }) {
     handleModalClose();
   };
 
+  const recordUpload = async () => {
+    const files = recordRef.current.files[0];
+  };
   return (
     <div className={styles.file}>
       <p>파일을 선택해주세요</p>
@@ -46,7 +53,10 @@ export default function FileUpload({ type }) {
         />
       )}
       <div className={styles.summit}>
-        <MyButton text="제출" onClickHandler={ImgUpload} />
+        <MyButton
+          text="제출"
+          onClickHandler={type === "img" ? imgUpload : recordUpload}
+        />
       </div>
     </div>
   );
