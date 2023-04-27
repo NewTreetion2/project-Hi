@@ -5,9 +5,7 @@ export default function Menu() {
     <>
       <div className={`${styles.menuBarTitle}`}>메뉴</div>
       <div className={`${styles.menuBarContent}`}>
-        <p className={`${styles.menuBarContentFont}`}>프로젝트 관리</p>
         <p className={`${styles.menuBarContentFont}`}>대화창</p>
-        <p className={`${styles.menuBarContentFont}`}>고객센터</p>
       </div>
     </>
   );

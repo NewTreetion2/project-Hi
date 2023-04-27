@@ -47,13 +47,6 @@ export default function ThrowWork() {
 
   const { handleModalClose } = useModalControl();
 
-  const imgChange = (e) => {
-    const selectedFile = e.target.files;
-    imgRef.current.src = `img/${selectedFile[0].name}`;
-    imgRef.current.style = { objectFit: "contain" };
-    setImg(imgRef.current.src);
-  };
-
   const typeOnChangeHandler = (e) => {
     setRecordingType(e.target.value);
   };
@@ -62,33 +55,44 @@ export default function ThrowWork() {
     setRecordingPlace(e.target.value);
   };
 
+  const handleOpenImgDialog = () => {
+    imgInputRef.current.click();
+  };
+
+  const handleImgSelected = (e) => {
+    const files = e.target.files[0];
+    imgRef.current.src = `img/${files.name}`;
+    imgRef.current.style = { objectFit: "contain" };
+    setImg(files);
+  };
+
   const handleOpenScriptDialog = () => {
     scriptRef.current.click();
   };
 
-  const handleScriptSelected = () => {
-    const files = scriptRef.current.files;
-    const newFiles = Object.values(files);
-    setScript(newFiles);
-  };
-
-  const handleOpenImgDialog = () => {
-    imgInputRef.current.click();
+  const handleScriptSelected = (e) => {
+    const files = e.target.files[0];
+    setScript(files);
   };
 
   const onSubmitHandler = async () => {
     const today = changeDateForm(startDate);
     const deadline = changeDateForm(endDate);
-    await PostWork(
-      title,
-      signInUserData.mbNo,
-      content,
-      today,
-      deadline,
-      price,
-      recordingPlace,
-      "Y"
-    );
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("mbNo", signInUserData.mbNo);
+    formData.append("content", content);
+    formData.append("registrationDate", today);
+    formData.append("closingDate", deadline);
+    formData.append("price", price);
+    formData.append("recordingPlace", recordingPlace);
+    formData.append("recordingType", recordingType);
+    formData.append("images", img);
+    formData.append("scripts", script);
+
+    const res = await PostWork(formData);
+    console.log(res);
 
     handleModalClose();
   };
@@ -126,7 +130,7 @@ export default function ThrowWork() {
             type="file"
             accept="image/*"
             style={{ display: "none" }}
-            onChange={imgChange}
+            onChange={handleImgSelected}
             ref={imgInputRef}
             multiple
           />
@@ -141,8 +145,7 @@ export default function ThrowWork() {
         <div>
           <input
             type="file"
-            accept=".hwp , .doc , .pdf"
-            multiple
+            accept=".zip, .7z"
             style={{ display: "none" }}
             ref={scriptRef}
             onChange={handleScriptSelected}
@@ -154,9 +157,7 @@ export default function ThrowWork() {
           <div>
             {script ? (
               <div className={styles.script}>
-                {script.map((item) => {
-                  return <p style={{ marginBottom: "5px" }}>{item.name}</p>;
-                })}
+                <p style={{ marginBottom: "5px" }}>{script.name}</p>
               </div>
             ) : (
               ""
@@ -188,8 +189,8 @@ export default function ThrowWork() {
               <label>
                 <input
                   type="radio"
-                  value={"animation"}
-                  checked={recordingType === "animation"}
+                  value={"01"}
+                  checked={recordingType === "01"}
                   onChange={typeOnChangeHandler}
                 />
                 <p>애니메이션</p>
@@ -197,8 +198,8 @@ export default function ThrowWork() {
               <label>
                 <input
                   type="radio"
-                  value={"game"}
-                  checked={recordingType === "game"}
+                  value={"02"}
+                  checked={recordingType === "02"}
                   onChange={typeOnChangeHandler}
                 />
                 <p>게임</p>
@@ -206,8 +207,8 @@ export default function ThrowWork() {
               <label>
                 <input
                   type="radio"
-                  value={"ad"}
-                  checked={recordingType === "ad"}
+                  value={"03"}
+                  checked={recordingType === "03"}
                   onChange={typeOnChangeHandler}
                 />
                 <p>광고</p>
@@ -215,8 +216,8 @@ export default function ThrowWork() {
               <label>
                 <input
                   type="radio"
-                  value={"narration"}
-                  checked={recordingType === "narration"}
+                  value={"04"}
+                  checked={recordingType === "04"}
                   onChange={typeOnChangeHandler}
                 />
                 <p>내레이션</p>
@@ -299,71 +300,3 @@ export default function ThrowWork() {
     </div>
   );
 }
-
-// <Form className={styles.throwWork}>
-//   <Form.Group className={styles.imgPreviewContainer} controlId="formFile">
-//     <Form.Label>
-//       <img
-//         className={styles.imgPreview}
-//         src="img/imgUpload.PNG"
-//         alt="이미지 없음"
-//         ref={imgRef}
-//       />
-//       <p>이미지를 선택해주세요</p>
-//     </Form.Label>
-//     <Form.Control
-//       type="file"
-//       size="sm"
-//       accept="image/*"
-//       style={{ display: "none" }}
-//       onChange={imgChange}
-//     />
-//   </Form.Group>
-//   <div className={styles.contents}>
-//     <Form.Group className={styles.title} controlId="formGridEmail">
-//       <Form.Label>Title</Form.Label>
-//       <Form.Control
-//         type="text"
-//         placeholder="오디션 이름을 입력해주세요"
-//         onChange={setTitle}
-//       />
-//     </Form.Group>
-//     <Form.Group controlId="formGridPassword">
-//       <Form.Label>Text</Form.Label>
-//       <Form.Control
-//         as="textarea"
-//         placeholder="내용을 입력해주세요"
-//         rows={3}
-//         onChange={setText}
-//       />
-//     </Form.Group>
-//   </div>
-//   <div>
-//     선택사항
-//     <Form.Group id="formGridCheckbox">
-//       <label>
-//         <Form.Check
-//           type="checkbox"
-//           id="recordingSpace"
-//           value={"02"}
-//           onChange={setCheck}
-//           checked={check === "02"}
-//         />
-//         홈레코딩
-//       </label>
-//       <label>
-//         <Form.Check
-//           type="checkbox"
-//           id="recordingSpace"
-//           value={"01"}
-//           onChange={setCheck}
-//           checked={check === "01"}
-//         />
-//         스튜디오
-//       </label>
-//     </Form.Group>
-//     <Button variant="primary" type="submit" onClick={onSubmit}>
-//       Submit
-//     </Button>
-//   </div>
-// </Form>

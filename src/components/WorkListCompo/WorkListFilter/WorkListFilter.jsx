@@ -12,6 +12,7 @@ const categoryArr = [
   { value: "animation", text: "애니메이션" },
   { value: "advert", text: "광고" },
   { value: "game", text: "게임" },
+  { value: "narration", text: "내레이션" },
 ];
 
 const priceArr = [
@@ -39,7 +40,7 @@ export default function Filter() {
       <div className={styles.selectorWrapper}>
         <p className={styles.selectExplaneText}>카테고리</p>
         <MySelect
-          id="project"
+          id="recordingType"
           onChangeHandler={handleCategoryChange}
           arr={categoryArr}
         />
@@ -48,7 +49,7 @@ export default function Filter() {
       <div className={styles.selectorWrapper}>
         <p className={styles.selectExplaneText}>금액</p>
         <MySelect
-          id="project"
+          id="price"
           onChangeHandler={handlePriceChange}
           arr={priceArr}
         />

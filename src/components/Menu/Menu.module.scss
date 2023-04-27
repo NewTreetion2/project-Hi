@@ -11,6 +11,15 @@
   width: 200px;
   height: 300px;
   flex-direction: column;
+
+  p {
+    width: fit-content;
+    &:hover {
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 }
 
 .menuBarContentFont {

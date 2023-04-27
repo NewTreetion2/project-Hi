@@ -54,11 +54,13 @@
     }
 
     .script {
+      width: 175px;
       height: 100px;
       display: flex;
       flex-direction: column;
       border: 1px solid #ced4da;
       overflow-y: scroll;
+      overflow-x: hidden;
 
       border-radius: 5px;
       &::-webkit-scrollbar {
