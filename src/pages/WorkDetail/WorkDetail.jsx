@@ -12,7 +12,10 @@ import { workStatus } from "store";
 import { signInUser } from "store";
 
 const tmpComment = [
-  { id: "트리션", src: "img/1__.mp3   " },
+  {
+    id: "트리션",
+    src: "https://vo-fileserver.s3.ap-northeast-2.amazonaws.com/post/image/_20230427023103%5BLjava.lang.String%3B%40764fe956",
+  },
   { id: "가렌", src: "정의의 전장으로.mp3" },
   { id: "다리우스", src: "녹서스의 단두대.mp3" },
 ];
@@ -31,20 +34,29 @@ export default function WorkDetail() {
     }
   }, [setIsRegistrant]);
 
+  const scriptDownload = () => {
+    const tmpScript =
+      "https://vo-fileserver.s3.ap-northeast-2.amazonaws.com/post/script/_20230427031023dddd%20-%20%EB%B3%B5%EC%82%AC%EB%B3%B8%20-%20%EB%B3%B5%EC%82%AC%EB%B3%B8%20%282%29.hwp";
+    window.location.href = tmpScript;
+  };
+
   // 서버에서 params에 들어있는 workNum의 해당하는 WorkDetail을 가지고 온다
   return (
     <div className={styles.workDetailMain}>
       <div className={styles.img}>
         <img src="../img/default_profile.png" alt="프로젝트 이미지" />
         {console.log(workList)}
-        <div className={styles.attendBtn}>
+        <div>
           {isRegistrant ? (
             ""
           ) : (
-            <MyButton
-              onClickHandler={defineModalTypeAsFileUpload}
-              text="프로젝트 참여하기"
-            />
+            <div className={styles.attendBtn}>
+              <MyButton
+                onClickHandler={defineModalTypeAsFileUpload}
+                text="프로젝트 참여하기"
+              />
+              <MyButton onClickHandler={scriptDownload} text="대본 다운받기" />
+            </div>
           )}
         </div>
       </div>

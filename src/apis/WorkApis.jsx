@@ -1,28 +1,15 @@
 import axios from "axios";
 
 export default function WorkApis() {
-  async function PostWork(
-    title,
-    mbNo,
-    content,
-    registrationDate,
-    closingDate,
-    price,
-    recordingPlace,
-    useYn
-  ) {
+  async function PostWork(formData) {
     try {
-      const res = await axios.post(`/api/vo/post`, {
-        title,
-        mbNo,
-        content,
-        registrationDate,
-        closingDate,
-        price,
-        recordingPlace,
-        useYn,
+      const res = await axios.post(`/api/vo/post`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-      return res.status;
+
+      return res;
     } catch (err) {
       return err;
     }
