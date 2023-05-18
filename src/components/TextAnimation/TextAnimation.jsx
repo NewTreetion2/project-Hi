@@ -8,7 +8,7 @@ export default function TextAnimation({ text }) {
   useEffect(() => {
     const timer = setInterval(() => {
       setTemp(!temp);
-    }, 5000);
+    }, 500);
 
     return () => {
       clearInterval(timer);

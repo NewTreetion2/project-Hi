@@ -32,6 +32,7 @@ export default function FileUpload({ type }) {
   const recordUpload = async () => {
     const files = recordRef.current.files[0];
   };
+
   return (
     <div className={styles.file}>
       <p>파일을 선택해주세요</p>

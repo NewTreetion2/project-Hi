@@ -16,7 +16,7 @@ export default function Profile({ user }) {
     try {
       const res = await GetProfileImg(user.mbNo);
       if (res.data !== "") {
-        const dataType = "data:image/png;base64,";
+        const dataType = "data:image/*;base64,";
         const url = dataType + res.data;
         setUserImg(url);
       } else {
