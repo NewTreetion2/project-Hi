@@ -92,7 +92,6 @@ export default function ThrowWork() {
     formData.append("scripts", script);
 
     const res = await PostWork(formData);
-    console.log(res);
 
     handleModalClose();
   };

@@ -41,6 +41,12 @@
       h3 {
         font-size: 23px;
       }
+
+      .date {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+      }
     }
 
     .content {

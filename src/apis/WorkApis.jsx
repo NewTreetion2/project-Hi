@@ -15,9 +15,17 @@ export default function WorkApis() {
     }
   }
 
-  async function GetWorkList() {
+  async function GetWorkList(formData) {
     try {
-      const res = await axios.get(`/api/vo/post`);
+      const res = await axios.get(`/api/vo/post`, {
+        params: {
+          mbNo: formData.get(`mbNo`),
+        },
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       return res.data;
     } catch (err) {
       return err;
@@ -32,5 +40,6 @@ export default function WorkApis() {
       return err;
     }
   }
+
   return { PostWork, GetWorkList, GetWorkDetail };
 }

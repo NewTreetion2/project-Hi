@@ -12,19 +12,53 @@ import WorkApis from "apis/WorkApis";
 const mainCarouArr = [
   {
     imgSrc: "img/carouselFirst.jpg",
-    text: <TextAnimation text="환영합니다" />,
+    text: (
+      <div
+        style={{
+          display: "flex",
+          width: "1075px",
+          height: "350px",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          style={{
+            flex: "1",
+            fontSize: "60px",
+            display: "flex",
+            justifyContent: "left",
+            marginLeft: "150px",
+          }}
+        >
+          <TextAnimation text="당신의 목소리를       " />
+        </div>
+        <div
+          style={{
+            flex: "1",
+            fontSize: "60px",
+            display: "flex",
+            justifyContent: "left",
+            marginLeft: "600px",
+          }}
+        >
+          <TextAnimation text="         보여주세요 " />
+        </div>
+      </div>
+    ),
   },
-  { imgSrc: "", text: "2번째 carousel입니다" },
-  { imgSrc: "", text: "3번째 carousel입니다" },
+  { imgSrc: "img/micimg.jpg", text: "2번째 carousel입니다" },
+  { imgSrc: "img/logoCharacter.png", text: "3번째 carousel입니다" },
 ];
 
 //메인페이지 loginState에 따라 보여주는 화면이 달라진다
 export default function Main() {
   const [workList, setWorkList] = useRecoilState(workStatus);
   const { GetWorkList } = WorkApis();
+  const formData = new FormData();
+
   const getWorkList = async () => {
     try {
-      const res = await GetWorkList();
+      const res = await GetWorkList(formData);
       return res.data;
     } catch (err) {
       throw err;

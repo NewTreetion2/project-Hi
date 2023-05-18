@@ -10,27 +10,53 @@ import { useEffect, useState } from "react";
 
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import { signInUser, mypageSortType, workStatus } from "store";
-import { mypageSearchStatus } from "store";
+import {
+  signInUser,
+  mypageSortType,
+  workStatus,
+  mypageSearchStatus,
+} from "store";
+
+import WorkApis from "apis/WorkApis";
+
+const formData = new FormData();
 
 export default function MyPage() {
   const signInUserInfo = useRecoilValue(signInUser);
-  const [sortType, setSortType] = useRecoilState(mypageSortType);
   const workList = useRecoilValue(workStatus);
-  const [sortWorkList, setSortWorkList] = useState([...workList]);
-  const [countWork, setCountWork] = useState([]);
   const searchInfo = useRecoilValue(mypageSearchStatus);
 
+  const [sortType, setSortType] = useRecoilState(mypageSortType);
+
+  const [sortWorkList, setSortWorkList] = useState([...workList]);
+  const [countWork, setCountWork] = useState([]);
+  const [throwWorkList, setThrowWorkList] = useState([]);
+
+  const { GetWorkList } = WorkApis();
+
+  const getUserWorkList = async () => {
+    try {
+      formData.append("mbNo", signInUserInfo.mbNo);
+      const res = await GetWorkList(formData);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  };
+
   useEffect(() => {
-    const throwWorkList = sortWorkList.filter(
-      (item) => item.memberNo === signInUserInfo.mbNo
-    );
     // const attendWorkList =
+    const setUserWorkList = async () => {
+      const res = await getUserWorkList();
+      setThrowWorkList(res);
+    };
+
+    setUserWorkList();
+
+    // 현재는 임시방편으로 제작했지만, 추후에 서버에서 작업한 뒤 []만 넘어올 예정
 
     const tmpCount = [throwWorkList.length, 0, workList.length];
     setCountWork([...tmpCount]);
-
-    // 현재는 임시방편으로 제작했지만, 추후에 서버에서 작업한 뒤 []만 넘어올 예정
 
     if (sortType === "throw") {
       setSortWorkList([...throwWorkList]);
