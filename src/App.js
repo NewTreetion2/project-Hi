@@ -5,16 +5,24 @@ import { Routes, Route } from "react-router-dom";
 
 import { Header, MyModal, Footer } from "components";
 import { Main, NotFound, WorkList, MyPage, WorkDetail } from "pages";
-import { signInUser } from "store";
+import { userDataState } from "store";
 
-import { useResetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
+import { useEffect } from "react";
+
+import { getSessionStorage } from "utils";
+import { USER_STORAGE_KEY } from "constant";
 
 // TODO
 function App() {
-  const resetUserID = useResetRecoilState(signInUser);
-  window.onbeforeunload = () => {
-    resetUserID();
-  };
+  const setUserData = useSetRecoilState(userDataState);
+
+  useEffect(() => {
+    const userData = getSessionStorage(USER_STORAGE_KEY);
+
+    if (userData === null) return;
+    setUserData(userData);
+  }, []);
 
   return (
     <div className={styles.project}>

@@ -1,7 +1,6 @@
 export {
-  loginStatus,
   modalStatus,
-  signInUser,
+  userDataState,
   workStatus,
   mypageSortType,
   mypageSearchStatus,

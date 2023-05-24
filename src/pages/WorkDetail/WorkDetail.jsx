@@ -1,38 +1,62 @@
-import Comment from "components/Comment/Comment";
-import styles from "./WorkDetail.module.scss";
+import { useEffect, useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import MyButton from "components/Button/MyButton";
+import { Comment, MyButton } from "components";
+
 import { useModalControl } from "hooks";
 
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { getSessionStorage } from "utils";
+import { USER_STORAGE_KEY } from "constant";
 
-import { useRecoilValue } from "recoil";
-import { workStatus } from "store";
-import { signInUser } from "store";
+import WorkApis from "apis/WorkApis";
 
-const tmpComment = [
-  {
-    id: "트리션",
-    src: "https://vo-fileserver.s3.ap-northeast-2.amazonaws.com/post/image/_20230427023103%5BLjava.lang.String%3B%40764fe956",
-  },
-  { id: "가렌", src: "정의의 전장으로.mp3" },
-  { id: "다리우스", src: "녹서스의 단두대.mp3" },
-];
+import styles from "./WorkDetail.module.scss";
 
 export default function WorkDetail() {
   const params = useParams();
+  const workNumber = params.workNum;
+
   const { defineModalTypeAsFileUpload } = useModalControl();
-  const [isRegistrant, setIsRegistrant] = useState(false);
-  const signInUserInfo = useRecoilValue(signInUser);
-  const workList = useRecoilValue(workStatus);
-  const WorkNumber = params.workNum - 1;
+
+  const { GetWorkDetail } = WorkApis();
+
+  const [userData, setUserData] = useState(getSessionStorage(USER_STORAGE_KEY));
+  const [detailInfo, setDetailInfo] = useState({
+    title: "",
+    mbNo: "",
+    content: "",
+    price: "",
+    closingDate: "",
+    recordingPlace: "",
+  });
+
+  const isRegistrant = useMemo(() => {
+    return detailInfo.mbNo === userData.mbNo;
+  }, [userData, detailInfo]);
+
+  const getWorkInfo = async () => {
+    try {
+      const res = await GetWorkDetail(workNumber);
+      console.log(res);
+      return res.data;
+    } catch (err) {
+      alert("디테일에서 서버통신 오류");
+      throw err;
+    }
+  };
 
   useEffect(() => {
-    if (workList[WorkNumber].memberNo === signInUserInfo.mbNo) {
-      setIsRegistrant(true);
-    }
-  }, [setIsRegistrant]);
+    const setWorkInfo = async () => {
+      try {
+        setDetailInfo(await getWorkInfo());
+      } catch (err) {
+        alert("useEffect안에서 통신오류");
+        throw err;
+      }
+    };
+
+    setWorkInfo();
+  }, []);
 
   const scriptDownload = () => {
     const tmpScript =
@@ -43,9 +67,11 @@ export default function WorkDetail() {
   // 서버에서 params에 들어있는 workNum의 해당하는 WorkDetail을 가지고 온다
   return (
     <div className={styles.workDetailMain}>
+      {console.log(detailInfo)}
+      {console.log(userData)}
+
       <div className={styles.img}>
         <img src="../img/default_profile.png" alt="프로젝트 이미지" />
-        {console.log(workList)}
         <div>
           {isRegistrant ? (
             ""
@@ -62,7 +88,7 @@ export default function WorkDetail() {
       </div>
       <div className={styles.info}>
         <div className={styles.title}>
-          {workList[WorkNumber].title}
+          {detailInfo.title}
           {isRegistrant ? (
             <div className={styles.btns}>
               <MyButton text="완료" />
@@ -73,12 +99,12 @@ export default function WorkDetail() {
             ""
           )}
         </div>
-        <div className={styles.content}>{workList[WorkNumber].content}</div>
+        <div className={styles.content}>{detailInfo.content}</div>
         <div className={styles.notes}>
-          <p className={styles.item}>{workList[WorkNumber].price}원</p>
-          <p className={styles.item}>{workList[WorkNumber].closingDate}</p>
+          <p className={styles.item}>{detailInfo.price}원</p>
+          <p className={styles.item}>{detailInfo.closingDate}</p>
           <p className={styles.item}>
-            {workList[WorkNumber].recordingPlace === "01" ? "스튜디오" : "홈"}
+            {detailInfo.recordingPlace === "01" ? "스튜디오" : "홈"}
           </p>
           <p className={styles.item}>
             현재 프로젝트 고유 넘버는 {params.workNum} 입니다
@@ -87,9 +113,11 @@ export default function WorkDetail() {
 
         {isRegistrant ? (
           <div className={styles.comment}>
-            {tmpComment.map((item, index) => {
-              return <Comment key={index} userInfo={item} />;
-            })}
+            {detailInfo.commentList.length
+              ? detailInfo.commentList.map((item, index) => {
+                  return <Comment key={index} userInfo={item} />;
+                })
+              : ""}
           </div>
         ) : (
           ""

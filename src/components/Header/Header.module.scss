@@ -1,7 +1,6 @@
 .header {
   position: fixed;
   display: flex;
-  width: 100vw;
   height: 50px;
   justify-content: center;
   z-index: 30;
@@ -25,18 +24,6 @@
 
 .logoSize {
   height: 49px;
-}
-
-.height10 {
-  height: 10vh;
-}
-
-.login {
-  display: flex;
-  height: 10px;
-  justify-content: right;
-  gap: 10px;
-  flex: 1;
 }
 
 .loginBtn {

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./WorkListCompo.module.scss";
 import { useEffect, useState } from "react";
-import MyButton from "components/Button/MyButton";
+import MyButton from "components/MyButton/MyButton";
 
 export default function WorkListCompo({ workListObj }) {
   const [choiced, setChoiced] = useState(false);

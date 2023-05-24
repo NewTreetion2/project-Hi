@@ -1,13 +1,13 @@
 .carousel {
-  width: 100vw;
   height: 500px;
 }
 
 .cardList {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
+  margin: 0 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 238px);
+  grid-gap: 20px;
+  justify-content: space-between;
 }
 
 .cardListWrap {

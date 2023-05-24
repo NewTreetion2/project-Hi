@@ -4,47 +4,53 @@ import UserApis from "apis/UserApis";
 
 import { useRecoilState, useSetRecoilState } from "recoil";
 
-import { loginStatus } from "store";
-
 import { useInput, useModalControl } from "hooks";
-import { useEffect, useState } from "react";
-import MyButton from "components/Button/MyButton";
-import { signInUser } from "store";
+import { useMemo } from "react";
+import MyButton from "components/MyButton/MyButton";
+import { userDataState } from "store";
+
+import { setSessionStorage } from "utils";
+import { USER_STORAGE_KEY } from "constant";
 
 export default function SignIn() {
   const [inputId, setInputId] = useInput();
   const [inputPw, setInputPw] = useInput();
   const { handleModalClose } = useModalControl();
-  const [login, setLogin] = useRecoilState(loginStatus);
   const { SignInUser, SignInUserData } = UserApis();
-  const [active, setActive] = useState(true);
-  const setSignInUser = useSetRecoilState(signInUser);
+  const setUserData = useSetRecoilState(userDataState);
 
-  useEffect(() => {
-    if (inputId !== "" && inputPw !== "") {
-      setActive(false);
-    } else {
-      setActive(true);
-    }
-  }, [inputId, inputPw, setActive]);
+  // memos
+  const isActive = useMemo(() => {
+    return inputId.length && inputPw.length;
+  }, [inputId, inputPw]);
+
+  const handleUserData = (data) => {
+    setUserData(data);
+    setSessionStorage(USER_STORAGE_KEY, data);
+  };
 
   const checkValidation = async () => {
-    const res = await SignInUser(inputId, inputPw);
-    const userData = await SignInUserData(inputId);
-    if (res.status === "SUCCESS") {
-      setLogin(!login);
-      handleModalClose();
-      setSignInUser(userData.data);
-      alert("로그인 성공");
-    } else {
-      alert(`아이디 혹은 비밀번호를 확인해주세요`);
+    try {
+      const res = await SignInUser(inputId, inputPw);
+      const userData = await SignInUserData(inputId);
+
+      if (res.status === "SUCCESS") {
+        handleModalClose();
+        handleUserData(userData.data);
+
+        alert("로그인 성공");
+      } else {
+        alert(`아이디 혹은 비밀번호를 확인해주세요`);
+      }
+    } catch (e) {
+      alert("로그인오류입니다");
     }
   };
 
   const enterPress = (e) => {
-    if (e.key === "Enter" && active === false) {
-      checkValidation();
-    }
+    if (!isActive) return;
+
+    if (e.key === "Enter") checkValidation();
   };
 
   return (
@@ -71,7 +77,7 @@ export default function SignIn() {
       </div>
       <div className={styles.submit}>
         <MyButton
-          disabled={active}
+          disabled={!isActive}
           onClickHandler={checkValidation}
           text="Sign In"
         />

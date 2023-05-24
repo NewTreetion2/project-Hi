@@ -8,9 +8,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useRef, useState, useEffect } from "react";
 
 import { useInput, useModalControl } from "hooks";
-import MyButton from "components/Button/MyButton";
+import MyButton from "components/MyButton/MyButton";
 import { useRecoilValue } from "recoil";
-import { signInUser } from "store";
+import { userDataState } from "store";
 
 export default function ThrowWork() {
   const [startDate, setStartDate] = useState(new Date());
@@ -41,7 +41,7 @@ export default function ThrowWork() {
   const [recordingPlace, setRecordingPlace] = useState("");
   const [active, setActive] = useState(false);
 
-  const signInUserData = useRecoilValue(signInUser);
+  const userData = useRecoilValue(userDataState);
 
   const { PostWork } = WorkApis();
 
@@ -81,7 +81,7 @@ export default function ThrowWork() {
     const formData = new FormData();
 
     formData.append("title", title);
-    formData.append("mbNo", signInUserData.mbNo);
+    formData.append("mbNo", userData.mbNo);
     formData.append("content", content);
     formData.append("registrationDate", today);
     formData.append("closingDate", deadline);

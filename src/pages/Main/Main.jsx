@@ -1,13 +1,13 @@
-import styles from "./Main.module.scss";
-
-import { MainCarousel, MyCard } from "components";
-import TextAnimation from "components/TextAnimation/TextAnimation";
-
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
+
 import { workStatus } from "store";
 
+import { MainCarousel, MyCard, TextAnimation } from "components"; // TODO
+
 import WorkApis from "apis/WorkApis";
+
+import styles from "./Main.module.scss";
 
 const mainCarouArr = [
   {
@@ -56,7 +56,7 @@ export default function Main() {
   const { GetWorkList } = WorkApis();
   const formData = new FormData();
 
-  const getWorkList = async () => {
+  const handleWorkList = async () => {
     try {
       const res = await GetWorkList(formData);
       return res.data;
@@ -67,11 +67,17 @@ export default function Main() {
 
   useEffect(() => {
     const getAllWorkList = async () => {
-      setWorkList(await getWorkList());
+      try {
+        setWorkList(await handleWorkList());
+      } catch (err) {
+        alert("메인에서 서버오류");
+        throw err;
+      }
     };
 
     getAllWorkList();
   }, []);
+
   return (
     <div className={`${styles.main}`}>
       {/* Carousel은 {children} 으로 처리할 수 없을 것 같은데 방법을 찾아보자 어떻게 component와 할 수 있을까
@@ -83,18 +89,25 @@ export default function Main() {
 
       <div className={`${styles.cardListWrap}`}>
         <p>현재 진행중인 오디션</p>
-        <div className={`${styles.cardList}`}>
-          {workList.map((item, index) => (
-            <MyCard
-              postNo={item.postNo}
-              key={index}
-              title={item.title}
-              text={item.content}
-              imgSrc={"img/default_profile.png"}
-            />
-          ))}
-        </div>
+        <CardList workList={workList} />
       </div>
     </div>
   );
 }
+
+// 최초1회만 렌더됨
+const CardList = React.memo(({ workList }) => {
+  return (
+    <div className={`${styles.cardList}`}>
+      {workList.map((item, index) => (
+        <MyCard
+          postNo={item.postNo}
+          key={index}
+          title={item.title}
+          text={item.content}
+          imgSrc={"img/default_profile.png"}
+        />
+      ))}
+    </div>
+  );
+});

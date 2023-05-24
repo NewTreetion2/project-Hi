@@ -1,17 +1,11 @@
-import styles from "./MyPage.module.scss";
-
-import Menu from "components/Menu/Menu";
-import Profile from "components/Profile/Profile";
-import Summary from "components/Summary/Summary";
-import Search from "components/Search/Search";
-import WorkListCompo from "components/WorkListCompo/WorkListCompo";
-
 import { useEffect, useState } from "react";
+
+import { Menu, Profile, Summary, Search, WorkListCompo } from "components";
 
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import {
-  signInUser,
+  userDataState,
   mypageSortType,
   workStatus,
   mypageSearchStatus,
@@ -19,10 +13,12 @@ import {
 
 import WorkApis from "apis/WorkApis";
 
+import styles from "./MyPage.module.scss";
+
 const formData = new FormData();
 
 export default function MyPage() {
-  const signInUserInfo = useRecoilValue(signInUser);
+  const userData = useRecoilValue(userDataState);
   const workList = useRecoilValue(workStatus);
   const searchInfo = useRecoilValue(mypageSearchStatus);
 
@@ -36,7 +32,7 @@ export default function MyPage() {
 
   const getUserWorkList = async () => {
     try {
-      formData.append("mbNo", signInUserInfo.mbNo);
+      formData.append("mbNo", userData.mbNo);
       const res = await GetWorkList(formData);
       return res.data;
     } catch (err) {
@@ -75,7 +71,7 @@ export default function MyPage() {
     <div className={`${styles.main}`}>
       <div className={`${styles.infoMenuBox}`}>
         <div className={`${styles.userInfo}`}>
-          <Profile user={signInUserInfo} />
+          <Profile user={userDataState} />
         </div>
         <div className={`${styles.menuBar}`}>
           <Menu />

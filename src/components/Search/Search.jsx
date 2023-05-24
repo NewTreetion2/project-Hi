@@ -1,6 +1,6 @@
 import styles from "./Search.module.scss";
 
-import MyButton from "components/Button/MyButton";
+import MyButton from "components/MyButton/MyButton";
 import MySelect from "components/MySelect/MySelect";
 
 import DatePicker from "react-datepicker";
