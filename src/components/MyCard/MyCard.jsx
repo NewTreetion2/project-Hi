@@ -1,17 +1,18 @@
 import { Card } from "react-bootstrap";
-import MyButton from "components/Button/MyButton";
+import MyButton from "components/MyButton/MyButton";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { loginStatus } from "store";
+import { userDataState } from "store";
 
 export default function MyCard({ postNo, title, text, imgSrc }) {
   const navigate = useNavigate();
-  const login = useRecoilValue(loginStatus);
+  const userData = useRecoilValue(userDataState);
   const goDetail = () => {
-    if (login === false) {
-      alert("로그인을 해주세요");
-    } else {
+    if (userData) {
       navigate(`/work-detail/${postNo}`);
+    } else {
+      // 로그인창 띄우기
+      alert("로그인을 해주세요");
     }
   };
 

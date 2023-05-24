@@ -1,12 +1,43 @@
-import styles from "./WorkList.module.scss";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 
 import { MyCard, WorkListFilter } from "components";
-import { useRecoilValue } from "recoil";
+
 import { workStatus } from "store";
 
+import WorkApis from "apis/WorkApis";
+
+import styles from "./WorkList.module.scss";
+
 export default function WorkList() {
-  const workList = useRecoilValue(workStatus);
+  const [workList, setWorkList] = useRecoilState(workStatus);
   //! TODO: 비동기 이므로 try, catch 삽입할것
+  const formData = new FormData();
+  const { GetWorkList } = WorkApis();
+
+  const getWorkList = async () => {
+    try {
+      const res = await GetWorkList(formData);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    if (workList.length) return;
+    else {
+      const getAllWorkList = async () => {
+        try {
+          setWorkList(await getWorkList());
+        } catch (err) {
+          throw err;
+        }
+      };
+
+      getAllWorkList();
+    }
+  }, []);
 
   return (
     <div className={styles.workListContainer}>

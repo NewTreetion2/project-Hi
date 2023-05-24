@@ -1,13 +1,13 @@
-import styles from "./SignUp.module.scss";
+import { useMemo } from "react";
+
+import { useInput, useModalControl } from "hooks";
+import MyButton from "components/MyButton/MyButton";
 
 import UserApis from "apis/UserApis";
 
-import { useInput, useModalControl } from "hooks";
-import { useState, useEffect } from "react";
-import MyButton from "components/Button/MyButton";
+import styles from "./SignUp.module.scss";
 
 export default function SignUp() {
-  const [active, setActive] = useState(true);
   const [inputId, setInputId] = useInput();
   const [inputPw, setInputPw] = useInput();
   const [inputPwConfirm, setInputPwConfirm] = useInput();
@@ -15,37 +15,29 @@ export default function SignUp() {
   const { handleModalClose } = useModalControl();
   const { RegistUser } = UserApis();
 
-  useEffect(() => {
-    if (
-      inputId !== "" &&
-      inputPw !== "" &&
-      inputPwConfirm !== "" &&
-      inputName !== ""
-    ) {
-      setActive(false);
-    } else {
-      setActive(true);
-    }
-  }, [inputId, inputPw, inputPwConfirm, inputName, setActive]);
+  const isActive = useMemo(() => {
+    return (
+      inputId.length &&
+      inputPw.length &&
+      inputPwConfirm.length &&
+      inputName.length
+    );
+  }, [inputId, inputPw, inputPwConfirm, inputName]);
 
   const makeNewUser = async () => {
-    if (inputId === "" || inputPw === "") {
-      alert("공백이 존재할 수 없습니다");
+    const res = await RegistUser(inputId, inputPw, inputPwConfirm, inputName);
+    if (res === 200) {
+      alert(`회원가입 성공`);
+      handleModalClose();
     } else {
-      const res = await RegistUser(inputId, inputPw, inputPwConfirm, inputName);
-      if (res === 200) {
-        alert(`회원가입 성공`);
-        handleModalClose();
-      } else {
-        alert(`회원정보를 올바르게 입력해주세요`);
-      }
+      alert(`회원정보를 올바르게 입력해주세요`);
     }
   };
 
   const enterPress = (e) => {
-    if (e.key === "Enter" && active === false) {
-      makeNewUser();
-    }
+    if (!isActive) return;
+
+    if (e.key === "Enter") makeNewUser();
   };
 
   return (
@@ -89,7 +81,7 @@ export default function SignUp() {
         </form>
         <div className={`${styles.submit}`}>
           <MyButton
-            disabled={active}
+            disabled={!isActive}
             onClickHandler={makeNewUser}
             text="Submit"
           />

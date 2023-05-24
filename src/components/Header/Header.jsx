@@ -2,15 +2,18 @@ import styles from "./Header.module.scss";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import MyButton from "components/Button/MyButton";
+import MyButton from "components/MyButton/MyButton";
 
-import { loginStatus } from "store";
+import { userDataState } from "store";
 
 import useModalControl from "hooks/useModalControl";
 
+import { removeSessionStorage } from "utils";
+import { USER_STORAGE_KEY } from "constant";
+
 export default function Header() {
   // 현재 로그인상태인지 아닌지를 결정하는 State
-  const [isLogin, setIsLogin] = useRecoilState(loginStatus);
+  const [userData, setUserData] = useRecoilState(userDataState);
   const navigate = useNavigate();
   const goGetWork = () => {
     navigate("/getWork");
@@ -18,10 +21,13 @@ export default function Header() {
   const goMyPage = () => {
     navigate("/my-page");
   };
+
   const logout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       alert("로그아웃 되었습니다");
-      setIsLogin(!isLogin);
+      setUserData(null);
+      removeSessionStorage(USER_STORAGE_KEY);
+
       navigate("/");
     } else {
       alert("취소되었습니다");
@@ -48,7 +54,7 @@ export default function Header() {
       </div>
       <div className={`${styles.login}`}>
         <div className={`${styles.loginBtn}`}>
-          {isLogin ? (
+          {userData ? (
             <div className={`${styles.btnSpace}`}>
               <MyButton onClickHandler={goMyPage} text={"My Page"} />
               <MyButton

@@ -1,11 +1,5 @@
 import { atom } from "recoil";
 
-// 로그인 관리를 위한 LoginState
-export const loginStatus = atom({
-  key: "loginStatus",
-  default: false,
-});
-
 // Modal창 컨트롤러
 export const modalStatus = atom({
   key: "modalStatus",
@@ -13,9 +7,9 @@ export const modalStatus = atom({
 });
 
 // 현재 로그인 한 유저 정보
-export const signInUser = atom({
-  key: "signInUser",
-  default: {},
+export const userDataState = atom({
+  key: "userDataState",
+  default: null,
 });
 
 // 프로젝트 목록 가져오기

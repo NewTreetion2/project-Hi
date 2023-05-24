@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 //! TODO: 왜 컴포넌트를 그대로?? , 다른것들은 컴포넌트의 index에서 가져옴
 import MySelect from "components/MySelect/MySelect";
-import MyButton from "components/Button/MyButton";
+import MyButton from "components/MyButton/MyButton";
 
 import { useWorkListFilter } from "hooks";
 

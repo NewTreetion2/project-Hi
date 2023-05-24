@@ -1,10 +1,10 @@
 import styles from "./FileUpload.module.scss";
 
-import MyButton from "components/Button/MyButton";
+import MyButton from "components/MyButton/MyButton";
 
 import { useRef } from "react";
 import { useRecoilValue } from "recoil";
-import { signInUser } from "store";
+import { userDataState } from "store";
 
 import { useModalControl } from "hooks";
 
@@ -13,7 +13,7 @@ import UserApis from "apis/UserApis";
 export default function FileUpload({ type }) {
   const imgRef = useRef();
   const recordRef = useRef();
-  const signInUserData = useRecoilValue(signInUser);
+  const userData = useRecoilValue(userDataState);
   const { ChangeProfileImg } = UserApis();
   const { handleModalClose } = useModalControl();
 
@@ -21,8 +21,8 @@ export default function FileUpload({ type }) {
     const formData = new FormData();
     const files = imgRef.current.files[0];
 
-    formData.append("id", signInUserData.id);
-    formData.append("password", signInUserData.password);
+    formData.append("id", userData.id);
+    formData.append("password", userData.password);
     formData.append("file", files);
 
     await ChangeProfileImg(formData);
