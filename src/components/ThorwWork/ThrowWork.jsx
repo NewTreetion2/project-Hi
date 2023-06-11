@@ -61,7 +61,8 @@ export default function ThrowWork() {
 
   const handleImgSelected = (e) => {
     const files = e.target.files[0];
-    imgRef.current.src = `img/${files.name}`;
+    const temp = URL.createObjectURL(files);
+    imgRef.current.src = temp;
     imgRef.current.style = { objectFit: "contain" };
     setImg(files);
   };

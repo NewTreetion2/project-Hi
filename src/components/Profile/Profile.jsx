@@ -1,14 +1,15 @@
-import UserApis from "apis/UserApis";
-import styles from "./Profile.module.scss";
-
-import MyButton from "components/MyButton/MyButton";
-
-import { useModalControl } from "hooks";
 import { useEffect, useState } from "react";
 
-const { GetProfileImg } = UserApis();
+import { useModalControl } from "hooks";
+
+import { MyButton } from "components";
+
+import UserApis from "apis/UserApis";
+
+import styles from "./Profile.module.scss";
 
 export default function Profile({ user }) {
+  const { GetProfileImg } = UserApis();
   const { defineModalTypeAsImgUpload } = useModalControl();
   const [userImg, setUserImg] = useState();
 

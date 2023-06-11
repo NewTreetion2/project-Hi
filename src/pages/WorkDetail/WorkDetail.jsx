@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import { useParams } from "react-router-dom";
 
 import { Comment, MyButton } from "components";
@@ -7,6 +8,8 @@ import { useModalControl } from "hooks";
 
 import { getSessionStorage } from "utils";
 import { USER_STORAGE_KEY } from "constant";
+
+import { userDataState } from "store";
 
 import WorkApis from "apis/WorkApis";
 
@@ -20,7 +23,8 @@ export default function WorkDetail() {
 
   const { GetWorkDetail } = WorkApis();
 
-  const [userData, setUserData] = useState(getSessionStorage(USER_STORAGE_KEY));
+  const [userData, setUserData] = useRecoilState(userDataState);
+  const [isRegistrant, setIsRegistrant] = useState(false);
   const [detailInfo, setDetailInfo] = useState({
     title: "",
     mbNo: "",
@@ -30,14 +34,13 @@ export default function WorkDetail() {
     recordingPlace: "",
   });
 
-  const isRegistrant = useMemo(() => {
-    return detailInfo.mbNo === userData.mbNo;
-  }, [userData, detailInfo]);
+  // const isRegistrant = useMemo(() => {
+  //   return detailInfo.mbNo === userData.mbNo;
+  // }, [userData, detailInfo]);
 
   const getWorkInfo = async () => {
     try {
       const res = await GetWorkDetail(workNumber);
-      console.log(res);
       return res.data;
     } catch (err) {
       alert("디테일에서 서버통신 오류");
@@ -47,8 +50,13 @@ export default function WorkDetail() {
 
   useEffect(() => {
     const setWorkInfo = async () => {
+      const sesstionUserData = getSessionStorage(USER_STORAGE_KEY);
       try {
-        setDetailInfo(await getWorkInfo());
+        const res = await getWorkInfo();
+        setDetailInfo(res);
+        if (res.mbNo === sesstionUserData.mbNo) {
+          setIsRegistrant(true);
+        } else setIsRegistrant(false);
       } catch (err) {
         alert("useEffect안에서 통신오류");
         throw err;
@@ -71,7 +79,7 @@ export default function WorkDetail() {
       {console.log(userData)}
 
       <div className={styles.img}>
-        <img src="../img/default_profile.png" alt="프로젝트 이미지" />
+        <img src="../img/이누야샤.png" alt="프로젝트 이미지" />
         <div>
           {isRegistrant ? (
             ""
