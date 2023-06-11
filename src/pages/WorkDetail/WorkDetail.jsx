@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { useParams } from "react-router-dom";
 
@@ -75,6 +75,9 @@ export default function WorkDetail() {
   // 서버에서 params에 들어있는 workNum의 해당하는 WorkDetail을 가지고 온다
   return (
     <div className={styles.workDetailMain}>
+      {console.log(detailInfo)}
+      {console.log(userData)}
+
       <div className={styles.img}>
         <img src="../img/이누야샤.png" alt="프로젝트 이미지" />
         <div>
