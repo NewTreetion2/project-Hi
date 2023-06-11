@@ -13,36 +13,8 @@ const mainCarouArr = [
   {
     imgSrc: "img/carouselFirst.jpg",
     text: (
-      <div
-        style={{
-          display: "flex",
-          width: "1075px",
-          height: "350px",
-          flexDirection: "column",
-        }}
-      >
-        <div
-          style={{
-            flex: "1",
-            fontSize: "60px",
-            display: "flex",
-            justifyContent: "left",
-            marginLeft: "150px",
-          }}
-        >
-          <TextAnimation text="당신의 목소리를       " />
-        </div>
-        <div
-          style={{
-            flex: "1",
-            fontSize: "60px",
-            display: "flex",
-            justifyContent: "left",
-            marginLeft: "600px",
-          }}
-        >
-          <TextAnimation text="         보여주세요 " />
-        </div>
+      <div className={styles.textWrap}>
+        <TextAnimation text="당신의 목소리를 보여주세요" />
       </div>
     ),
   },
@@ -76,10 +48,11 @@ export default function Main() {
     };
 
     getAllWorkList();
-  }, []);
+  }, [setWorkList]);
 
   return (
     <div className={`${styles.main}`}>
+      {console.log("render")}
       {/* Carousel은 {children} 으로 처리할 수 없을 것 같은데 방법을 찾아보자 어떻게 component와 할 수 있을까
       받아야 할 props는 interval, 각 아이템의 src, 내용
       객체로 [{src:"" , 내용은 <></>}] 배열처리해서 넘겨준다? */}
@@ -88,7 +61,6 @@ export default function Main() {
       </div>
 
       <div className={`${styles.cardListWrap}`}>
-        <p>현재 진행중인 오디션</p>
         <CardList workList={workList} />
       </div>
     </div>

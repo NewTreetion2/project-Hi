@@ -1,8 +1,12 @@
 import { Card } from "react-bootstrap";
-import MyButton from "components/MyButton/MyButton";
+
+import { MyButton } from "components";
+
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userDataState } from "store";
+
+import styles from "./MyCard.module.scss";
 
 export default function MyCard({ postNo, title, text, imgSrc }) {
   const navigate = useNavigate();
@@ -20,9 +24,15 @@ export default function MyCard({ postNo, title, text, imgSrc }) {
     <Card style={{ width: "15rem" }}>
       <Card.Img variant="top" src={imgSrc} />
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Card.Text>{text}</Card.Text>
-        <MyButton text={"Go somewhere"} onClickHandler={goDetail} />
+        <div className={styles.title}>
+          <Card.Title>{title}</Card.Title>
+        </div>
+        <div className={styles.text}>
+          <Card.Text>{text}</Card.Text>
+        </div>
+        <div className={styles.button}>
+          <MyButton text={"Go somewhere"} onClickHandler={goDetail} />
+        </div>
       </Card.Body>
     </Card>
   );

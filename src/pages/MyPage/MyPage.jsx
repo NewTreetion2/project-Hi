@@ -4,6 +4,9 @@ import { Menu, Profile, Summary, Search, WorkListCompo } from "components";
 
 import { useRecoilState, useRecoilValue } from "recoil";
 
+import { getSessionStorage } from "utils";
+import { USER_STORAGE_KEY } from "constant";
+
 import {
   userDataState,
   mypageSortType,
@@ -18,11 +21,11 @@ import styles from "./MyPage.module.scss";
 const formData = new FormData();
 
 export default function MyPage() {
-  const userData = useRecoilValue(userDataState);
-  const workList = useRecoilValue(workStatus);
   const searchInfo = useRecoilValue(mypageSearchStatus);
 
   const [sortType, setSortType] = useRecoilState(mypageSortType);
+  const [workList, setWorkList] = useRecoilState(workStatus);
+  const [userData, setUserData] = useRecoilState(userDataState);
 
   const [sortWorkList, setSortWorkList] = useState([...workList]);
   const [countWork, setCountWork] = useState([]);
@@ -31,8 +34,12 @@ export default function MyPage() {
   const { GetWorkList } = WorkApis();
 
   const getUserWorkList = async () => {
+    const sessionUserData = getSessionStorage(USER_STORAGE_KEY);
+    if (sessionUserData === null) return;
+    setUserData(sessionUserData);
+
     try {
-      formData.append("mbNo", userData.mbNo);
+      formData.append("mbNo", sessionUserData.mbNo);
       const res = await GetWorkList(formData);
       return res.data;
     } catch (err) {
@@ -40,11 +47,38 @@ export default function MyPage() {
     }
   };
 
+  const handleWorkList = async () => {
+    const emptyFormData = new FormData();
+    try {
+      const res = await GetWorkList(emptyFormData);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  };
+
   useEffect(() => {
+    if (workList.length === 0) {
+      const getAllWorkList = async () => {
+        try {
+          setWorkList(await handleWorkList());
+        } catch (err) {
+          alert("메인에서 서버오류");
+          throw err;
+        }
+      };
+
+      getAllWorkList();
+    }
     // const attendWorkList =
     const setUserWorkList = async () => {
-      const res = await getUserWorkList();
-      setThrowWorkList(res);
+      try {
+        const res = await getUserWorkList();
+        setThrowWorkList(res);
+      } catch (err) {
+        alert("유저 워크리스트 서버 통신 오류");
+        throw err;
+      }
     };
 
     setUserWorkList();
@@ -65,13 +99,13 @@ export default function MyPage() {
 
       setSortType("");
     }
-  }, [sortType, setSortWorkList]);
+  }, [sortType, workList, setSortWorkList, setThrowWorkList]);
 
   return (
     <div className={`${styles.main}`}>
       <div className={`${styles.infoMenuBox}`}>
         <div className={`${styles.userInfo}`}>
-          <Profile user={userDataState} />
+          <Profile user={userData ? userData : ""} />
         </div>
         <div className={`${styles.menuBar}`}>
           <Menu />

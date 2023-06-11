@@ -37,7 +37,7 @@ export default function WorkList() {
 
       getAllWorkList();
     }
-  }, []);
+  }, [workList]);
 
   return (
     <div className={styles.workListContainer}>
